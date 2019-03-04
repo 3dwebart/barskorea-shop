@@ -122,7 +122,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 						<div class="col-md-4">
 							<!--Logo Start-->
 							<div class="logo text-center">
-								<a href="index.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
+								<a href="<?php echo G5_URL; ?>"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
 							</div>
 							<!--Logo Start-->
 						</div>
