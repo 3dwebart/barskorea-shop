@@ -45,6 +45,8 @@ if (G5_IS_MOBILE) {
 if($config['cf_add_meta'])
     echo $config['cf_add_meta'].PHP_EOL;
 ?>
+<meta name="description" content="">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo G5_ASSETS_URL; ?>/img/favicon.ico">
 <title><?php echo $g5_head_title; ?></title>
 <?php
 $shop_css = '';
@@ -54,6 +56,39 @@ echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/'.(G5_IS_MOBILE?'mobile'
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
+
+<!-- Material Design Iconic Font CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/material-design-iconic-font.min.css">
+<!-- Font Awesome CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/font-awesome.min.css">
+
+<!-- Animate CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/animate.css">
+<!-- Owl Carousel CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/owl.carousel.min.css">
+<!-- Slick Slider CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/slick.css">
+<!-- Meanmenu CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/meanmenu.min.css">
+<!-- Jquery Ui CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/jquery-ui.css">
+<!-- Nice Select CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/nice-select.css">
+<!-- Easy Zoom CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/easyzoom.css">
+<!-- Venobox CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/venobox.css">
+<!-- Bootstrap CSS-->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/bootstrap.min.css">
+<!-- Style CSS -->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/style.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/custom.css">
+<!-- Modernizr Js -->
+<script src="<?php echo G5_ASSETS_URL; ?>/js/vendor/modernizr-2.8.3.min.js"></script>
+
 <script>
 // 자바스크립트에서 사용하는 전역변수 선언
 var g5_url       = "<?php echo G5_URL ?>";
@@ -66,7 +101,11 @@ var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
 </script>
-<script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
+<!-- <script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script> -->
+<!-- BIGIN :: Add js files -->
+<!--Jquery 1.12.4-->
+<script src="<?php echo G5_ASSETS_URL; ?>/js/vendor/jquery-1.12.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
 <?php
 if (defined('_SHOP_')) {
     if(!G5_IS_MOBILE) {

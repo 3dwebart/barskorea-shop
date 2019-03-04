@@ -72,7 +72,8 @@ if ($config['cf_analytics']) {
     echo $config['cf_analytics'];
 }
 ?>
-
+</div>
+<!-- END :: wrapper -->
 <script src="<?php echo G5_JS_URL; ?>/sns.js"></script>
 <!-- } 하단 끝 -->
 

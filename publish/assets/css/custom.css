@@ -1,0 +1,9 @@
+/* ------ custom.css --------*/
+/* BIGIN :: Main slider */
+.slider-area .single-slider[data-no="1"] { background-image:url(../img/slider/slider1.jpg); }
+.slider-area .single-slider[data-no="2"] { background-image:url(../img/slider/slider2.jpg); }
+/* END :: Main slider */
+/* BIGIN :: Navigation custom */
+.mega-menu > * > a { font-weight: bold; font-size: 1.5rem; }
+.mega-menu > * > ul > li > a { line-height: 2.5rem; }
+/* END :: Navigation custom */
