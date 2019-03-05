@@ -190,20 +190,38 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 						<div class="col-lg-12">
 							<!--Logo Sticky Start-->
 							<div class="logo-sticky">
-							 <a href="index.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
+								<a href="index.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
 							</div>
 							<!--Logo Sticky End-->
 							<!--Header Menu Start-->
 							<div class="header-menu-area text-center">
 								<nav>
 									<ul class="main-menu">
-										<li><a href="index.html">Home</a>
+										<li>
+											<a href="index.html">Home</a>
 											<!--Dropdown Menu Start-->
 											<ul class="dropdown">
 												<li><a href="index.html">Home Shop 1</a></li>
 												<li><a href="index-2.html">Home Shop 2</a></li>
 												<li><a href="index-3.html">Home Shop 3</a></li>
 												<li><a href="index-4.html">Home Shop 4</a></li>
+											</ul>
+											<!--Dropdown Menu End-->
+										</li>
+										<li>
+											<a href="index.html">shopping</a>
+											<!--Dropdown Menu Start-->
+											<ul class="dropdown">
+												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1">히트상품</a></li>
+												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=2">추천상품</a></li>
+												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3">최신상품</a></li>
+												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=4">인기상품</a></li>
+												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5">할인상품</a></li>
+												<li class="hd_menu_right"><a href="<?php echo G5_BBS_URL; ?>/faq.php">FAQ</a></li>
+												<li class="hd_menu_right"><a href="<?php echo G5_BBS_URL; ?>/qalist.php">1:1문의</a></li>
+												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/personalpay.php">개인결제</a></li>
+												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/itemuselist.php">사용후기</a></li>
+												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/couponzone.php">쿠폰존</a></li>
 											</ul>
 											<!--Dropdown Menu End-->
 										</li>
@@ -320,7 +338,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 		</div>
 	</header>
 	<?php if(defined('_INDEX_')) { ?>
-	<!--Slider Area Start-->
+	<!-- BIGIN :: Main Slider -->
 	<div class="slider-area mb-90">
 		<div class="hero-slider owl-carousel">
 			<div class="single-slider" data-no="1">
@@ -343,21 +361,23 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 			</div>
 		</div>
 	</div>
-	<!--Slider Area End-->
+	<!-- END :: Main Slider -->
 	<?php } ?>
 <!-- 상단 시작 { -->
+<?php /*
 <div id="hd">
 	<h1 id="hd_h1"><?php echo $g5['title'] ?></h1>
 
 	<div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
-	<?php if(defined('_INDEX_')) { // index에서만 실행
+	<?php
+	if(defined('_INDEX_')) { // index에서만 실행
 		include G5_BBS_PATH.'/newwin.inc.php'; // 팝업레이어
-	 } ?>
-
-		<!-- 쇼핑몰 배너 시작 { -->
-		<?php // echo display_banner('왼쪽'); ?>
-		<!-- } 쇼핑몰 배너 끝 -->
+	 }
+	 ?>
+	<!-- 쇼핑몰 배너 시작 { -->
+	<?php // echo display_banner('왼쪽'); ?>
+	<!-- } 쇼핑몰 배너 끝 -->
 	<div id="hd_menu">
 		<ul>
 			<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1">히트상품</a></li>
@@ -374,7 +394,8 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 		</ul>
 	</div>
 </div>
-
+*/ ?>
+<!-- } 상단 끝 -->
 <div id="side_menu">
 	<button type="button" id="btn_sidemenu" class="btn_sidemenu_cl"><i class="fa fa-outdent" aria-hidden="true"></i><span class="sound_only">사이드메뉴버튼</span></button>
 	<div class="side_menu_wr">
@@ -408,10 +429,9 @@ $(function (){
 </script>
 
 
-<div id="wrapper">
-
+<!-- <div id="wrapper"> -->
+	<?php /* cate menus
 	<div id="aside">
-
 		<?php include_once(G5_SHOP_SKIN_PATH.'/boxcategory.skin.php'); // 상품분류 ?>
 		<?php include_once(G5_THEME_SHOP_PATH.'/category.php'); // 분류 ?>
 		<?php if($default['de_type4_list_use']) { ?>
@@ -445,10 +465,12 @@ $(function (){
 
 		<?php echo visit('theme/shop_basic'); // 접속자 ?>
 	</div>
-<!-- } 상단 끝 -->
+	*/ ?>
+
 
 	<!-- 콘텐츠 시작 { -->
-	<div id="container">
+	<!-- <div id="container"> -->
+		<?php /*
 		<?php if ((!$bo_table || $w == 's' ) && !defined('_INDEX_')) { ?><div id="wrapper_title"><?php echo $g5['title'] ?></div><?php } ?>
 		<!-- 글자크기 조정 display:none 되어 있음 시작 { -->
 		<div id="text_size">
@@ -456,4 +478,5 @@ $(function (){
 			<button class="no_text_resize" onclick="font_default('container');">기본</button>
 			<button class="no_text_resize" onclick="font_resize('container', 'increase');">크게</button>
 		</div>
+		*/ ?>
 		<!-- } 글자크기 조정 display:none 되어 있음 끝 -->

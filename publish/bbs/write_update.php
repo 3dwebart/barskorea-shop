@@ -243,8 +243,8 @@ if ($w == '' || $w == 'r') {
         $wr_reply = '';
     }
 
-    $sql = " insert into $write_table
-                set wr_num = '$wr_num',
+    $sql = " INSERT INTO $write_table
+                SET wr_num = '$wr_num',
                      wr_reply = '$wr_reply',
                      wr_comment = 0,
                      ca_name = '$ca_name',

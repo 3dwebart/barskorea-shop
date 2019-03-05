@@ -156,6 +156,14 @@ if(!isset($default['de_listtype_list_skin'])) {
                     ADD `de_mobile_listtype_img_width` int(11) NOT NULL DEFAULT '0' AFTER `de_mobile_listtype_list_row`,
                     ADD `de_mobile_listtype_img_height` int(11) NOT NULL DEFAULT '0' AFTER `de_mobile_listtype_img_width` ", true);
 }
+
+// 메인화면 상품 탭 자동화 구현 추가
+if(!isset($default['main_tabs'])) {
+    sql_query(" ALTER TABLE `{$g5['g5_shop_default_table']}`
+                    ADD `main_tabs` varchar(255) NOT NULL DEFAULT '' AFTER `de_admin_info_email`,
+                    ADD `main_tabs_id` varchar(255) NOT NULL DEFAULT '' AFTER `main_tabs`,
+                    ADD `main_tabs_item_count` int(11) NOT NULL DEFAULT '0' AFTER `main_tabs` ", true);
+}
 ?>
 
 <form name="fconfig" action="./configformupdate.php" onsubmit="return fconfig_check(this)" method="post" enctype="MULTIPART/FORM-DATA">
@@ -234,6 +242,25 @@ if(!isset($default['de_listtype_list_skin'])) {
             <th scope="row"><label for="de_admin_info_email">정보책임자 e-mail</label></th>
             <td>
                 <input type="text" name="de_admin_info_email" value="<?php echo $default['de_admin_info_email']; ?>" id="de_admin_info_email" class="frm_input" size="30">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="4">메인화면 탭메뉴 아이템</th>
+        </tr>
+        <tr>
+            <th scope="row"><label for="main_tabs">불러올 카테고리(,로 구분)</label></th>
+            <td>
+                <input type="text" name="main_tabs" value="<?php echo $default['main_tabs']; ?>" id="main_tabs" class="frm_input" size="30">
+            </td>
+            <th scope="row"><label for="main_tabs_id">불러올 탭의 아이디(,로 구분)</label></th>
+            <td>
+                <input type="text" name="main_tabs_id" value="<?php echo $default['main_tabs_id']; ?>" id="main_tabs_id" class="frm_input" size="30">
+            </td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="main_tabs_item_count">각 불러올 카테고리당 아이템 최대 갯수</label></th>
+            <td colspan="3">
+                <input type="text" name="main_tabs_item_count" value="<?php echo $default['main_tabs_item_count']; ?>" id="main_tabs_item_count" class="frm_input" size="30">
             </td>
         </tr>
         </tbody>

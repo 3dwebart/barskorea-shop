@@ -36,8 +36,8 @@ if($_POST['de_pg_service'] == 'kcp' && !$_POST['de_card_test'] && ($_POST['de_ic
 //
 // 영카트 default
 //
-$sql = " update {$g5['g5_shop_default_table']}
-            set de_admin_company_owner        = '{$_POST['de_admin_company_owner']}',
+$sql = " UPDATE {$g5['g5_shop_default_table']}
+            SET de_admin_company_owner        = '{$_POST['de_admin_company_owner']}',
                 de_admin_company_name         = '{$_POST['de_admin_company_name']}',
                 de_admin_company_saupja_no    = '{$_POST['de_admin_company_saupja_no']}',
                 de_admin_company_tel          = '{$_POST['de_admin_company_tel']}',
@@ -47,6 +47,9 @@ $sql = " update {$g5['g5_shop_default_table']}
                 de_admin_company_addr         = '{$_POST['de_admin_company_addr']}',
                 de_admin_info_name            = '{$_POST['de_admin_info_name']}',
                 de_admin_info_email           = '{$_POST['de_admin_info_email']}',
+                main_tabs                     = '{$_POST['main_tabs']}',
+                main_tabs_id                  = '{$_POST['main_tabs_id']}',
+                main_tabs_item_count          = '{$_POST['main_tabs_item_count']}',
                 de_shop_skin                  = '{$_POST['de_shop_skin']}',
                 de_shop_mobile_skin           = '{$_POST['de_shop_mobile_skin']}',
                 de_type1_list_use             = '{$_POST['de_type1_list_use']}',
@@ -215,11 +218,11 @@ $sql = " update {$g5['g5_shop_default_table']}
 sql_query($sql);
 
 // 환경설정 > 포인트 사용
-sql_query(" update {$g5['config_table']} set cf_use_point = '{$_POST['cf_use_point']}' ");
+sql_query(" UPDATE {$g5['config_table']} SET cf_use_point = '{$_POST['cf_use_point']}' ");
 
 // LG, 아이코드 설정
-$sql = " update {$g5['config_table']}
-            set cf_sms_use              = '{$_POST['cf_sms_use']}',
+$sql = " UPDATE {$g5['config_table']}
+            SET cf_sms_use              = '{$_POST['cf_sms_use']}',
                 cf_sms_type             = '{$_POST['cf_sms_type']}',
                 cf_icode_id             = '{$_POST['cf_icode_id']}',
                 cf_icode_pw             = '{$_POST['cf_icode_pw']}',

@@ -6,4 +6,5 @@
 /* BIGIN :: Navigation custom */
 .mega-menu > * > a { font-weight: bold; font-size: 1.5rem; }
 .mega-menu > * > ul > li > a { line-height: 2.5rem; }
+.header-sticky.is-sticky .logo-sticky { margin: 23px 0; }
 /* END :: Navigation custom */

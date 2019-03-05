@@ -24,13 +24,13 @@ include_once(G5_PATH.'/head.php');
 
     <?php
     //  최신글
-    $sql = " select bo_table
-                from `{$g5['board_table']}` a left join `{$g5['group_table']}` b on (a.gr_id=b.gr_id)
-                where a.bo_device <> 'mobile' ";
+    $sql = " SELECT bo_table
+                FROM `{$g5['board_table']}` a LEFT JOIN `{$g5['group_table']}` b ON (a.gr_id=b.gr_id)
+                WHERE a.bo_device <> 'mobile' ";
     if(!$is_admin)
-        $sql .= " and a.bo_use_cert = '' ";
-    $sql .= " and a.bo_table not in ('notice', 'gallery') ";     //공지사항과 갤러리 게시판은 제외
-    $sql .= " order by b.gr_order, a.bo_order ";
+        $sql .= " AND a.bo_use_cert = '' ";
+    $sql .= " AND a.bo_table NOT IN ('notice', 'gallery') ";     //공지사항과 갤러리 게시판은 제외
+    $sql .= " ORDER BY b.gr_order, a.bo_order ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         if ($i%2==1) $lt_style = "margin-left:2%";

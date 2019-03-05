@@ -120,6 +120,13 @@ CREATE TABLE IF NOT EXISTS `g5_board` (
 
 -- --------------------------------------------------------
 
+DROP TABLE IF EXISTS `g5_newsletter_apply`;
+CREATE TABLE IF NOT EXISTS `g5_newsletter_apply` (
+  `idx` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`idx`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 --
 -- Table structure for table `g5_board_file`
 --
