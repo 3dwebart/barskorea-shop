@@ -42,7 +42,7 @@ $(function() {
 <!--Jquery Ui-->
 <script src="<?php echo G5_ASSETS_URL; ?>/js/jquery-ui.js"></script>
 <!--Nice Select-->
-<script src="<?php echo G5_ASSETS_URL; ?>/js/jquery.nice-select.min.js"></script>
+<!-- <script src="<?php echo G5_ASSETS_URL; ?>/js/jquery.nice-select.min.js"></script> -->
 <!--Easy Zoom-->
 <script src="<?php echo G5_ASSETS_URL; ?>/js/easyzoom.min.js"></script>
 <!--Wow-->

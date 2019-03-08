@@ -8,3 +8,102 @@
 .mega-menu > * > ul > li > a { line-height: 2.5rem; }
 .header-sticky.is-sticky .logo-sticky { margin: 23px 0; }
 /* END :: Navigation custom */
+/* BIGIN :: Bootstrap grid row style { */
+.row-2 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -2px; margin-left: -2px; }
+.row-2 > *[class^="col-"],.row-2 > *[class$="col-"] { padding-left: 2px; padding-right: 2px; }
+.row-3 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -3px; margin-left: -3px; }
+.row-3 > *[class^="col-"],.row-3 > *[class$="col-"] { padding-left: 3px; padding-right: 3px; }
+.row-4 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -4px; margin-left: -4px; }
+.row-4 > *[class^="col-"],.row-4 > *[class$="col-"] { padding-left: 4px; padding-right: 4px; }
+.row-5 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -5px; margin-left: -5px; }
+.row-5 > *[class^="col-"],.row-5 > *[class$="col-"] { padding-left: 5px; padding-right: 5px; }
+.row-6 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -6px; margin-left: -6px; }
+.row-6 > *[class^="col-"],.row-6 > *[class$="col-"] { padding-left: 6px; padding-right: 6px; }
+.row-7 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -7px; margin-left: -7px; }
+.row-7 > *[class^="col-"],.row-7 > *[class$="col-"] { padding-left: 7px; padding-right: 7px; }
+.row-8 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -8px; margin-left: -8px; }
+.row-8 > *[class^="col-"],.row-8 > *[class$="col-"] { padding-left: 8px; padding-right: 8px; }
+.row-9 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -6px; margin-left: -6px; }
+.row-9 > *[class^="col-"],.row-9 > *[class$="col-"] { padding-left: 9px; padding-right: 9px; }
+.row-10 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -10px; margin-left: -10px; }
+.row-10 > *[class^="col-"],.row-10 > *[class$="col-"] { padding-left: 10px; padding-right: 10px; }
+/* } END :: Bootstrap grid row style */
+/* BIGIN :: Shop detail page { */
+.single-product-price .price {
+	font-weight: 700;
+}
+.single-product-price .regular-price {
+	color: #999;
+	font-weight: normal;
+}
+
+.product-btn { height: 43px; line-height: 43px; }
+.wishlist-compare-btn button:hover {
+    background: #eeb013;
+    border-color: #eeb013;
+    color: #fff;
+}
+.wishlist-compare-btn button {
+    background: none;
+    border: 1px solid #ededed;
+    color: #222;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 45px;
+    line-height: 43px;
+    text-align: center;
+    width: 170px;
+    border-radius: 0;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+.dec-and-review-menu > li {
+	padding: 0 25px;
+}
+.product-review-content-tab {
+	border-top: 0;
+	border-bottom: 0;
+}
+a.btn01,a.btn02 {
+    background: #fff;
+    border: 1px solid #ededed;
+    color: #222;
+}
+
+a.btn01:hover,a.btn02:hover {
+    background: #eeb013;
+    border-color: #eeb013;
+    color: #fff;
+}
+/* } END :: Shop detail page */
+#login_fs .btn_submit,
+#faq_sch .btn_submit {
+    background: #eeb013;
+    border-color: #eeb013;
+    color: #fff;
+}
+#login_fs .btn_submit:hover,
+#faq_sch .btn_submit:hover {
+    background: #333;
+    border-color: #333;
+    color: #fff;
+}
+#bo_cate #bo_cate_on,
+#sps_sch a {
+	background: #fff;
+    border-color: #333;
+    color: #333;
+}
+#bo_cate #bo_cate_on:hover,
+#sps_sch a:hover {
+	background: #eeb013;
+    border-color: #eeb013;
+    color: #fff;
+}
+#sit_opt_added .num_input {
+	float: none;
+	padding-left: 0;
+}
+.nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus { color: #fff !important; }
+input[type="radio"],input[type="checkbox"] { width: auto; height: auto; }

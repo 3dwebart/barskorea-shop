@@ -466,10 +466,11 @@ function get_it_thumbnail($img, $width, $height=0, $id='', $is_crop=false)
 
     if($thumb) {
         $file_url = str_replace(G5_PATH, G5_URL, $filepath.'/'.$thumb);
-        $str = '<img src="'.$file_url.'" width="'.$width.'" height="'.$height.'"';
+        //$str = '<img src="'.$file_url.'" width="'.$width.'" height="'.$height.'"';
+        $str = '<img src="'.$file_url.'"';
         if($id)
             $str .= ' id="'.$id.'"';
-        $str .= ' alt="">';
+        $str .= ' alt="'.$filename.'" />';
     }
 
     return $str;
@@ -976,8 +977,8 @@ function get_item_options($it_id, $subject, $is_div='')
                     $disabled = ' disabled="disabled"';
 
                 if($is_div === 'div') {
-                    $str .= '<div class="get_item_options">'.PHP_EOL;
-                    $str .= '<label for="it_option_'.$seq.'">'.$subj[$i].'</label>'.PHP_EOL;
+                    $str .= '<div class="row-4 get_item_options">'.PHP_EOL;
+                    $str .= '<label for="it_option_'.$seq.'" class="col-12 col-md-5 col-lg-4 col-form-label">'.$subj[$i].'</label>'.PHP_EOL;
                 } else {
                     $str .= '<tr>'.PHP_EOL;
                     $str .= '<th><label for="it_option_'.$seq.'">'.$subj[$i].'</label></th>'.PHP_EOL;
@@ -994,7 +995,7 @@ function get_item_options($it_id, $subject, $is_div='')
                 $select .= '</select>'.PHP_EOL;
 
                 if($is_div === 'div') {
-                    $str .= '<span>'.$select.'</span>'.PHP_EOL;
+                    $str .= '<div class="col-12 col-md-7 col-lg-8">'.$select.'</div>'.PHP_EOL;
                     $str .= '</div>'.PHP_EOL;
                 } else {
                     $str .= '<td>'.$select.'</td>'.PHP_EOL;
@@ -1004,8 +1005,8 @@ function get_item_options($it_id, $subject, $is_div='')
         }
     } else {
         if($is_div === 'div') {
-            $str .= '<div class="get_item_options">'.PHP_EOL;
-            $str .= '<label for="it_option_1">'.$subj[0].'</label>'.PHP_EOL;
+            $str .= '<div class="row-4 get_item_options">'.PHP_EOL;
+            $str .= '<label for="it_option_1" class="col-12 col-md-5 col-lg-4 col-form-label">'.$subj[0].'</label>'.PHP_EOL;
         } else {
             $str .= '<tr>'.PHP_EOL;
             $str .= '<th><label for="it_option_1">'.$subj[0].'</label></th>'.PHP_EOL;
@@ -1029,7 +1030,7 @@ function get_item_options($it_id, $subject, $is_div='')
         $select .= '</select>'.PHP_EOL;
         
         if($is_div === 'div') {
-            $str .= '<span>'.$select.'</span>'.PHP_EOL;
+            $str .= '<div class="col-12 col-md-7 col-lg-8">'.$select.'</div>'.PHP_EOL;
             $str .= '</div>'.PHP_EOL;
         } else {
             $str .= '<td>'.$select.'</td>'.PHP_EOL;

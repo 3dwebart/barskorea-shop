@@ -40,7 +40,7 @@ include_once(G5_THEME_SHOP_PATH.'/shop.head.php');
 	</div>
 </div>
 <!-- END :: Banner Area -->
-<!--Featured Products Area Start-->
+<!-- BIGIN :: Featured Products Area -->
 <?php
 $sql = "SELECT main_tabs, main_tabs_id, main_tabs_item_count FROM {$g5['g5_shop_default_table']}";
 $row = sql_fetch($sql);
@@ -59,7 +59,6 @@ while ($row = sql_fetch_array($res)) {
 	}
 }
 ?>
-
 <div class="featured-products mb-85">
 	<div class="container">
 		<div class="row">
@@ -93,11 +92,10 @@ while ($row = sql_fetch_array($res)) {
 				<div class="tab-content">
 					<?php
 						for ($i=0; $i < count($main_tabs_arr); $i++) {
-							$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE ca_id = '$main_tabs_arr[$i]'";
+							$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE ca_id = '$main_tabs_arr[$i]' AND it_type5 = 1";
 							$res = sql_query($sql);
 					?>
 					<div class="tab-pane fade <?php if($i == 0) echo ' show active'; ?>" id="<?php echo $main_tabs_id_arr[$i]; ?>">
-						<h1><?php echo $main_tabs_arr[$i]; ?></h1>
 						<!--Product Start-->
 						<div class="all-sinlgle-product">
 							 <div class="product-slider-wrap">
@@ -110,7 +108,7 @@ while ($row = sql_fetch_array($res)) {
 										<!--Single Product Start-->
 										<div class="single-product">
 											<div class="product-img">
-												<a href="single-product.html">
+												<a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $row['it_id']; ?>">
 													<img src="<?php echo G5_DATA_URL.'/item/'.$row['it_img1']; ?>" alt="" />
 												</a>
 												<span class="onsale">
@@ -128,7 +126,7 @@ while ($row = sql_fetch_array($res)) {
 												</div>
 											</div>
 											<div class="product-content">
-												<h4><a href="single-product.html"><?php echo $row['it_name']; ?></a></h4>
+												<h4><a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $row['it_id']; ?>"><?php echo $row['it_name']; ?></a></h4>
 												<div class="product-reviews">
 													<i class="fa fa-star"></i>
 													<i class="fa fa-star"></i>
@@ -138,8 +136,12 @@ while ($row = sql_fetch_array($res)) {
 												</div>
 											</div>
 											<div class="product-price">
-												<span class="price">$66.00</span>
-												<span class="regular-price">$77.00</span>
+												<span class="price">
+													<?php echo "&#8361;" . number_format($row['it_price']); ?><!-- $66.00 -->
+												</span>
+												<span class="regular-price">
+													<?php echo "&#8361;" . number_format($row['it_cust_price']); ?><!-- $77.00 -->
+												</span>
 											</div>
 										</div>
 										<!--Single Product End-->
@@ -147,388 +149,6 @@ while ($row = sql_fetch_array($res)) {
 									<?php
 										}
 									?>
-									<? /*
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product1.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Sit voluptatem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$66.00</span>
-												<span class="regular-price">$77.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product2.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Porro quisquam</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$60.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product3.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Officiis debitis</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$85.00</span>
-												<span class="regular-price">$90.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product4.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$64.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product5.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nostrum exercitationem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product6.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nemo enim</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$65.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product7.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Natus erro</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$81.00</span>
-												<span class="regular-price">$85.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product8.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Laudantium</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product9.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Itaque earum</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$72.00</span>
-												<span class="regular-price">$76.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product10.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$62.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									*/ ?>
 								  </div>
 							 </div>
 						</div>
@@ -537,1575 +157,217 @@ while ($row = sql_fetch_array($res)) {
 					<?php
 						}
 					?>
-					<? /*
-					<div class="tab-pane fade show active" id="bag">
-						<!--Product Start-->
-						<div class="all-sinlgle-product">
-							 <div class="product-slider-wrap">
-								 <div class="row product-slider owl-carousel">
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product1.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Sit voluptatem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$66.00</span>
-												<span class="regular-price">$77.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product2.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Porro quisquam</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$60.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product3.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Officiis debitis</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$85.00</span>
-												<span class="regular-price">$90.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product4.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$64.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product5.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nostrum exercitationem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product6.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nemo enim</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$65.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product7.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Natus erro</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$81.00</span>
-												<span class="regular-price">$85.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product8.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Laudantium</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product9.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Itaque earum</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$72.00</span>
-												<span class="regular-price">$76.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product10.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$62.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-								  </div>
-							 </div>
-						</div>
-						<!--Product End-->
-					</div>
-					<div class="tab-pane fade" id="decoration">
-						<!--Product Start-->
-						<div class="all-sinlgle-product">
-							<div class="product-slider-wrap">
-								<div class="row product-slider owl-carousel">
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product6.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nemo enim</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$65.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product7.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Natus erro</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$81.00</span>
-												<span class="regular-price">$85.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product8.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Laudantium</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product9.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Itaque earum</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$72.00</span>
-												<span class="regular-price">$76.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product10.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$62.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product1.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Sit voluptatem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$66.00</span>
-												<span class="regular-price">$77.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product2.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Porro quisquam</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$60.00</span>
-												<span class="regular-price">$68.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product3.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Officiis debitis</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$85.00</span>
-												<span class="regular-price">$90.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product4.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nullam maximus</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$64.00</span>
-												<span class="regular-price">$78.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-									<div class="col-md-12">
-										<!--Single Product Start-->
-										<div class="single-product">
-											<div class="product-img">
-												<a href="single-product.html">
-													<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product5.jpg" alt="">
-												</a>
-												<span class="onsale">
-													<span>Sale!</span>
-												</span>
-												<div class="product-action">
-													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-													</ul>
-													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-													</div>
-												</div>
-											</div>
-											<div class="product-content">
-												<h4><a href="single-product.html">Nostrum exercitationem</a></h4>
-												<div class="product-reviews">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-											</div>
-											<div class="product-price">
-												<span class="price">$79.00</span>
-												<span class="regular-price">$86.00</span>
-											</div>
-										</div>
-										<!--Single Product End-->
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--Product End-->
-					</div>
-					<div class="tab-pane fade" id="essentials">
-					  <!--Product Start-->
-					  <div class="all-sinlgle-product">
-						 <div class="product-slider-wrap">
-							 <div class="row product-slider owl-carousel">
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product11.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Sit voluptatem</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$66.00</span>
-											<span class="regular-price">$77.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product12.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Porro quisquam</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$60.00</span>
-											<span class="regular-price">$68.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product13.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Officiis debitis</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$85.00</span>
-											<span class="regular-price">$90.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product14.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nullam maximus</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$64.00</span>
-											<span class="regular-price">$78.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product15.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nostrum exercitationem</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$79.00</span>
-											<span class="regular-price">$86.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product6.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nemo enim</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$65.00</span>
-											<span class="regular-price">$68.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product17.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Natus erro</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$81.00</span>
-											<span class="regular-price">$85.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product8.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Laudantium</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$79.00</span>
-											<span class="regular-price">$86.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product9.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Itaque earum</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$72.00</span>
-											<span class="regular-price">$76.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product10.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nullam maximus</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$62.00</span>
-											<span class="regular-price">$78.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-							  </div>
-						 </div>
-					  </div>
-					  <!--Product End-->
-					</div>
-					<div class="tab-pane fade" id="interior">
-					  <!--Product Start-->
-					  <div class="all-sinlgle-product">
-						 <div class="product-slider-wrap">
-							 <div class="row product-slider owl-carousel">
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product15.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Sit voluptatem</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$66.00</span>
-											<span class="regular-price">$77.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product16.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Porro quisquam</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$60.00</span>
-											<span class="regular-price">$68.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product17.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Officiis debitis</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$85.00</span>
-											<span class="regular-price">$90.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product18.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nullam maximus</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$64.00</span>
-											<span class="regular-price">$78.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product5.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nostrum exercitationem</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$79.00</span>
-											<span class="regular-price">$86.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product19.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nemo enim</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$65.00</span>
-											<span class="regular-price">$68.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product20.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Natus erro</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$81.00</span>
-											<span class="regular-price">$85.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product7.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Laudantium</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$79.00</span>
-											<span class="regular-price">$86.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product13.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Itaque earum</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$72.00</span>
-											<span class="regular-price">$76.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-								<div class="col-md-12">
-									<!--Single Product Start-->
-									<div class="single-product">
-										<div class="product-img">
-											<a href="single-product.html">
-												<img src="<?php echo G5_ASSETS_URL; ?>/img/product/product14.jpg" alt="">
-											</a>
-											<span class="onsale">
-												<span>Sale!</span>
-											</span>
-											<div class="product-action">
-												<ul>
-													<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-													<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
-												</ul>
-												<div class="quickviewbtn">
-													<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
-												</div>
-											</div>
-										</div>
-										<div class="product-content">
-											<h4><a href="single-product.html">Nullam maximus</a></h4>
-											<div class="product-reviews">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-price">
-											<span class="price">$62.00</span>
-											<span class="regular-price">$78.00</span>
-										</div>
-									</div>
-									<!--Single Product End-->
-								</div>
-							  </div>
-						 </div>
-					  </div>
-					  <!--Product End-->
-					</div>
-					*/ ?>
 				</div>
 				<!-- END :: Featured Tab Content -->
 			</div>
 		</div>
 	</div>
 </div>
-<!--Featured Products Area End-->
+<!-- END :: Featured Products Area -->
+<!-- BIGIN :: Sale Banner Area -->
+<div class="sale-banner-area mb-85">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-content">
+                    <h3>Sale!</h3>
+                    <p><em>10% off on all products</em></p>
+                    <a class="banner-btn" href="#">Shop now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END :: Sale Banner Area -->
+<!-- BIGIN :: Product Area -->
+<?php
+	$best_item = array();
+	$trand_item = array();
+	$new_item = array();
+	$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE it_type2 = 1";
+	$res = sql_query($sql);
+	while ($row = sql_fetch_array($res)) {
+		$trand_item[] = $row;
+	}
+	$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE it_type3 = 1";
+	$res = sql_query($sql);
+	while ($row = sql_fetch_array($res)) {
+		$new_item[] = $row;
+	}
+	$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE it_type4 = 1";
+	$res = sql_query($sql);
+	while ($row = sql_fetch_array($res)) {
+		$best_item[] = $row;
+	}
+?>
+<div class="product-area mb-55">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-12">
+                <div class="product-title">
+                    <h3>Best Sellers</h3>
+                </div>
+                <div class="product-cat-list owl-carousel">
+                    <?php
+                    	for ($i=0; $i < count($best_item); $i++) {
+                    		if($i % 2 == 0) {
+                    ?>
+                    <div class="product-list-group">
+	                    <?php
+	                    	}
+	                    ?>
+                        <!--Single List Product Start-->
+                        <div class="single-product product-list mb-35">
+                            <div class="list-col-4">
+                                <div class="product-img">
+                                    <a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $best_item[$i]['it_id']; ?>"><img src="<?php echo G5_DATA_URL . '/item/' . $best_item[$i]['it_img1']; ?>" alt=""></a>
+                                    <span class="onsale">
+                                        <span>Sale!</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list-col-8">
+                                <div class="product-content">
+                                    <h4><a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $best_item[$i]['it_id']; ?>"><?php echo $best_item[$i]['it_name']; ?></a></h4>
+                                    <div class="product-reviews">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price"><?php echo "&#8361;" . number_format($best_item[$i]['it_price']); ?></span>
+                                        <?php if (!empty($best_item[$i]['it_cust_price'])) { ?>
+                                        <span class="regular-price"><?php echo "&#8361;" . number_format($best_item[$i]['it_cust_price']); ?></span>
+                                    	<?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single List Product End-->
+                        <?php
+                        	if (($i + 1) % 2 == 0) {
+                        ?>
+                    </div>
+                	<?php
+                			}
+                		}
+                	?>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-12">
+                <div class="product-title">
+                    <h3>Top Rate</h3>
+                </div>
+                <div class="product-cat-list owl-carousel">
+                    <?php
+                    	for ($i=0; $i < count($trand_item); $i++) {
+                    		if($i % 2 == 0) {
+                    ?>
+                    <div class="product-list-group">
+	                    <?php
+	                    	}
+	                    ?>
+                        <!--Single List Product Start-->
+                        <div class="single-product product-list mb-35">
+                            <div class="list-col-4">
+                                <div class="product-img">
+                                    <a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $trand_item[$i]['it_id']; ?>"><img src="<?php echo G5_DATA_URL . '/item/' . $trand_item[$i]['it_img1']; ?>" alt=""></a>
+                                    <span class="onsale">
+                                        <span>Sale!</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list-col-8">
+                                <div class="product-content">
+                                    <h4><a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $trand_item[$i]['it_id']; ?>"><?php echo $trand_item[$i]['it_name']; ?></a></h4>
+                                    <div class="product-reviews">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price"><?php echo "&#8361;" . number_format($trand_item[$i]['it_price']); ?></span>
+                                        <?php if (!empty($trand_item[$i]['it_cust_price'])) { ?>
+                                        <span class="regular-price"><?php echo "&#8361;" . number_format($trand_item[$i]['it_cust_price']); ?></span>
+                                    	<?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single List Product End-->
+                        <?php
+                        	if (($i + 1) % 2 == 0) {
+                        ?>
+                    </div>
+                	<?php
+                			}
+                		}
+                	?>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-12">
+                <div class="product-title">
+                    <h3>New Arrivals</h3>
+                </div>
+                <div class="product-cat-list owl-carousel">
+                    <?php
+                    	for ($i=0; $i < count($new_item); $i++) {
+                    		if($i % 2 == 0) {
+                    ?>
+                    <div class="product-list-group">
+	                    <?php
+	                    	}
+	                    ?>
+                        <!--Single List Product Start-->
+                        <div class="single-product product-list mb-35">
+                            <div class="list-col-4">
+                                <div class="product-img">
+                                    <a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $new_item[$i]['it_id']; ?>"><img src="<?php echo G5_DATA_URL . '/item/' . $new_item[$i]['it_img1']; ?>" alt=""></a>
+                                    <span class="onsale">
+                                        <span>Sale!</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list-col-8">
+                                <div class="product-content">
+                                    <h4><a href="<?php echo G5_SHOP_URL . '/item.php?it_id=' . $new_item[$i]['it_id']; ?>"><?php echo $new_item[$i]['it_name']; ?></a></h4>
+                                    <div class="product-reviews">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="price"><?php echo "&#8361;" . number_format($new_item[$i]['it_price']); ?></span>
+                                        <?php if (!empty($new_item[$i]['it_cust_price'])) { ?>
+                                        <span class="regular-price"><?php echo "&#8361;" . number_format($new_item[$i]['it_cust_price']); ?></span>
+                                    	<?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single List Product End-->
+                        <?php
+                        	if (($i + 1) % 2 == 0) {
+                        ?>
+                    </div>
+                	<?php
+                			}
+                		}
+                	?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END :: Product Area -->
+<?php /*
+
 <div class="container">
 	<?php if($default['de_type1_list_use']) { ?>
 	<!-- 히트상품 시작 { -->
@@ -2193,28 +455,269 @@ while ($row = sql_fetch_array($res)) {
 	</section>
 	<!-- } 인기상품 끝 -->
 	<?php } ?>
-	<?php if($default['de_type5_list_use']) { ?>
-	<!-- 할인상품 시작 { -->
-	<section class="sct_wrap">
-		<header>
-			<h2><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5">할인상품</a></h2>
-		</header>
-		<?php
-		$list = new item_list();
-		$list->set_type(5);
-		$list->set_view('it_id', false);
-		$list->set_view('it_name', true);
-		$list->set_view('it_basic', true);
-		$list->set_view('it_cust_price', true);
-		$list->set_view('it_price', true);
-		$list->set_view('it_icon', true);
-		$list->set_view('sns', true);
-		echo $list->run();
-		?>
-	</section>
-	<!-- } 할인상품 끝 -->
-	<?php } ?>
 </div>
+*/ ?>
+<!-- BIGIN :: Blog Area -->
+<div class="blog-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!--Section Title Start-->
+                <div class="section-title text-center">
+                    <h3>Latest News</h3>
+                </div>
+                <!--Section Title End-->
+            </div>
+        </div>
+        <div class="row blog-slider owl-carousel">
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog1.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Blog image post</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>01 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog2.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Post with Gallery</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>15 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog3.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Post with Audio</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>01 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog4.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Post with Video</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>05 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog5.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Maecenas ultricies</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>10 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog6.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Etiam magna</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>01 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+            <div class="col-12">
+                <!--Single Blog Start-->
+                <div class="single-blog">
+                    <div class="blog-img img-full">
+                        <a href="single-blog.html">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/blog/blog7.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="single-blog.html">Praesent imperdiet</a></h3>
+                        <ul class="blog-meta">
+                            <li>By<a href="#">admin</a></li>
+                            <li>on <span>20 Dec 2018</span></li>
+                        </ul>
+                        <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Praesent</p>
+                    </div>
+                </div>
+                <!--Single Blog Start-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END :: Blog Area -->
+<!-- BIGIN :: Feature Area -->
+<div class="feature-area mb-90">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-4 white-bg">
+                <!--Single Feature Start-->
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <img src="<?php echo G5_ASSETS_URL; ?>/img/icon/feature1.png" alt="">
+                    </div>
+                    <div class="feature-content">
+                        <h3>100% Money Back Guarantee</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit auctor nibh.</p>
+                    </div>
+                </div>
+                <!--Single Feature End-->
+            </div>
+            <div class="col-md-4 white-bg">
+                <!--Single Feature Start-->
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <img src="<?php echo G5_ASSETS_URL; ?>/img/icon/feature2.png" alt="">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Free Shipping On Order Over 500$</h3>
+                        <p>Duis luctus libero in quam convallis, idpla cerat tellus convallis</p>
+                    </div>
+                </div>
+                <!--Single Feature End-->
+            </div>
+            <div class="col-md-4 white-bg">
+                <!--Single Feature Start-->
+                <div class="single-feature">
+                    <div class="feature-icon">
+                        <img src="<?php echo G5_ASSETS_URL; ?>/img/icon/feature3.png" alt="">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Online Support 24/7</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit auctor nibh.</p>
+                    </div>
+                </div>
+                <!--Single Feature End-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END :: Feature Area -->
+<!-- BIGIN :: Testimonial Area -->
+<div class="testimonial-area mb-85">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!--Section Title Start-->
+                <div class="section-title text-center">
+                    <h3>What They Say About Us</h3>
+                </div>
+                <!--Section Title End-->
+            </div>
+        </div>
+        <div class="testimonial-slider">
+            <div class="row testimonial-active owl-carousel">
+                <div class="col-lg-8 col-12 ml-auto mr-auto">
+                    <!--Single Testimonial Start-->
+                    <div class="single-testimonial text-center">
+                        <div class="testimonial-img">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/testimonial/testimonial1.jpg" alt="">
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Perfect Themes and the best of all that you have many options to choose! Best Support team ever! Very fast responding! Thank you very much! I highly recommend this theme and these people!</p>
+                            <div class="testimonial-author">
+                                <h6>Katherine Sullivan <span>Customer</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Testimonial End-->
+                </div>
+                <div class="col-lg-8 col-12 ml-auto mr-auto">
+                    <!--Single Testimonial Start-->
+                    <div class="single-testimonial text-center">
+                        <div class="testimonial-img">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/testimonial/testimonial2.jpg" alt="">
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Perfect Themes and the best of all that you have many options to choose! Best Support team ever! Very fast responding! Thank you very much! I highly recommend this theme and these people!</p>
+                            <div class="testimonial-author">
+                                <h6>Md Shohel <span>Manager of AZ</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Testimonial End-->
+                </div>
+                <div class="col-lg-8 col-12 ml-auto mr-auto">
+                    <!--Single Testimonial Start-->
+                    <div class="single-testimonial text-center">
+                        <div class="testimonial-img">
+                            <img src="<?php echo G5_ASSETS_URL; ?>/img/testimonial/testimonial3.jpg" alt="">
+                        </div>
+                        <div class="testimonial-content">
+                            <p>Perfect Themes and the best of all that you have many options to choose! Best Support team ever! Very fast responding! Thank you very much! I highly recommend this theme and these people!</p>
+                            <div class="testimonial-author">
+                                <h6>Kathy Young <span>CEO of SunPark</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Testimonial End-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END :: Testimonial Area -->
 <?php
 include_once(G5_THEME_SHOP_PATH.'/shop.tail.php');
 ?>

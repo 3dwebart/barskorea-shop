@@ -4,7 +4,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 0);
 ?>
-
+<div class="container">
 <?php
 for ($i=1; $row=sql_fetch_array($result); $i++) {
     if ($list_mod >= 2) { // 1줄 이미지 : 2개 이상
@@ -33,3 +33,4 @@ if ($i > 1) echo "</ul>\n";
 
 if($i == 1) echo "<p class=\"sct_noitem\">등록된 개인결제가 없습니다.</p>\n";
 ?>
+</div>

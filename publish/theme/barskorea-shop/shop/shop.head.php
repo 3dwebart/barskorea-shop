@@ -190,7 +190,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 						<div class="col-lg-12">
 							<!--Logo Sticky Start-->
 							<div class="logo-sticky">
-								<a href="index.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
+								<a href="<?php echo G5_URL; ?>"><img src="<?php echo G5_ASSETS_URL; ?>/img/logo/logo.png" alt=""></a>
 							</div>
 							<!--Logo Sticky End-->
 							<!--Header Menu Start-->
