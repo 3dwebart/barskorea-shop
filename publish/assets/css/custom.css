@@ -28,6 +28,10 @@
 .row-10 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -10px; margin-left: -10px; }
 .row-10 > *[class^="col-"],.row-10 > *[class$="col-"] { padding-left: 10px; padding-right: 10px; }
 /* } END :: Bootstrap grid row style */
+.product-action > ul > li > a.btn-list-wishlist.active:hover,
+.btn-list-wishlist.active {
+    color: red;
+}
 /* BIGIN :: Shop detail page { */
 .single-product-price .price {
 	font-weight: 700;

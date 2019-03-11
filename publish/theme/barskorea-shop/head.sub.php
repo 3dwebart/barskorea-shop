@@ -21,6 +21,8 @@ if (!$g5['lo_location'])
 $g5['lo_url'] = addslashes(clean_xss_tags($_SERVER['REQUEST_URI']));
 if (strstr($g5['lo_url'], '/'.G5_ADMIN_DIR.'/') || $is_admin == 'super') $g5['lo_url'] = '';
 
+$mb_id = $_SESSION['ss_mb_id'];
+
 /*
 // 만료된 페이지로 사용하시는 경우
 header("Cache-Control: no-cache"); // HTTP/1.1
@@ -99,7 +101,9 @@ var g5_bo_table  = "<?php echo isset($bo_table)?$bo_table:''; ?>";
 var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
-var mb_id = "<?php echo $_SESSION['ss_mb_id']; ?>";
+var mb_id = "<?php echo $mb_id; ?>";
+var g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
+var g5_assets_url = "<?php echo G5_ASSETS_URL; ?>";
 </script>
 <!-- <script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script> -->
 <!-- BIGIN :: Add js files -->

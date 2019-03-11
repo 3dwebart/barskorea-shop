@@ -92,7 +92,7 @@ while ($row = sql_fetch_array($res)) {
 				<div class="tab-content">
 					<?php
 						for ($i=0; $i < count($main_tabs_arr); $i++) {
-							$sql = "SELECT * FROM {$g5['g5_shop_item_table']} WHERE ca_id = '$main_tabs_arr[$i]' AND it_type5 = 1";
+							$sql = "SELECT a.*, (SELECT b.it_id FROM {$g5['g5_shop_wish_table']} AS b WHERE a.it_id = b.it_id AND b.mb_id = '$mb_id') AS wish FROM {$g5['g5_shop_item_table']} AS a WHERE a.ca_id = '$main_tabs_arr[$i]' AND a.it_type5 = 1";
 							$res = sql_query($sql);
 					?>
 					<div class="tab-pane fade <?php if($i == 0) echo ' show active'; ?>" id="<?php echo $main_tabs_id_arr[$i]; ?>">
@@ -116,12 +116,27 @@ while ($row = sql_fetch_array($res)) {
 												</span>
 												<div class="product-action">
 													<ul>
-														<li><a href="#" data-toggle="tooltip" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" title="Add To Wishlist"><i class="fa fa-heart-o"></i></a></li>
-														<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i class="fa fa-refresh"></i></a></li>
+														<li>
+															<a href="#" class="btn-list-cart" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Cart">
+																<i class="fa fa-shopping-cart"></i>
+															</a>
+														</li>
+														<li>
+															<a href="#" class="btn-list-wishlist<?php echo $row['wish'] != '' ? ' active' : ''; ?>" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Wishlist">
+																<i class="fa fa-heart-o"></i>
+															</a>
+														</li>
+														<li>
+															<a href="#" class="btn-list-compare" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" data-placement="top" title="Compare">
+																<i class="fa fa-refresh"></i>
+															</a>
+														</li>
 													</ul>
 													<div class="quickviewbtn">
-														<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>
+														<a href="#open-modal" data-toggle="modal" class="btn-list-quick-view" data-id="<?php echo $row['it_id']; ?>" title="Quick view">
+															<i class="fa fa-search"></i>
+															Quick View
+														</a>
 													</div>
 												</div>
 											</div>

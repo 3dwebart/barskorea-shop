@@ -86,12 +86,12 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 	$tmplete1 .= '</span>';
 	$tmplete1 .= '<div class="product-action">';
     $tmplete1 .= '<ul>';
-    $tmplete1 .= '<li><a href="#" data-toggle="tooltip" title="Add To Cart" class="btn-list-cart"><i class="fa fa-shopping-cart"></i></a></li>';
-    $tmplete1 .= '<li><a href="#" data-toggle="tooltip" title="Add To Wishlist" class="btn-list-wishlist"><i class="fa fa-heart-o"></i></a></li>';
-    $tmplete1 .= '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Compare" class="btn-list-compare"><i class="fa fa-refresh"></i></a></li>';
+    $tmplete1 .= '<li><a href="#" data-id="'.$row['it_id'].'" data-toggle="tooltip" title="Add To Cart" class="btn-list-cart"><i class="fa fa-shopping-cart"></i></a></li>';
+    $tmplete1 .= '<li><a href="#" data-id="'.$row['it_id'].'" data-toggle="tooltip" title="Add To Wishlist" class="btn-list-wishlist"><i class="fa fa-heart-o"></i></a></li>';
+    $tmplete1 .= '<li><a href="#" data-id="'.$row['it_id'].'" data-toggle="tooltip" data-placement="top" title="Compare" class="btn-list-compare"><i class="fa fa-refresh"></i></a></li>';
     $tmplete1 .= '</ul>';
 	$tmplete1 .= '<div class="quickviewbtn">';
-	$tmplete1 .= '<a href="#open-modal" data-toggle="modal" title="Quick view"><i class="fa fa-search"></i>Quick View</a>';
+	$tmplete1 .= '<a href="#open-modal" data-toggle="modal" class="btn-list-quick-view" data-id="'.$row['it_id'].'" title="Quick view"><i class="fa fa-search"></i>Quick View</a>';
 	$tmplete1 .= '</div>';
 	$tmplete1 .= '</div>';
 	$tmplete1 .= '</div>';

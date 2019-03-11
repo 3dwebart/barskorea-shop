@@ -10,7 +10,7 @@ set_cart_id($sw_direct);
 
 $s_cart_id = get_session('ss_cart_id');
 // 선택필드 초기화
-$sql = " update {$g5['g5_shop_cart_table']} set ct_select = '0' where od_id = '$s_cart_id' ";
+$sql = " UPDATE {$g5['g5_shop_cart_table']} SET ct_select = '0' WHERE od_id = '$s_cart_id' ";
 sql_query($sql);
 
 $cart_action_url = G5_SHOP_URL.'/cartupdate.php';
@@ -63,7 +63,7 @@ include_once('./_head.php');
         $tot_sell_price = 0;
 
         // $s_cart_id 로 현재 장바구니 자료 쿼리
-        $sql = " select a.ct_id,
+        $sql = " SELECT a.ct_id,
                         a.it_id,
                         a.it_name,
                         a.ct_price,
@@ -75,23 +75,22 @@ include_once('./_head.php');
                         b.ca_id,
                         b.ca_id2,
                         b.ca_id3
-                   from {$g5['g5_shop_cart_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
-                  where a.od_id = '$s_cart_id' ";
-        $sql .= " group by a.it_id ";
-        $sql .= " order by a.ct_id ";
+                   FROM {$g5['g5_shop_cart_table']} a LEFT JOIN {$g5['g5_shop_item_table']} b ON ( a.it_id = b.it_id )
+                  WHERE a.od_id = '$s_cart_id' ";
+        $sql .= " GROUP BY a.it_id ";
+        $sql .= " ORDER BY a.ct_id ";
         $result = sql_query($sql);
 
         $it_send_cost = 0;
 
-        for ($i=0; $row=sql_fetch_array($result); $i++)
-        {
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
             // 합계금액 계산
-            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
-                            SUM(ct_point * ct_qty) as point,
-                            SUM(ct_qty) as qty
-                        from {$g5['g5_shop_cart_table']}
-                        where it_id = '{$row['it_id']}'
-                          and od_id = '$s_cart_id' ";
+            $sql = " SELECT SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) AS price,
+                            SUM(ct_point * ct_qty) AS point,
+                            SUM(ct_qty) AS qty
+                        FROM {$g5['g5_shop_cart_table']}
+                        WHERE it_id = '{$row['it_id']}'
+                          AND od_id = '$s_cart_id' ";
             $sum = sql_fetch($sql);
 
             if ($i==0) { // 계속쇼핑
@@ -110,8 +109,7 @@ include_once('./_head.php');
             }
 
             // 배송비
-            switch($row['ct_send_cost'])
-            {
+            switch($row['ct_send_cost']) {
                 case 1:
                     $ct_send_cost = '착불';
                     break;
@@ -277,8 +275,7 @@ function form_check(act) {
     var f = document.frmcartlist;
     var cnt = f.records.value;
 
-    if (act == "buy")
-    {
+    if (act == "buy") {
         if($("input[name^=ct_chk]:checked").length < 1) {
             alert("주문하실 상품을 하나이상 선택해 주십시오.");
             return false;
@@ -286,14 +283,10 @@ function form_check(act) {
 
         f.act.value = act;
         f.submit();
-    }
-    else if (act == "alldelete")
-    {
+    } else if (act == "alldelete") {
         f.act.value = act;
         f.submit();
-    }
-    else if (act == "seldelete")
-    {
+    } else if (act == "seldelete") {
         if($("input[name^=ct_chk]:checked").length < 1) {
             alert("삭제하실 상품을 하나이상 선택해 주십시오.");
             return false;
@@ -307,7 +300,6 @@ function form_check(act) {
 }
 </script>
 <!-- } 장바구니 끝 -->
-
 <?php
 include_once('./_tail.php');
 ?>

@@ -169,12 +169,12 @@ if ($w == '' || $w == 'u') {
         $begin_reply_char = 'A';
         $end_reply_char = 'Z';
         $reply_number = +1;
-        $sql = " select MAX(SUBSTRING(wr_reply, $reply_len, 1)) as reply from {$write_table} where wr_num = '{$reply_array['wr_num']}' and SUBSTRING(wr_reply, {$reply_len}, 1) <> '' ";
+        $sql = " SELECT MAX(SUBSTRING(wr_reply, $reply_len, 1)) AS reply FROM {$write_table} WHERE wr_num = '{$reply_array['wr_num']}' AND SUBSTRING(wr_reply, {$reply_len}, 1) <> '' ";
     } else {
         $begin_reply_char = 'Z';
         $end_reply_char = 'A';
         $reply_number = -1;
-        $sql = " select MIN(SUBSTRING(wr_reply, {$reply_len}, 1)) as reply from {$write_table} where wr_num = '{$reply_array['wr_num']}' and SUBSTRING(wr_reply, {$reply_len}, 1) <> '' ";
+        $sql = " SELECT MIN(SUBSTRING(wr_reply, {$reply_len}, 1)) AS reply FROM {$write_table} WHERE wr_num = '{$reply_array['wr_num']}' AND SUBSTRING(wr_reply, {$reply_len}, 1) <> '' ";
     }
     if ($reply_array['wr_reply']) $sql .= " and wr_reply like '{$reply_array['wr_reply']}%' ";
     $row = sql_fetch($sql);
@@ -281,19 +281,19 @@ if ($w == '' || $w == 'r') {
     $wr_id = sql_insert_id();
 
     // 부모 아이디에 UPDATE
-    sql_query(" update $write_table set wr_parent = '$wr_id' where wr_id = '$wr_id' ");
+    sql_query(" UPDATE $write_table SET wr_parent = '$wr_id' WHERE wr_id = '$wr_id' ");
 
     // 새글 INSERT
-    sql_query(" insert into {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id ) values ( '{$bo_table}', '{$wr_id}', '{$wr_id}', '".G5_TIME_YMDHIS."', '{$member['mb_id']}' ) ");
+    sql_query(" INSERT INTO {$g5['board_new_table']} ( bo_table, wr_id, wr_parent, bn_datetime, mb_id ) VALUES ( '{$bo_table}', '{$wr_id}', '{$wr_id}', '".G5_TIME_YMDHIS."', '{$member['mb_id']}' ) ");
 
     // 게시글 1 증가
-    sql_query("update {$g5['board_table']} set bo_count_write = bo_count_write + 1 where bo_table = '{$bo_table}'");
+    sql_query("UPDATE {$g5['board_table']} SET bo_count_write = bo_count_write + 1 WHERE bo_table = '{$bo_table}'");
 
     // 쓰기 포인트 부여
     if ($w == '') {
         if ($notice) {
             $bo_notice = $wr_id.($board['bo_notice'] ? ",".$board['bo_notice'] : '');
-            sql_query(" update {$g5['board_table']} set bo_notice = '{$bo_notice}' where bo_table = '{$bo_table}' ");
+            sql_query(" UPDATE {$g5['board_table']} SET bo_notice = '{$bo_notice}' WHERE bo_table = '{$bo_table}' ");
         }
 
         insert_point($member['mb_id'], $board['bo_write_point'], "{$board['bo_subject']} {$wr_id} 글쓰기", $bo_table, $wr_id, '쓰기');
@@ -367,8 +367,8 @@ if ($w == '' || $w == 'r') {
     if (!$is_admin)
         $sql_ip = " , wr_ip = '{$_SERVER['REMOTE_ADDR']}' ";
 
-    $sql = " update {$write_table}
-                set ca_name = '{$ca_name}',
+    $sql = " UPDATE {$write_table}
+                SET ca_name = '{$ca_name}',
                      wr_option = '{$html},{$secret},{$mail}',
                      wr_subject = '{$wr_subject}',
                      wr_content = '{$wr_content}',
@@ -390,7 +390,7 @@ if ($w == '' || $w == 'r') {
                      wr_10= '{$wr_10}'
                      {$sql_ip}
                      {$sql_password}
-              where wr_id = '{$wr['wr_id']}' ";
+              WHERE wr_id = '{$wr['wr_id']}' ";
     sql_query($sql);
 
     // 분류가 수정되는 경우 해당되는 코멘트의 분류명도 모두 수정함
@@ -417,7 +417,7 @@ if ($w == '' || $w == 'r') {
     */
 
     $bo_notice = board_notice($board['bo_notice'], $wr_id, $notice);
-    sql_query(" update {$g5['board_table']} set bo_notice = '{$bo_notice}' where bo_table = '{$bo_table}' ");
+    sql_query(" UPDATE {$g5['board_table']} SET bo_notice = '{$bo_notice}' WHERE bo_table = '{$bo_table}' ");
 }
 
 // 게시판그룹접근사용을 하지 않아야 하고 비회원 글읽기가 가능해야 하며 비밀글이 아니어야 합니다.
@@ -465,15 +465,15 @@ for ($i=0; $i<count($_FILES['bf_file']['name']); $i++) {
     if (isset($_POST['bf_file_del'][$i]) && $_POST['bf_file_del'][$i]) {
         $upload[$i]['del_check'] = true;
 
-        $row = sql_fetch(" select bf_file from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' and bf_no = '{$i}' ");
+        $row = sql_fetch(" SELECT bf_file FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' AND bf_no = '{$i}' ");
         @unlink(G5_DATA_PATH.'/file/'.$bo_table.'/'.$row['bf_file']);
         // 썸네일삭제
         if(preg_match("/\.({$config['cf_image_extension']})$/i", $row['bf_file'])) {
             delete_board_thumbnail($bo_table, $row['bf_file']);
         }
-    }
-    else
+    } else {
         $upload[$i]['del_check'] = false;
+    }
 
     $tmp_file  = $_FILES['bf_file']['tmp_name'][$i];
     $filesize  = $_FILES['bf_file']['size'][$i];
@@ -485,8 +485,7 @@ for ($i=0; $i<count($_FILES['bf_file']['name']); $i++) {
         if ($_FILES['bf_file']['error'][$i] == 1) {
             $file_upload_msg .= '\"'.$filename.'\" 파일의 용량이 서버에 설정('.$upload_max_filesize.')된 값보다 크므로 업로드 할 수 없습니다.\\n';
             continue;
-        }
-        else if ($_FILES['bf_file']['error'][$i] != 0) {
+        } else if ($_FILES['bf_file']['error'][$i] != 0) {
             $file_upload_msg .= '\"'.$filename.'\" 파일이 정상적으로 업로드 되지 않았습니다.\\n';
             continue;
         }
@@ -498,7 +497,6 @@ for ($i=0; $i<count($_FILES['bf_file']['name']); $i++) {
             $file_upload_msg .= '\"'.$filename.'\" 파일의 용량('.number_format($filesize).' 바이트)이 게시판에 설정('.number_format($board['bo_upload_size']).' 바이트)된 값보다 크므로 업로드 하지 않습니다.\\n';
             continue;
         }
-
         //=================================================================\
         // 090714
         // 이미지나 플래시 파일에 악성코드를 심어 업로드 하는 경우를 방지
@@ -508,8 +506,9 @@ for ($i=0; $i<count($_FILES['bf_file']['name']); $i++) {
         // image type
         if ( preg_match("/\.({$config['cf_image_extension']})$/i", $filename) ||
              preg_match("/\.({$config['cf_flash_extension']})$/i", $filename) ) {
-            if ($timg['2'] < 1 || $timg['2'] > 16)
+            if ($timg['2'] < 1 || $timg['2'] > 16) {
                 continue;
+            }
         }
         //=================================================================
 
@@ -518,7 +517,7 @@ for ($i=0; $i<count($_FILES['bf_file']['name']); $i++) {
         // 4.00.11 - 글답변에서 파일 업로드시 원글의 파일이 삭제되는 오류를 수정
         if ($w == 'u') {
             // 존재하는 파일이 있다면 삭제합니다.
-            $row = sql_fetch(" select bf_file from {$g5['board_file_table']} where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$i' ");
+            $row = sql_fetch(" SELECT bf_file FROM {$g5['board_file_table']} WHERE bo_table = '$bo_table' AND wr_id = '$wr_id' AND bf_no = '$i' ");
             @unlink(G5_DATA_PATH.'/file/'.$bo_table.'/'.$row['bf_file']);
             // 이미지파일이면 썸네일삭제
             if(preg_match("/\.({$config['cf_image_extension']})$/i", $row['bf_file'])) {
@@ -556,15 +555,15 @@ for ($i=0; $i<count($upload); $i++)
         $upload[$i]['source'] = addslashes($upload[$i]['source']);
     }
 
-    $row = sql_fetch(" select count(*) as cnt from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' and bf_no = '{$i}' ");
+    $row = sql_fetch(" SELECT count(*) AS cnt FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' AND bf_no = '{$i}' ");
     if ($row['cnt'])
     {
         // 삭제에 체크가 있거나 파일이 있다면 업데이트를 합니다.
         // 그렇지 않다면 내용만 업데이트 합니다.
         if ($upload[$i]['del_check'] || $upload[$i]['file'])
         {
-            $sql = " update {$g5['board_file_table']}
-                        set bf_source = '{$upload[$i]['source']}',
+            $sql = " UPDATE {$g5['board_file_table']}
+                        SET bf_source = '{$upload[$i]['source']}',
                              bf_file = '{$upload[$i]['file']}',
                              bf_content = '{$bf_content[$i]}',
                              bf_filesize = '{$upload[$i]['filesize']}',
@@ -572,25 +571,25 @@ for ($i=0; $i<count($upload); $i++)
                              bf_height = '{$upload[$i]['image']['1']}',
                              bf_type = '{$upload[$i]['image']['2']}',
                              bf_datetime = '".G5_TIME_YMDHIS."'
-                      where bo_table = '{$bo_table}'
-                                and wr_id = '{$wr_id}'
-                                and bf_no = '{$i}' ";
+                      WHERE bo_table = '{$bo_table}'
+                                AND wr_id = '{$wr_id}'
+                                AND bf_no = '{$i}' ";
             sql_query($sql);
         }
         else
         {
-            $sql = " update {$g5['board_file_table']}
-                        set bf_content = '{$bf_content[$i]}'
-                        where bo_table = '{$bo_table}'
-                                  and wr_id = '{$wr_id}'
-                                  and bf_no = '{$i}' ";
+            $sql = " UPDATE {$g5['board_file_table']}
+                        SET bf_content = '{$bf_content[$i]}'
+                        WHERE bo_table = '{$bo_table}'
+                                  AND wr_id = '{$wr_id}'
+                                  AND bf_no = '{$i}' ";
             sql_query($sql);
         }
     }
     else
     {
-        $sql = " insert into {$g5['board_file_table']}
-                    set bo_table = '{$bo_table}',
+        $sql = " INSERT INTO {$g5['board_file_table']}
+                    SET bo_table = '{$bo_table}',
                          wr_id = '{$wr_id}',
                          bf_no = '{$i}',
                          bf_source = '{$upload[$i]['source']}',
@@ -608,24 +607,24 @@ for ($i=0; $i<count($upload); $i++)
 
 // 업로드된 파일 내용에서 가장 큰 번호를 얻어 거꾸로 확인해 가면서
 // 파일 정보가 없다면 테이블의 내용을 삭제합니다.
-$row = sql_fetch(" select max(bf_no) as max_bf_no from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
+$row = sql_fetch(" SELECT max(bf_no) AS max_bf_no FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' ");
 for ($i=(int)$row['max_bf_no']; $i>=0; $i--)
 {
-    $row2 = sql_fetch(" select bf_file from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' and bf_no = '{$i}' ");
+    $row2 = sql_fetch(" SELECT bf_file FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' AND bf_no = '{$i}' ");
 
     // 정보가 있다면 빠집니다.
     if ($row2['bf_file']) break;
 
     // 그렇지 않다면 정보를 삭제합니다.
-    sql_query(" delete from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' and bf_no = '{$i}' ");
+    sql_query(" DELETE FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' AND bf_no = '{$i}' ");
 }
 
 // 파일의 개수를 게시물에 업데이트 한다.
-$row = sql_fetch(" select count(*) as cnt from {$g5['board_file_table']} where bo_table = '{$bo_table}' and wr_id = '{$wr_id}' ");
-sql_query(" update {$write_table} set wr_file = '{$row['cnt']}' where wr_id = '{$wr_id}' ");
+$row = sql_fetch(" SELECT count(*) AS cnt FROM {$g5['board_file_table']} WHERE bo_table = '{$bo_table}' AND wr_id = '{$wr_id}' ");
+sql_query(" UPDATE {$write_table} SET wr_file = '{$row['cnt']}' WHERE wr_id = '{$wr_id}' ");
 
 // 자동저장된 레코드를 삭제한다.
-sql_query(" delete from {$g5['autosave_table']} where as_uid = '{$uid}' ");
+sql_query(" DELETE FROM {$g5['autosave_table']} WHERE as_uid = '{$uid}' ");
 //------------------------------------------------------------------------------
 
 // 비밀글이라면 세션에 비밀글의 아이디를 저장한다. 자신의 글은 다시 비밀번호를 묻지 않기 위함
