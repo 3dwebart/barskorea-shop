@@ -382,8 +382,7 @@ function get_image($img, $width=0, $height=0, $img_id='')
 
 
 // 상품 이미지를 얻는다
-function get_it_image($it_id, $width, $height=0, $anchor=false, $img_id='', $img_alt='', $is_crop=false)
-{
+function get_it_image($it_id, $width, $height=0, $anchor=false, $img_id='', $img_alt='', $is_crop=false) {
     global $g5;
 
     if(!$it_id || !$width)
@@ -440,6 +439,65 @@ function get_it_image($it_id, $width, $height=0, $anchor=false, $img_id='', $img
     return $img;
 }
 
+// 
+// 상품 이미지를 얻는다 - Add Bootstrap 4 class (img-fluid) 반응형 웹 이미지 변환 2019-03-12
+function get_it_image_responsive($it_id, $width, $height=0, $anchor=false, $img_id='', $img_alt='', $is_crop=false) {
+    global $g5;
+
+    if(!$it_id || !$width)
+        return '';
+
+    $sql = " SELECT it_id, it_img1, it_img2, it_img3, it_img4, it_img5, it_img6, it_img7, it_img8, it_img9, it_img10 FROM {$g5['g5_shop_item_table']} WHERE it_id = '$it_id' ";
+    $row = sql_fetch($sql);
+
+    if(!$row['it_id'])
+        return '';
+
+    for($i=1;$i<=10; $i++) {
+        $file = G5_DATA_PATH.'/item/'.$row['it_img'.$i];
+        if(is_file($file) && $row['it_img'.$i]) {
+            $size = @getimagesize($file);
+            if($size[2] < 1 || $size[2] > 3)
+                continue;
+
+            $filename = basename($file);
+            $filepath = dirname($file);
+            $img_width = $size[0];
+            $img_height = $size[1];
+
+            break;
+        }
+    }
+
+    if($img_width && !$height) {
+        $height = round(($width * $img_height) / $img_width);
+    }
+
+    if($filename) {
+        //thumbnail($filename, $source_path, $target_path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=true, $um_value='80/0.5/3')
+        $thumb = thumbnail($filename, $filepath, $filepath, $width, $height, false, $is_crop, 'center', false, $um_value='80/0.5/3');
+    }
+
+    if($thumb) {
+        $file_url = str_replace(G5_PATH, G5_URL, $filepath.'/'.$thumb);
+        $img = '<img src="'.$file_url.'" alt="'.$img_alt.'" class="img-fluid"';
+    } else {
+        $img = '<img src="'.G5_SHOP_URL.'/img/no_image.gif"';
+        if($height) {
+            $img .= '';
+        }
+        $img .= ' alt="'.$img_alt.'" class="img-fluid"';
+    }
+
+    if($img_id)
+        $img .= ' id="'.$img_id.'"';
+    $img .= '>';
+
+    if($anchor)
+        $img = '<a href="'.G5_SHOP_URL.'/item.php?it_id='.$it_id.'">'.$img.'</a>';
+
+    return $img;
+}
 
 // 상품이미지 썸네일 생성
 function get_it_thumbnail($img, $width, $height=0, $id='', $is_crop=false)

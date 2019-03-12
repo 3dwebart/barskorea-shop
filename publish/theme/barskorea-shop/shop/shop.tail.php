@@ -199,7 +199,7 @@ $admin = get_admin("super");
 	</div>
 </footer>
 <!-- END :: Footer Area -->
-<!-- Modal Area Strat -->
+<!-- BIGIN :: Modal Area -->
 <div class="modal fade" id="open-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -215,42 +215,57 @@ $admin = get_admin("super");
 							<div class="tab-pane fade show active" id="single-slide1" role="tabpanel" aria-labelledby="single-slide-tab-1">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product1.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product1.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
 							<div class="tab-pane fade" id="single-slide2" role="tabpanel" aria-labelledby="single-slide-tab-2">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product2.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product2.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
 							<div class="tab-pane fade" id="single-slide3" role="tabpanel" aria-labelledby="single-slide-tab-3">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product3.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product3.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
 							<div class="tab-pane fade" id="single-slide4" role="tabpanel" aria-labelledby="single-slide-tab-4">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product4.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product4.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
 							<div class="tab-pane fade" id="single-slide5" role="tabpanel" aria-labelledby="single-slide-tab-4">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product5.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product5.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
 							<div class="tab-pane fade" id="single-slide6" role="tabpanel" aria-labelledby="single-slide-tab-4">
 								<!--Single Product Image Start-->
 								<div class="single-product-img img-full">
-									<img src="img/single-product/single-product6.jpg" alt="">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product6.jpg" alt="">
+								</div>
+								<!--Single Product Image End-->
+							</div>
+
+							<div class="tab-pane fade" id="single-slide7" role="tabpanel" aria-labelledby="single-slide-tab-2">
+								<!--Single Product Image Start-->
+								<div class="single-product-img img-full">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product2.jpg" alt="">
+								</div>
+								<!--Single Product Image End-->
+							</div>
+							<div class="tab-pane fade" id="single-slide8" role="tabpanel" aria-labelledby="single-slide-tab-4">
+								<!--Single Product Image Start-->
+								<div class="single-product-img img-full">
+									<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product5.jpg" alt="">
 								</div>
 								<!--Single Product Image End-->
 							</div>
@@ -260,22 +275,29 @@ $admin = get_admin("super");
 						<div class="single-product-menu">
 							<div class="nav single-slide-menu owl-carousel" role="tablist">
 								<div class="single-tab-menu img-full">
-									<a class="active" data-toggle="tab" id="single-slide-tab-1" href="#single-slide1"><img src="img/single-product/small/single-product1.jpg" alt=""></a>
+									<a class="active" data-toggle="tab" id="single-slide-tab-1" href="#single-slide1"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product1.jpg" alt=""></a>
 								</div>
 								<div class="single-tab-menu img-full">
-									<a data-toggle="tab" id="single-slide-tab-2" href="#single-slide2"><img src="img/single-product/small/single-product2.jpg" alt=""></a>
+									<a data-toggle="tab" id="single-slide-tab-2" href="#single-slide2"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product2.jpg" alt=""></a>
 								</div>
 								<div class="single-tab-menu img-full">
-									<a data-toggle="tab" id="single-slide-tab-3" href="#single-slide3"><img src="img/single-product/small/single-product3.jpg" alt=""></a>
+									<a data-toggle="tab" id="single-slide-tab-3" href="#single-slide3"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product3.jpg" alt=""></a>
 								</div>
 								<div class="single-tab-menu img-full">
-									<a data-toggle="tab" id="single-slide-tab-4" href="#single-slide4"><img src="img/single-product/small/single-product4.jpg" alt=""></a>
+									<a data-toggle="tab" id="single-slide-tab-4" href="#single-slide4"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product4.jpg" alt=""></a>
 								</div>
 								<div class="single-tab-menu img-full">
-									<a data-toggle="tab" id="single-slide-tab-5" href="#single-slide5"><img src="img/single-product/small/single-product5.jpg" alt=""></a>
+									<a data-toggle="tab" id="single-slide-tab-5" href="#single-slide5"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product5.jpg" alt=""></a>
 								</div>
 								<div class="single-tab-menu img-full">
-									<a data-toggle="tab" id="single-slide-tab-6" href="#single-slide6"><img src="img/single-product/small/single-product6.jpg" alt=""></a>
+									<a data-toggle="tab" id="single-slide-tab-6" href="#single-slide6"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product6.jpg" alt=""></a>
+								</div>
+
+								<div class="single-tab-menu img-full">
+									<a data-toggle="tab" id="single-slide-tab-7" href="#single-slide7"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product2.jpg" alt=""></a>
+								</div>
+								<div class="single-tab-menu img-full">
+									<a data-toggle="tab" id="single-slide-tab-8" href="#single-slide8"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product5.jpg" alt=""></a>
 								</div>
 							</div>
 						</div>
@@ -285,7 +307,7 @@ $admin = get_admin("super");
 					<!--Modal Content-->
 					<div class="col-md-7">
 						<div class="modal-product-info">
-							<h1>Sit voluptatem</h1>
+							<h1 class="subject">Sit voluptatem</h1>
 							<div class="modal-product-price">
 							   <span class="old-price">$74.00</span>
 							   <span class="new-price">$69.00</span>
@@ -322,7 +344,7 @@ $admin = get_admin("super");
 		</div>
 	</div>
 </div>
-<!-- Modal Area End -->
+<!-- END :: Modal Area -->
 <?php
 	/*
 	<div id="ft">

@@ -10,28 +10,72 @@
 /* END :: Navigation custom */
 /* BIGIN :: Bootstrap grid row style { */
 .row-2 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -2px; margin-left: -2px; }
-.row-2 > *[class^="col-"],.row-2 > *[class$="col-"] { padding-left: 2px; padding-right: 2px; }
+.row-2 > *[class^="col-"],.row-2 > *[class$="col-"] { padding-left: 2px; padding-right: 2px; transition: all .5s ease; }
 .row-3 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -3px; margin-left: -3px; }
-.row-3 > *[class^="col-"],.row-3 > *[class$="col-"] { padding-left: 3px; padding-right: 3px; }
+.row-3 > *[class^="col-"],.row-3 > *[class$="col-"] { padding-left: 3px; padding-right: 3px; transition: all .5s ease; }
 .row-4 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -4px; margin-left: -4px; }
-.row-4 > *[class^="col-"],.row-4 > *[class$="col-"] { padding-left: 4px; padding-right: 4px; }
+.row-4 > *[class^="col-"],.row-4 > *[class$="col-"] { padding-left: 4px; padding-right: 4px; transition: all .5s ease; }
 .row-5 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -5px; margin-left: -5px; }
-.row-5 > *[class^="col-"],.row-5 > *[class$="col-"] { padding-left: 5px; padding-right: 5px; }
+.row-5 > *[class^="col-"],.row-5 > *[class$="col-"] { padding-left: 5px; padding-right: 5px; transition: all .5s ease; }
 .row-6 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -6px; margin-left: -6px; }
-.row-6 > *[class^="col-"],.row-6 > *[class$="col-"] { padding-left: 6px; padding-right: 6px; }
+.row-6 > *[class^="col-"],.row-6 > *[class$="col-"] { padding-left: 6px; padding-right: 6px; transition: all .5s ease; }
 .row-7 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -7px; margin-left: -7px; }
-.row-7 > *[class^="col-"],.row-7 > *[class$="col-"] { padding-left: 7px; padding-right: 7px; }
+.row-7 > *[class^="col-"],.row-7 > *[class$="col-"] { padding-left: 7px; padding-right: 7px; transition: all .5s ease; }
 .row-8 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -8px; margin-left: -8px; }
-.row-8 > *[class^="col-"],.row-8 > *[class$="col-"] { padding-left: 8px; padding-right: 8px; }
+.row-8 > *[class^="col-"],.row-8 > *[class$="col-"] { padding-left: 8px; padding-right: 8px; transition: all .5s ease; }
 .row-9 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -6px; margin-left: -6px; }
-.row-9 > *[class^="col-"],.row-9 > *[class$="col-"] { padding-left: 9px; padding-right: 9px; }
+.row-9 > *[class^="col-"],.row-9 > *[class$="col-"] { padding-left: 9px; padding-right: 9px; transition: all .5s ease; }
 .row-10 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -10px; margin-left: -10px; }
-.row-10 > *[class^="col-"],.row-10 > *[class$="col-"] { padding-left: 10px; padding-right: 10px; }
+.row-10 > *[class^="col-"],.row-10 > *[class$="col-"] { padding-left: 10px; padding-right: 10px; transition: all .5s ease; }
+.row > *[class^="col-"],.row > *[class$="col-"] { transition: all .5s ease; }
 /* } END :: Bootstrap grid row style */
+/* BIGIN :: Shop item list { */
 .product-action > ul > li > a.btn-list-wishlist.active:hover,
 .btn-list-wishlist.active {
     color: red;
+    transition: all .5s ease;
 }
+.btn-list-wishlist {
+    transition: all .5s ease;
+}
+/* } END :: Shop item list */
+/* BIGIN :: Shop wish item list { */
+#sod_ws .wish-list .sod_ws_img {
+    width: auto;
+}
+#sod_ws .wish-list .sod_ws_img a {
+    display: inline-block;
+}
+#sod_ws .wish-list .wish_info {
+    height: auto;
+    min-height: 45px;
+    border-bottom: 0;
+}
+#sod_ws .wish-list .wish_info .wish_del {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #dedede;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.15rem;
+}
+#sod_ws .wish-list .wish_info .wish_del:hover {
+    background: #eeb013;
+    border-color: #eeb013;
+    color: #fff;
+}
+.wishlist-subj-box {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+/* } END :: Shop wish item list */
 /* BIGIN :: Shop detail page { */
 .single-product-price .price {
 	font-weight: 700;
