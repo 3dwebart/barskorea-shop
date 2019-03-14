@@ -15,7 +15,6 @@ $admin = get_admin("super");
 	<!-- </div> -->
 	<!-- } 콘텐츠 끝 -->
 <!-- </div> -->
-
 <!-- 하단 시작 { -->
 <!--Brand Area Start-->
 <div class="brand-area">
@@ -199,6 +198,13 @@ $admin = get_admin("super");
 	</div>
 </footer>
 <!-- END :: Footer Area -->
+<?php
+if (G5_HTTPS_DOMAIN) {
+    $action_url = G5_HTTPS_DOMAIN.'/'.G5_SHOP_DIR.'/cartupdate.php';
+} else {
+    $action_url = './cartupdate.php';
+}
+?>
 <!-- BIGIN :: Modal Area -->
 <div class="modal fade" id="open-modal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -305,45 +311,127 @@ $admin = get_admin("super");
 					</div>
 					<!--Modal Img-->
 					<!--Modal Content-->
-					<div class="col-md-7">
-						<div class="modal-product-info">
-							<h1 class="subject">Sit voluptatem</h1>
-							<div class="modal-product-price">
-							   <span class="old-price">$74.00</span>
-							   <span class="new-price">$69.00</span>
-						   </div>
-						   <a href="single-product.html" class="see-all">See all features</a>
-						   <div class="add-to-cart quantity">
-								<form class="add-quantity" action="#">
-									 <div class="modal-quantity">
-										 <input type="number" value="1">
-									 </div>
-									<div class="add-to-link">
-										<button class="form-button" data-text="add to cart">add to cart</button>
-									</div>
-								</form>
-						   </div>
-						   <div class="cart-description">
-							   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus.</p>
-						   </div>
-							<div class="social-share">
-							   <h3>Share this product</h3>
-							   <ul class="socil-icon2">
-								   <li><a href=""><i class="fa fa-facebook"></i></a></li>
-								   <li><a href=""><i class="fa fa-twitter"></i></a></li>
-								   <li><a href=""><i class="fa fa-pinterest"></i></a></li>
-								   <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-								   <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-							   </ul>
+					<div class="col-md-7 2017_renewal_itemform">
+						<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_submit(this);" id="fitem">
+							<div class="modal-product-info">
+								<h1 class="subject">Sit voluptatem</h1>
+								<div class="modal-product-price">
+									<span class="old-price">$74.00</span>
+									<span class="new-price">$69.00</span>
+								</div>
+								<a href="single-product.html" class="see-all">See all features</a>
+								<div class="opt-box"></div>
+								<div class="add-to-cart quantity">
+									<form class="add-quantity" action="#">
+										 <div class="modal-quantity">
+											 <input type="number" value="1">
+										 </div>
+										<div class="add-to-link">
+											<button class="form-button" data-text="add to cart">add to cart</button>
+										</div>
+									</form>
+							   </div>
+							   <div class="cart-description">
+								   <p>
+									   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus.
+									</p>
+							   </div>
+								<div class="social-share">
+								   <h3>Share this product</h3>
+								   <ul class="socil-icon2">
+									   <li><a href=""><i class="fa fa-facebook"></i></a></li>
+									   <li><a href=""><i class="fa fa-twitter"></i></a></li>
+									   <li><a href=""><i class="fa fa-pinterest"></i></a></li>
+									   <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+									   <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+								   </ul>
+								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 					<!--Modal Content-->
+
+					<script>
+						$(function() {
+							// price_calculate();
+						});
+					</script>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+function fitem_submit(f) {
+	f.action = "<?php echo $action_url; ?>";
+	f.target = "";
+
+	if (document.pressed == "장바구니") {
+		f.sw_direct.value = 0;
+	} else { // 바로구매
+		f.sw_direct.value = 1;
+	}
+
+	// 판매가격이 0 보다 작다면
+	if (document.getElementById("it_price").value < 0) {
+		alert("전화로 문의해 주시면 감사하겠습니다.");
+		return false;
+	}
+
+	if($(".sit_opt_list").size() < 1) {
+		alert("상품의 선택옵션을 선택해 주십시오.");
+		return false;
+	}
+
+	var val, io_type, result = true;
+	var sum_qty = 0;
+	var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
+	var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+	var $el_type = $("input[name^=io_type]");
+
+	$("input[name^=ct_qty]").each(function(index) {
+		val = $(this).val();
+
+		if(val.length < 1) {
+			alert("수량을 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(val.replace(/[0-9]/g, "").length > 0) {
+			alert("수량은 숫자로 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
+			alert("수량은 1이상 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		io_type = $el_type.eq(index).val();
+		if(io_type == "0")
+			sum_qty += parseInt(val);
+	});
+
+	if(!result) {
+		return false;
+	}
+
+	if(min_qty > 0 && sum_qty < min_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
+		return false;
+	}
+
+	if(max_qty > 0 && sum_qty > max_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
+		return false;
+	}
+
+	return true;
+}
+</script>
 <!-- END :: Modal Area -->
 <?php
 	/*

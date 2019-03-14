@@ -374,8 +374,9 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 							<h3>선택된 옵션</h3>
 							<?php
 							if(!$option_item) {
-								if(!$it['it_buy_min_qty'])
+								if(!$it['it_buy_min_qty']) {
 									$it['it_buy_min_qty'] = 1;
+								}
 							?>
 							<ul id="sit_opt_added">
 								<li class="sit_opt_list">

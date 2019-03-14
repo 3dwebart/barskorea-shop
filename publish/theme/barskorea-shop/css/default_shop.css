@@ -223,10 +223,11 @@ button.btn02 {display:inline-block;margin:0;padding:0 7px;border:1px solid #d50c
 fieldset .btn_submit {padding:0 7px;height:24px;line-height:1em}
 a.btn_cancel {display:inline-block;padding:7px;border:1px solid #ccc;background:#fafafa;color:#000;text-decoration:none;vertical-align:middle}
 button.btn_cancel {display:inline-block;padding:7px;border:1px solid #ccc;background:#fafafa;color:#000;vertical-align:top;text-decoration:none}
+/* 2019-03-13 shop option add plus & minus style clear
 a.btn_frmline, button.btn_frmline {display:inline-block;padding:0 10px;height:30px;border:1px solid #3476be;color:#3476be;background:#fff;letter-spacing:-0.1em;text-decoration:none;vertical-align:middle} /* 우편번호검색버튼 등 */
 a.btn_frmline {line-height:24px}
 button.btn_frmline {font-size:1em}
-
+*/
 /* 게시판용 버튼 */
 a.btn_b01,.btn_b01 {display:inline-block;background:#4c4f6f;color:#fff;text-decoration:none;vertical-align:middle}
 .btn_b01:hover, .btn_b01:hover {background:#54598c}
@@ -516,8 +517,10 @@ box-shadow: 1px 2px 2px #eee;}
 #sit_opt_added li {padding: 15px 0;padding-right:220px;border-bottom:1px solid #e9e9e9;position:relative}
 #sit_opt_added li .opt_name{line-height:20px;font-weight:bold}
 #sit_opt_added li .opt_count{position:absolute;top:50%;right:0;margin-top:-15px}
+/* 2019-03-13 shop option add plus & minus style clear
 #sit_opt_added button {float:left;width:30px;height:30px;border:1px solid #cdcdcd;background:#fff;color:#666;font-size:0.92em}
 #sit_opt_added button:hover{color:#000}
+*/
 #sit_opt_added .num_input {float:left;border:0;height:30px;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;text-align:center;}
 #sit_opt_added .sit_opt_del{border:0;font-size:15px}
 #sit_opt_added .sit_opt_del:hover{color:#be334a}

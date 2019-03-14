@@ -42,7 +42,6 @@
 			return false;
 		}
 	});
-
 	/*
 		성품 List, 
 		main 페이지 상품 리스트, 
@@ -68,6 +67,53 @@
 				jQuery('.modal-product-info .modal-product-price .new-price').html('&#8361;' + data.it_price.format());
 				jQuery('.modal-product-info .see-all').attr('href', g5_shop_url + '/list.php?ca_id=' + data.ca_id);
 				jQuery('.modal-product-info .cart-description > p').html(data.it_explan);
+				if(data.is_orderable == true) {
+					jQuery('#shop_override').remove();
+					jQuery('.modal-product-info .price-wrap').remove();
+					jQuery('.modal-product-info').before(data.scripts);
+					jQuery('.modal-product-info .see-all').after(data.opt_box);
+				}
+				var it_opt = '';
+				if(data.it_option != '') {
+					jQuery('.sit_option.it-opt').remove();
+					it_opt += '<section class="sit_option it-opt">';
+					it_opt += '<h3 class="sound_only">선택옵션</h3>';
+					it_opt += data.it_option;
+					it_opt += '</section>';
+					jQuery('.modal-product-info .see-all').after(it_opt);
+				} else {
+					jQuery('.sit_option.it-opt').remove();
+				}
+				// console.log('===================================');
+				// console.log(data.imgs);
+				// console.log(data.it_option);
+				// console.log(data.it_supply);
+				// console.log('===================================');
+				// 계산
+				var ea = jQuery('#ct_qty_11').val();
+				var price = data.it_price;
+				var cnt = ea;
+				var calc = ea * price;
+				jQuery('#sit_tot_price2').text(calc.format());
+				jQuery(document).on('click', '.sit_qty_plus', function() {
+					var ea = jQuery('#ct_qty_11').val();
+					cnt++;
+					jQuery(this).closest('.opt_count').find('#ct_qty_11').val(cnt);
+					price_calculat1e2();
+				});
+				jQuery(document).on('click', '.sit_qty_minus', function() {
+					var ea = jQuery('#ct_qty_11').val();
+					if(cnt == 1) {
+						alert('최소 1 개는 압력하셔야 합니다.');
+						return false;
+					} else {
+						cnt--;
+						jQuery(this).closest('.opt_count').find('#ct_qty_11').val(cnt);
+						price_calculate2();
+					}
+				});
+
+				price_calculate2();
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				$("div").html("<div>" + textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")</div>" );
@@ -76,9 +122,8 @@
 		return false;
 	});
 })(jQuery);
-
 // 숫자 타입에서 쓸 수 있도록 format() 함수 추가
-Number.prototype.format = function(){
+Number.prototype.format = function() {
     if(this==0) return 0;
  
     var reg = /(^[+-]?\d+)(\d{3})/;
@@ -90,7 +135,7 @@ Number.prototype.format = function(){
 };
  
 // 문자열 타입에서 쓸 수 있도록 format() 함수 추가
-String.prototype.format = function(){
+String.prototype.format = function() {
     var num = parseFloat(this);
     if( isNaN(num) ) return "0";
  

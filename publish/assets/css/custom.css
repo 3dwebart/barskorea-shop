@@ -39,6 +39,25 @@
     transition: all .5s ease;
 }
 /* } END :: Shop item list */
+#sit_opt_added li {
+    padding-right: 0;
+}
+#sit_tot_price2 {
+    margin: 10px 0;
+    font-size: 1.167em;
+    line-height: 25px;
+    font-weight: bold;
+    text-align: right;
+}
+#sit_tot_price2 span {
+    float: left;
+}
+
+#sit_tot_price2 strong {
+    font-size: 1.5em;
+    color: #ff0000;
+}
+.frm_input { height: 35px; }
 /* BIGIN :: Shop wish item list { */
 #sod_ws .wish-list .sod_ws_img {
     width: auto;

@@ -130,10 +130,11 @@ if ($is_admin) {
 echo '<div id="sit_hhtml">'.conv_content($it['it_head_html'], 1).'</div>';
 
 // 보안서버경로
-if (G5_HTTPS_DOMAIN)
+if (G5_HTTPS_DOMAIN) {
     $action_url = G5_HTTPS_DOMAIN.'/'.G5_SHOP_DIR.'/cartupdate.php';
-else
+} else {
     $action_url = './cartupdate.php';
+}
 
 // 이전 상품보기
 $sql = " SELECT it_id, it_name FROM {$g5['g5_shop_item_table']} WHERE it_id > '$it_id' AND SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' AND it_use = '1' ORDER BY it_id ASC LIMIT 1 ";
