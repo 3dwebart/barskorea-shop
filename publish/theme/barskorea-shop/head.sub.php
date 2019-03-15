@@ -58,12 +58,10 @@ echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/'.(G5_IS_MOBILE?'mobile'
 <!--[if lte IE 8]>
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
-
-<!-- Material Design Iconic Font CSS-->
+<!-- Material Design Iconic Font CSS -->
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/material-design-iconic-font.min.css">
 <!-- Font Awesome CSS-->
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/font-awesome.min.css">
-
 <!-- Animate CSS-->
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/animate.css">
 <!-- Owl Carousel CSS-->
@@ -86,6 +84,8 @@ echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/'.(G5_IS_MOBILE?'mobile'
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/style.css">
 <!-- Responsive CSS -->
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/responsive.css">
+<!-- Magnific popup CSS -->
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/plugins/magnific-popup/css/magnific-popup.css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="<?php echo G5_ASSETS_URL; ?>/css/custom.css">
 <!-- Modernizr Js -->

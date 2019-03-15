@@ -195,7 +195,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 							if (!$it['it_use']) { // 판매가능이 아닐 경우
 								$price_str1 = "";
 								$price_str2 = "판매중지";
-
 							} else if ($it['it_tel_inq']) { // 전화문의일 경우
 								$price_str1 = "";
 								$price_str2 = "전화문의";
@@ -417,7 +416,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 						</section>
 						<!-- } 선택된 옵션 끝 -->
 						<!-- 총 구매액 -->
-						<div id="sit_tot_price"></div>
+						<div id="sit_tot_price2"></div>
 						<?php } ?>
 
 						<?php if($is_soldout) { ?>

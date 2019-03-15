@@ -57,6 +57,31 @@ $(function() {
 <script src="<?php echo G5_ASSETS_URL; ?>/js/plugins.js"></script>
 <!--Main Js-->
 <script src="<?php echo G5_ASSETS_URL; ?>/js/main.js"></script>
+<!-- Magnific popup JS -->
+<script src="<?php echo G5_ASSETS_URL; ?>//plugins/magnific-popup/js/jquery.magnific-popup.js"></script>
+<script>
+(function($) {
+	jQuery('.btn-quick-view').each(function() {
+		console.log(12121212);
+		jQuery(this).magnificPopup({
+	        type: 'ajax',
+	        alignTop: true,
+	        overflowY: 'scroll',
+	        midClick: true,
+			ajax: {
+				settings: {
+					url: '<?php echo G5_SHOP_URL; ?>/quick.view.php',
+					type: 'POST',
+					data: {
+						it_id: jQuery(this).data('id'),
+						// to_data: idNo
+					}
+				}
+			}
+	    });
+	});
+})(jQuery);
+</script>
 <!-- END :: Add js files -->
 </body>
 </html>

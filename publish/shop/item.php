@@ -13,11 +13,13 @@ include_once(G5_LIB_PATH.'/iteminfo.lib.php');
 // 분류사용, 상품사용하는 상품의 정보를 얻음
 $sql = " SELECT a.*, b.ca_name, b.ca_use FROM {$g5['g5_shop_item_table']} a, {$g5['g5_shop_category_table']} b WHERE a.it_id = '$it_id' AND a.ca_id = b.ca_id ";
 $it = sql_fetch($sql);
-if (!$it['it_id'])
+if (!$it['it_id']) {
     alert('자료가 없습니다.');
+}
 if (!($it['ca_use'] && $it['it_use'])) {
-    if (!$is_admin)
+    if (!$is_admin) {
         alert('현재 판매가능한 상품이 아닙니다.');
+    }
 }
 
 // 분류 테이블에서 분류 상단, 하단 코드를 얻음
@@ -27,8 +29,9 @@ $ca = sql_fetch($sql);
 // 본인인증, 성인인증체크
 if(!$is_admin) {
     $msg = shop_member_cert_check($it_id, 'item');
-    if($msg)
+    if($msg) {
         alert($msg, G5_SHOP_URL);
+    }
 }
 
 // 오늘 본 상품 저장 시작

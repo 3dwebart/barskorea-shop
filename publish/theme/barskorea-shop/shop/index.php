@@ -116,7 +116,7 @@ while ($row = sql_fetch_array($res)) {
 												<div class="product-action">
 													<ul>
 														<li>
-															<a href="#" class="btn-list-cart" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Cart">
+															<a href="<?php echo G5_SHOP_URL; ?>/quick.view.php" class="btn-list-cart btn-quick-view" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Cart">
 																<i class="fa fa-shopping-cart"></i>
 															</a>
 														</li>

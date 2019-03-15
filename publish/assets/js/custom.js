@@ -47,7 +47,7 @@
 		main 페이지 상품 리스트, 
 		상세페이지 관련상품 리스트에서 Quick view 또는 카트 아이콘 클릭시 이벤트
 	*/
-	jQuery(document).on('click', '.btn-list-quick-view, .btn-list-cart', function() {
+	jQuery(document).on('click', '.btn-list-quick-view', function() {
 		var onThis = jQuery(this);
 		$.ajax({
 			url: g5_shop_url + "/ajax.list.quickview.php",
