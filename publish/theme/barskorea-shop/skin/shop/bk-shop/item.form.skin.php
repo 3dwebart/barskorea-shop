@@ -416,7 +416,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 						</section>
 						<!-- } 선택된 옵션 끝 -->
 						<!-- 총 구매액 -->
-						<div id="sit_tot_price2"></div>
+						<div id="sit_tot_price"></div>
 						<?php } ?>
 
 						<?php if($is_soldout) { ?>

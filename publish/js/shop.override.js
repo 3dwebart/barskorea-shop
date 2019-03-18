@@ -1,7 +1,5 @@
-jQuery(function($){
-
-	$(".2017_renewal_itemform select.it_supply").on("shop_sel_supply_process", function(e, param){
-		
+jQuery(function($) {
+	$(".2017_renewal_itemform select.it_supply").on("shop_sel_supply_process", function(e, param) {
 		var add_exec = param.add_exec;
 		var $el = $(this);
 		var val = $el.val();
@@ -45,7 +43,6 @@ jQuery(function($){
 	});
 
 	if (typeof add_sel_option === "function") {
-
 		add_sel_option = (function() {
 			var cached_function = add_sel_option;
 
@@ -62,14 +59,16 @@ jQuery(function($){
 					var item_code = $("input[name='it_id[]']").val();
 					var opt = "";
 					var li_class = "sit_opt_list";
-					if(type)
+					if(type) {
 						li_class = "sit_spl_list";
+					}
 
 					var opt_prc;
-					if(parseInt(price) >= 0)
+					if(parseInt(price) >= 0) {
 						opt_prc = "+"+number_format(String(price))+"원";
-					else
+					} else {
 						opt_prc = number_format(String(price))+"원";
+					}
 
 					opt += "<li class=\""+li_class+"\">";
 					opt += "<input type=\"hidden\" name=\"io_type["+item_code+"][]\" value=\""+type+"\">";
@@ -125,11 +124,8 @@ jQuery(function($){
 					price_calculate();
 
 				} else {
-
 					cached_function.apply(this, arguments); // use .apply() to call it
-
 				}   //end if
-
 			};
 		}());
 	}   //end if check function
@@ -163,6 +159,16 @@ jQuery(function($){
 						}
 					});
 
+					console.log('==========================================');
+					console.log('it_price :: ' + it_price);
+					console.log('price :: ' + price);
+					console.log('type :: ' + type);
+					console.log('qty :: ' + qty);
+					console.log('total :: ' + total);
+					console.log('it_price :: ' + it_price);
+					console.log('length :: ' + $el_prc.length);
+					console.log('==========================================');
+
 					$("#sit_tot_price").empty().html("<span>총 금액 </span><strong>"+number_format(String(total))+"</strong> 원");
 
 				} else {
@@ -172,5 +178,6 @@ jQuery(function($){
 			};
 		}());
 	}   //end if check function
-
 });
+//runPriceCalc()
+

@@ -39,6 +39,7 @@
     transition: all .5s ease;
 }
 /* } END :: Shop item list */
+#sct_sortlst { width: 100%; }
 #sit_opt_added li {
     padding-right: 0;
 }

@@ -62,12 +62,17 @@ $(function() {
 <script>
 (function($) {
 	jQuery('.btn-quick-view').each(function() {
-		console.log(12121212);
 		jQuery(this).magnificPopup({
 	        type: 'ajax',
 	        alignTop: true,
 	        overflowY: 'scroll',
 	        midClick: true,
+	        closeOnContentClick: false,
+	        closeOnBgClick: false,
+	        closeBtnInside: false,
+	        showCloseBtn: true,
+	        enableEscapeKey: true,
+
 			ajax: {
 				settings: {
 					url: '<?php echo G5_SHOP_URL; ?>/quick.view.php',

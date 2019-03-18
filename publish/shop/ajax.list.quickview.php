@@ -45,7 +45,8 @@ $is_orderable = true;
 if(!$row['it_use'] || $row['it_tel_inq'] || $is_soldout) {
     $is_orderable = false;
 }
-$scripts = '<script id="shop_override" src="/js/shop.override_list.js"></script>';
+$scripts = '<script id="shop_override" src="/js/shop.js"></script>';
+$scripts .= '<script id="shop_override" src="/js/shop.override.js"></script>';
 $html = '';
 $html .= '<div class="price-wrap">';
 $html .= '<input type="hidden" name="it_id[]" value="'.$it_id.'">';

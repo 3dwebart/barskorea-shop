@@ -63,6 +63,7 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 	background-color: #fff;
 }
 </style>
+<script src="<?php echo G5_JS_URL ?>/shop.js"></script>
 <script id="shop_override" src="<?php echo G5_JS_URL ?>/shop.override.js"></script>
 <div class="magnific-popup-wrap">
 	<div class="magnific-popup-content">
@@ -165,7 +166,7 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 			<!--Modal Img-->
 			<!--Modal Content-->
 			<div class="col-md-7 2017_renewal_itemform">
-				<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_submit(this);" id="fitem">
+				<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_list_submit(this);" id="fitem">
 					<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">';
 					<input type="hidden" name="sw_direct">';
 					<input type="hidden" name="url">';
@@ -482,12 +483,80 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 				</form>
 			</div>
 			<!--Modal Content-->
-			<script>
-				$(function() {
-					// price_calculate2();
-				});
-			</script>
 		</div>
 	</div>
 </div>
 
+<script>
+function fitem_list_submit(f) {
+	console.log("<?php echo $item['it_buy_min_qty']; ?>");
+	return false;
+	f.action = "<?php echo $action_url; ?>";
+	f.target = "";
+
+	if (document.pressed == "장바구니") {
+		f.sw_direct.value = 0;
+	} else { // 바로구매
+		f.sw_direct.value = 1;
+	}
+
+	// 판매가격이 0 보다 작다면
+	if (document.getElementById("it_price").value < 0) {
+		alert("전화로 문의해 주시면 감사하겠습니다.");
+		return false;
+	}
+
+	if($(".sit_opt_list").size() < 1) {
+		alert("상품의 선택옵션을 선택해 주십시오.");
+		return false;
+	}
+
+	var val, io_type, result = true;
+	var sum_qty = 0;
+	var min_qty = parseInt(<?php echo $item['it_buy_min_qty']; ?>);
+	var max_qty = parseInt(<?php echo $item['it_buy_max_qty']; ?>);
+	var $el_type = $("input[name^=io_type]");
+
+	$("input[name^=ct_qty]").each(function(index) {
+		val = $(this).val();
+
+		if(val.length < 1) {
+			alert("수량을 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(val.replace(/[0-9]/g, "").length > 0) {
+			alert("수량은 숫자로 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
+			alert("수량은 1이상 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		io_type = $el_type.eq(index).val();
+		if(io_type == "0")
+			sum_qty += parseInt(val);
+	});
+
+	if(!result) {
+		return false;
+	}
+
+	if(min_qty > 0 && sum_qty < min_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
+		return false;
+	}
+
+	if(max_qty > 0 && sum_qty > max_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
+		return false;
+	}
+
+	return true;
+}
+</script>

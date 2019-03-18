@@ -89,31 +89,6 @@
 				// console.log(data.it_option);
 				// console.log(data.it_supply);
 				// console.log('===================================');
-				// 계산
-				var ea = jQuery('#ct_qty_11').val();
-				var price = data.it_price;
-				var cnt = ea;
-				var calc = ea * price;
-				jQuery('#sit_tot_price2').text(calc.format());
-				jQuery(document).on('click', '.sit_qty_plus', function() {
-					var ea = jQuery('#ct_qty_11').val();
-					cnt++;
-					jQuery(this).closest('.opt_count').find('#ct_qty_11').val(cnt);
-					price_calculat1e2();
-				});
-				jQuery(document).on('click', '.sit_qty_minus', function() {
-					var ea = jQuery('#ct_qty_11').val();
-					if(cnt == 1) {
-						alert('최소 1 개는 압력하셔야 합니다.');
-						return false;
-					} else {
-						cnt--;
-						jQuery(this).closest('.opt_count').find('#ct_qty_11').val(cnt);
-						price_calculate2();
-					}
-				});
-
-				price_calculate2();
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				$("div").html("<div>" + textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")</div>" );

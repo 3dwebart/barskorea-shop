@@ -312,7 +312,7 @@ if (G5_HTTPS_DOMAIN) {
 					<!--Modal Img-->
 					<!--Modal Content-->
 					<div class="col-md-7 2017_renewal_itemform">
-						<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_submit(this);" id="fitem">
+						<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_list_submit(this);" id="fitem">
 							<div class="modal-product-info">
 								<h1 class="subject">Sit voluptatem</h1>
 								<div class="modal-product-price">
@@ -362,7 +362,10 @@ if (G5_HTTPS_DOMAIN) {
 	</div>
 </div>
 <script>
-function fitem_submit(f) {
+/*
+function fitem_list_submit(f) {
+	console.log("<?php echo $item['it_buy_min_qty']; ?>");
+	return false;
 	f.action = "<?php echo $action_url; ?>";
 	f.target = "";
 
@@ -385,8 +388,8 @@ function fitem_submit(f) {
 
 	var val, io_type, result = true;
 	var sum_qty = 0;
-	var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
-	var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+	var min_qty = parseInt(<?php echo $item['it_buy_min_qty']; ?>);
+	var max_qty = parseInt(<?php echo $item['it_buy_max_qty']; ?>);
 	var $el_type = $("input[name^=io_type]");
 
 	$("input[name^=ct_qty]").each(function(index) {
@@ -431,6 +434,7 @@ function fitem_submit(f) {
 
 	return true;
 }
+*/
 </script>
 <!-- END :: Modal Area -->
 <?php
