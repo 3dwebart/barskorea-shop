@@ -8,14 +8,14 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 <!--[if lte IE 7]>
 <script>
 $(function() {
-    var $sv_use = $(".sv_use");
-    var count = $sv_use.length;
+	var $sv_use = $(".sv_use");
+	var count = $sv_use.length;
 
-    $sv_use.each(function() {
-        $(this).css("z-index", count);
-        $(this).css("position", "relative");
-        count = count - 1;
-    });
+	$sv_use.each(function() {
+		$(this).css("z-index", count);
+		$(this).css("position", "relative");
+		count = count - 1;
+	});
 });
 </script>
 <![endif]-->
@@ -63,16 +63,18 @@ $(function() {
 (function($) {
 	jQuery('.btn-quick-view').each(function() {
 		jQuery(this).magnificPopup({
-	        type: 'ajax',
-	        alignTop: true,
-	        overflowY: 'scroll',
-	        midClick: true,
-	        closeOnContentClick: false,
-	        closeOnBgClick: false,
-	        closeBtnInside: false,
-	        showCloseBtn: true,
-	        enableEscapeKey: true,
-
+			type: 'ajax',
+			alignTop: true,
+			overflowY: 'scroll',
+			preloader: true,
+			midClick: true,
+			closeOnContentClick: false,
+			closeOnBgClick: false,
+			closeBtnInside: false,
+			showCloseBtn: true,
+			enableEscapeKey: true,
+			mainClass: 'mfp-fade',
+			// loseMarkup: '<button title="Close (Esc)" type="button" class="mfp-close"></button>',
 			ajax: {
 				settings: {
 					url: '<?php echo G5_SHOP_URL; ?>/quick.view.php',
@@ -83,7 +85,7 @@ $(function() {
 					}
 				}
 			}
-	    });
+		});
 	});
 })(jQuery);
 </script>

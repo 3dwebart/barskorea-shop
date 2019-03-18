@@ -7,6 +7,7 @@ ini_set("display_errors", 1);
 include_once(G5_LIB_PATH.'/shop.lib.php');
 include_once(G5_LIB_PATH.'/json.lib.php');
 include_once(G5_LIB_PATH.'/iteminfo.lib.php');
+include_once(G5_SHOP_PATH.'/settle_naverpay.inc.php');
 $it_id = $_POST['it_id'];
 $sql = "SELECT 
 			a.it_id, a.ca_id, a.ca_id2, a.ca_id3, 
@@ -167,10 +168,12 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 			<!--Modal Content-->
 			<div class="col-md-7 2017_renewal_itemform">
 				<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_list_submit(this);" id="fitem">
-					<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">';
-					<input type="hidden" name="sw_direct">';
-					<input type="hidden" name="url">';
+					<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">
+					<input type="hidden" name="sw_direct">
+					<input type="hidden" name="url">
 					<input type="hidden" id="it_price" value="<?php echo $item['it_price']; ?>">
+					<input type="hidden" id="it_buy_min_qty" value="<?php echo $item['it_buy_min_qty']; ?>">
+					<input type="hidden" id="it_buy_max_qty" value="<?php echo $item['it_buy_max_qty']; ?>">
 					<div class="modal-product-info">
 						<?php
 							/* BIGIN :: Specifying Variables */
@@ -409,7 +412,6 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 							?>
 							<ul id="sit_opt_added">
 								<li class="sit_opt_list">
-									
 									<input type="hidden" name="io_type[<?php echo $it_id; ?>][]" value="0">
 									<input type="hidden" name="io_id[<?php echo $it_id; ?>][]" value="">
 									<input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $item['it_name']; ?>">
@@ -454,6 +456,28 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 						<?php } ?>
 						<a href="<?php echo G5_SHOP_URL.'/list.php?ca_id='.$item['ca_id']; ?>" class="see-all">See all features</a>
 						<div class="opt-box"></div>
+						<!-- BIGIN :: Buttons -->
+						<div class="wishlist-compare-btn">
+							<?php if ($is_orderable) { ?>
+							<button type="submit" class="product-btn" data-text="Buy now" onclick="document.pressed=this.value;" value="바로구매">
+								<i class="fa fa-credit-card"></i>
+								Buy now
+							</button>
+							<button type="submit" class="add-compare" onclick="document.pressed=this.value;" value="장바구니">
+								<i class="fa fa-shopping-cart"></i>
+								Add to cart
+							</button>
+							<?php } ?>
+							<?php if(!$is_orderable && $it['it_soldout'] && $it['it_stock_sms']) { ?>
+							<a href="javascript:popup_stocksms('<?php echo $it['it_id']; ?>');" id="sit_btn_alm"><i class="fa fa-bell-o" aria-hidden="true"></i> 재입고알림</a>
+							<?php } ?>
+							
+							<a href="javascript:item_wish(document.fitem, '<?php echo $it['it_id']; ?>');" class="wishlist-btn">Add to Wishlist</a>
+							<?php if (!empty($naverpay_button_js)) { ?>
+							<div class="itemform-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
+							<?php } ?>
+						</div>
+						<!-- END :: Buttons -->
 						<div class="add-to-cart quantity">
 							<form class="add-quantity" action="#">
 								 <div class="modal-quantity">
@@ -488,9 +512,131 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 </div>
 
 <script>
-function fitem_list_submit(f) {
-	console.log("<?php echo $item['it_buy_min_qty']; ?>");
-	return false;
+// 상품보관
+function item_wish(f, it_id) {
+	f.url.value = "<?php echo G5_SHOP_URL; ?>/wishupdate.php?it_id="+it_id;
+	f.action = "<?php echo G5_SHOP_URL; ?>/wishupdate.php";
+	f.submit();
+}
+
+// 추천메일
+function popup_item_recommend(it_id) {
+	if (!g5_is_member) {
+		if (confirm("회원만 추천하실 수 있습니다.")) {
+			document.location.href = "<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo urlencode(G5_SHOP_URL."/item.php?it_id=$it_id"); ?>";
+		}
+	} else {
+		url = "./itemrecommend.php?it_id=" + it_id;
+		opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
+		popup_window(url, "itemrecommend", opt);
+	}
+}
+
+// 재입고SMS 알림
+function popup_stocksms(it_id) {
+	url = "<?php echo G5_SHOP_URL; ?>/itemstocksms.php?it_id=" + it_id;
+	opt = "scrollbars=yes,width=616,height=420,top=10,left=10";
+	popup_window(url, "itemstocksms", opt);
+}
+
+$(function() {
+	// 상품이미지 첫번째 링크
+	$("#sit_pvi_big a:first").addClass("visible");
+
+	// 상품이미지 미리보기 (썸네일에 마우스 오버시)
+	$("#sit_pvi .img_thumb").bind("mouseover focus", function(){
+		var idx = $("#sit_pvi .img_thumb").index($(this));
+		$("#sit_pvi_big a.visible").removeClass("visible");
+		$("#sit_pvi_big a:eq("+idx+")").addClass("visible");
+	});
+
+	// 상품이미지 크게보기
+	$(".popup_item_image").click(function() {
+		var url = $(this).attr("href");
+		var top = 10;
+		var left = 10;
+		var opt = 'scrollbars=yes,top='+top+',left='+left;
+		popup_window(url, "largeimage", opt);
+
+		return false;
+	});
+
+	var sit_inf_open_table = 'hide';
+	$('table#sit_inf_open tbody tr td').each(function() {
+		var Compare = '상품페이지 참고';
+		if($(this).text() != Compare) {
+			sit_inf_open_table = 'show';
+		}
+	});
+	console.log(sit_inf_open_table);
+	if(sit_inf_open_table == 'hide') {
+		$('table#sit_inf_open').hide();
+	}
+});
+
+function fsubmit_check(f) {
+	// 판매가격이 0 보다 작다면
+	if (document.getElementById("it_price").value < 0) {
+		alert("전화로 문의해 주시면 감사하겠습니다.");
+		return false;
+	}
+
+	if($(".sit_opt_list").size() < 1) {
+		alert("상품의 선택옵션을 선택해 주십시오.");
+		return false;
+	}
+
+	var val, io_type, result = true;
+	var sum_qty = 0;
+	var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
+	var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
+	var $el_type = $("input[name^=io_type]");
+
+	$("input[name^=ct_qty]").each(function(index) {
+		val = $(this).val();
+
+		if(val.length < 1) {
+			alert("수량을 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(val.replace(/[0-9]/g, "").length > 0) {
+			alert("수량은 숫자로 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
+			alert("수량은 1이상 입력해 주십시오.");
+			result = false;
+			return false;
+		}
+
+		io_type = $el_type.eq(index).val();
+		if(io_type == "0")
+			sum_qty += parseInt(val);
+	});
+
+	if(!result) {
+		return false;
+	}
+
+	if(min_qty > 0 && sum_qty < min_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
+		return false;
+	}
+
+	if(max_qty > 0 && sum_qty > max_qty) {
+		alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
+		return false;
+	}
+
+	return true;
+}
+
+// 바로구매, 장바구니 폼 전송
+function fitem_submit(f) {
 	f.action = "<?php echo $action_url; ?>";
 	f.target = "";
 
@@ -513,8 +659,8 @@ function fitem_list_submit(f) {
 
 	var val, io_type, result = true;
 	var sum_qty = 0;
-	var min_qty = parseInt(<?php echo $item['it_buy_min_qty']; ?>);
-	var max_qty = parseInt(<?php echo $item['it_buy_max_qty']; ?>);
+	var min_qty = parseInt(<?php echo $it['it_buy_min_qty']; ?>);
+	var max_qty = parseInt(<?php echo $it['it_buy_max_qty']; ?>);
 	var $el_type = $("input[name^=io_type]");
 
 	$("input[name^=ct_qty]").each(function(index) {

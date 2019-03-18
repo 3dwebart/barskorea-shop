@@ -27,11 +27,9 @@
 				timeout: 30000,
 				success: function(data) {
 					//debugger;
-					console.log('data.switch :: ' + data.switch);
 					if(data.switch == 0) {
 						onThis.removeClass('active');
 					} else if(data.switch == 1) {
-						console.log('html :: ' + jQuery(this).html());
 						onThis.addClass('active');
 					}
 				},
@@ -94,6 +92,15 @@
 				$("div").html("<div>" + textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")</div>" );
 			}
 		});
+		return false;
+	});
+
+	jQuery(document).on('click', '.mfp-content', function() {
+		jQuery(this).closest('.mfp-fade').magnificPopup('close');
+		return false;
+	});
+
+	jQuery(document).on('click', '.mfp-content > *', function() {
 		return false;
 	});
 })(jQuery);

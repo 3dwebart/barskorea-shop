@@ -15,6 +15,12 @@ ini_set("display_errors", 1);
 		<div id="grid" class="tab-pane fade show active">
 			<div class="product-grid-view">
 				<div class="row">
+					<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">
+					<input type="hidden" name="sw_direct">
+					<input type="hidden" name="url">
+					<input type="hidden" id="it_price" value="<?php echo $item['it_price']; ?>">
+					<input type="hidden" id="it_buy_min_qty" value="<?php echo $item['it_buy_min_qty']; ?>">
+					<input type="hidden" id="it_buy_max_qty" value="<?php echo $item['it_buy_max_qty']; ?>">
 					<!-- 상품진열 10 시작 { -->
 					<?php
 						for ($i=1; $row=sql_fetch_array($result); $i++) {
@@ -33,7 +39,7 @@ ini_set("display_errors", 1);
 							echo "<div class=\"product-img\">\n";
 							// BIGIN :: Image
 							if ($this->href) {
-								echo "<a href=\"{$this->href}{$row['it_id']}\">\n";
+								echo "<a href=\"{$this->href}{$row['it_id']}\" data-id=\"{$row['it_id']}\">\n";
 							}
 							if ($this->view_it_img) {
 								echo get_it_image_responsive($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name']))."\n";
@@ -52,7 +58,7 @@ ini_set("display_errors", 1);
 							// Buttons
 							echo "<ul>\n";
 							echo "<li>\n";
-							echo "<a href=\"#\" class=\"btn-list-cart btn-quick-view\" data-toggle=\"tooltip\" title=\"Add To Cart\">\n";
+							echo "<a href=\"#\" class=\"btn-list-cart btn-quick-view\" data-toggle=\"tooltip\" title=\"Add To Cart\" data-id=\"{$row['it_id']}\">\n";
 							echo "<i class=\"fa fa-shopping-cart\"></i>";
 							echo "</a>\n";
 							echo "</li>\n";

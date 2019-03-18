@@ -440,7 +440,9 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 							
 							<a href="javascript:item_wish(document.fitem, '<?php echo $it['it_id']; ?>');" class="wishlist-btn">Add to Wishlist</a>
 							<?php if ($naverpay_button_js) { ?>
-							<div class="itemform-naverpay"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
+							<div class="itemform-naverpay">
+								<?php echo $naverpay_request_js.$naverpay_button_js; ?>
+							</div>
 							<?php } ?>
 						</div>
 						<!-- END :: Buttons -->

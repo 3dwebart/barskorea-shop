@@ -362,9 +362,13 @@ if (G5_HTTPS_DOMAIN) {
 	</div>
 </div>
 <script>
-/*
 function fitem_list_submit(f) {
-	console.log("<?php echo $item['it_buy_min_qty']; ?>");
+	var min_qty = f.getElementById('it_buy_min_qty').value;
+	var max_qty = f.getElementById('it_buy_max_qty').value;
+	min_qty = typeof min_qty !== 'undefined' ? min_qty : 1;
+	max_qty = typeof max_qty !== 'undefined' ? max_qty : 99999;
+
+	console.log('it_buy_min_qty :: ' + it_buy_min_qty);
 	return false;
 	f.action = "<?php echo $action_url; ?>";
 	f.target = "";
@@ -388,8 +392,10 @@ function fitem_list_submit(f) {
 
 	var val, io_type, result = true;
 	var sum_qty = 0;
+	/*
 	var min_qty = parseInt(<?php echo $item['it_buy_min_qty']; ?>);
 	var max_qty = parseInt(<?php echo $item['it_buy_max_qty']; ?>);
+	*/
 	var $el_type = $("input[name^=io_type]");
 
 	$("input[name^=ct_qty]").each(function(index) {
@@ -434,7 +440,6 @@ function fitem_list_submit(f) {
 
 	return true;
 }
-*/
 </script>
 <!-- END :: Modal Area -->
 <?php
