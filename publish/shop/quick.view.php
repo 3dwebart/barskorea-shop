@@ -43,21 +43,21 @@ $supply_item = get_item_supply($item['it_id'], $item['it_supply_subject'], 'div'
 
 // 상품품절체크
 if(G5_SOLDOUT_CHECK) {
-    $is_soldout = is_soldout($item['it_id']);
+	$is_soldout = is_soldout($item['it_id']);
 }
 
 // 주문가능체크
 $is_orderable = true;
 if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
-    $is_orderable = false;
+	$is_orderable = false;
 }
 ?>
 <style>
 .magnific-popup-wrap {
 	margin: 5% auto;
-    min-height: 300px;
-    width: 1024px;
-    max-width: 100%;
+	min-height: 300px;
+	width: 1024px;
+	max-width: 100%;
 }
 .magnific-popup-content {
 	padding: 20px;
@@ -153,7 +153,6 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 						<div class="single-tab-menu img-full">
 							<a data-toggle="tab" id="single-slide-tab-6" href="#single-slide6"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product6.jpg" alt=""></a>
 						</div>
-
 						<div class="single-tab-menu img-full">
 							<a data-toggle="tab" id="single-slide-tab-7" href="#single-slide7"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product2.jpg" alt=""></a>
 						</div>
@@ -510,7 +509,7 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 		</div>
 	</div>
 </div>
-
+<script src="<?php echo G5_ASSETS_URL ?>/js/main.js"></script>
 <script>
 // 상품보관
 function item_wish(f, it_id) {
@@ -544,7 +543,7 @@ $(function() {
 	$("#sit_pvi_big a:first").addClass("visible");
 
 	// 상품이미지 미리보기 (썸네일에 마우스 오버시)
-	$("#sit_pvi .img_thumb").bind("mouseover focus", function(){
+	$("#sit_pvi .img_thumb").bind("mouseover focus", function() {
 		var idx = $("#sit_pvi .img_thumb").index($(this));
 		$("#sit_pvi_big a.visible").removeClass("visible");
 		$("#sit_pvi_big a:eq("+idx+")").addClass("visible");

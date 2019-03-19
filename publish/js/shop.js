@@ -167,11 +167,19 @@ $(function() {
     });
 
     // 수량변경 및 삭제
-    $(document).on("click", "#sit_sel_option li button", function() {
+    $(document).off().on("click", "#sit_sel_option li button", function() {
         var mode = $(this).text();
         var this_qty, max_qty = 9999, min_qty = 1;
         var $el_qty = $(this).closest("li").find("input[name^=ct_qty]");
         var stock = parseInt($(this).closest("li").find("input.io_stock").val());
+
+        console.log('========== BIGIN :: Var test ==========');
+        console.log('mode' + mode);
+        console.log('this_qty' + this_qty);
+        console.log('max_qty' + max_qty);
+        console.log('$el_qty' + $el_qty);
+        console.log('stock' + stock);
+        console.log('========== END :: Var test ==========');
 
         switch(mode) {
             case "증가":
@@ -257,8 +265,7 @@ $(function() {
 });
 
 // 선택옵션 추가처리
-function sel_option_process(add_exec)
-{
+function sel_option_process(add_exec) {
     var it_price = parseInt($("input#it_price").val());
     var id = "";
     var value, info, sel_opt, item, price, stock, run_error = false;
@@ -315,8 +322,7 @@ function sel_option_process(add_exec)
 }
 
 // 추가옵션 추가처리
-function sel_supply_process($el, add_exec)
-{
+function sel_supply_process($el, add_exec) {
     if( $el.triggerHandler( 'shop_sel_supply_process',{add_exec:add_exec} ) !== false ){
         var val = $el.val();
         var item = $el.closest(".get_item_supply").length ? $el.closest(".get_item_supply").find("label[for^=it_supply]").text() : "";
@@ -359,8 +365,7 @@ function sel_supply_process($el, add_exec)
 }
 
 // 선택된 옵션 출력
-function add_sel_option(type, id, option, price, stock)
-{
+function add_sel_option(type, id, option, price, stock) {
     var item_code = $("input[name='it_id[]']").val();
     var opt = "";
     var li_class = "sit_opt_list";
@@ -418,8 +423,7 @@ function add_sel_option(type, id, option, price, stock)
 }
 
 // 동일선택옵션있는지
-function same_option_check(val)
-{
+function same_option_check(val) {
     var result = false;
     $("input[name^=io_value]").each(function() {
         if(val == $(this).val()) {
@@ -435,12 +439,12 @@ function same_option_check(val)
 }
 
 // 가격계산
-function price_calculate()
-{
+function price_calculate() {
     var it_price = parseInt($("input#it_price").val());
 
-    if(isNaN(it_price))
+    if(isNaN(it_price)) {
         return;
+    }
 
     var $el_prc = $("input.io_price");
     var $el_qty = $("input[name^=ct_qty]");
@@ -463,7 +467,6 @@ function price_calculate()
 }
 
 // php chr() 대응
-function chr(code)
-{
+function chr(code) {
     return String.fromCharCode(code);
 }

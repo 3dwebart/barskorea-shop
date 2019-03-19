@@ -8,76 +8,72 @@
     Version: 1.0
 
 */
-
 (function ($) {
-	"use Strict";
-/*---------------------------------
-    Mean Menu Active
------------------------------------*/
-jQuery('.header-menu-area nav').meanmenu({
-    meanMenuContainer: '.mobile-menu',
-    meanScreenWidth: "991"
-})
+    "use Strict";
+    /*---------------------------------
+        Mean Menu Active
+    -----------------------------------*/
+    jQuery('.header-menu-area nav').meanmenu({
+        meanMenuContainer: '.mobile-menu',
+        meanScreenWidth: "991"
+    });
     
-/*---------------------------
-    Mini Cart Hover Active
-----------------------------*/
-$('.cart-dropdown').hide();
-    $('.mini-cart > ul > li ').hover(
-      function() {
-        if( $(this).children('ul').size() > 0 && $(this).children().hasClass('cart-dropdown') ) {
-            $(this).children().stop().slideDown(400);
+    /*---------------------------
+        Mini Cart Hover Active
+    ----------------------------*/
+    $('.cart-dropdown').hide();
+        $('.mini-cart > ul > li ').hover(function() {
+            if( $(this).children('ul').size() > 0 && $(this).children().hasClass('cart-dropdown') ) {
+                $(this).children().stop().slideDown(400);
+            }
+        }, function() {
+            $(this).children('.cart-dropdown').stop().slideUp(300);
         }
-      }, function() {
-        $(this).children('.cart-dropdown').stop().slideUp(300);
-      }
     );
-/*---------------------------------
-    Sticky Menu Active
------------------------------------*/
-$(window).on('scroll',function() {
-if ($(this).scrollTop() >50){  
-    $('.header-sticky').addClass("is-sticky");
-  }
-  else{
-    $('.header-sticky').removeClass("is-sticky");
-  }
-});
-/*----------------------------
-    Owl Active
------------------------------- */
-/*-------------
-    Hero Slider Active
-------------------------------*/
-$('.hero-slider, .hero-slider-3').owlCarousel({
-    smartSpeed: 1000,
-    nav: true,
-    loop: true,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    autoplay: false,
-    autoHeight:true,
-    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-    responsive: {
-        0: {
-            items: 1,
-            nav: false,
-            dots: true
-        },
-        768: {
-            items: 1,
-            nav: false,
-            dots: true
-        },
-        991: {
-            items: 1,
+    /*---------------------------------
+        Sticky Menu Active
+    -----------------------------------*/
+    $(window).on('scroll',function() {
+        if ($(this).scrollTop() >50){  
+            $('.header-sticky').addClass("is-sticky");
+        } else {
+            $('.header-sticky').removeClass("is-sticky");
         }
-    }
-})  
-/*------- 
-    Product Slider Active 
-----------------------------------*/
- $('.product-slider').owlCarousel({
+    });/*----------------------------
+        Owl Active
+    ------------------------------ */
+    /*-------------
+        Hero Slider Active
+    ------------------------------*/
+    $('.hero-slider, .hero-slider-3').owlCarousel({
+        smartSpeed: 1000,
+        nav: true,
+        loop: true,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
+        autoplay: false,
+        autoHeight:true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        responsive: {
+            0: {
+                items: 1,
+                nav: false,
+                dots: true
+            },
+            768: {
+                items: 1,
+                nav: false,
+                dots: true
+            },
+            991: {
+                items: 1,
+            }
+        }
+    });
+    /*----------------------------------
+        Product Slider Active 
+    ----------------------------------*/
+     $('.product-slider').owlCarousel({
         smartSpeed: 1000,
         nav: true,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -98,11 +94,11 @@ $('.hero-slider, .hero-slider-3').owlCarousel({
                 items: 4
             }
         }
-    })  
-/*------- 
-    On Sale Product Active 
-----------------------------------*/
- $('.on-sale-product').owlCarousel({
+    });
+    /*----------------------------------
+        On Sale Product Active 
+    ----------------------------------*/
+     $('.on-sale-product').owlCarousel({
         smartSpeed: 1000,
         nav: true,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -123,11 +119,11 @@ $('.hero-slider, .hero-slider-3').owlCarousel({
                 items: 3
             }
         }
-    }) 
-/*------- 
-    Product list Slider Active 
-----------------------------------*/
- $('.product-cat-list').owlCarousel({
+    });
+    /*----------------------------------
+        Product list Slider Active 
+    ----------------------------------*/
+     $('.product-cat-list').owlCarousel({
         smartSpeed: 1000,
         nav: true,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -148,11 +144,11 @@ $('.hero-slider, .hero-slider-3').owlCarousel({
                 items: 1
             }
         }
-    })
-/*------- 
-    Modal Menu Active 
-----------------------------------*/
- $('.single-slide-menu').owlCarousel({
+    });
+    /*----------------------------------
+        Modal Menu Active 
+    ----------------------------------*/
+     $('.single-slide-menu').owlCarousel({
         smartSpeed: 1000,
         nav: false,
         responsive: {
@@ -173,26 +169,25 @@ $('.hero-slider, .hero-slider-3').owlCarousel({
             }
         }
     });
-$('.modal').on('shown.bs.modal', function (e) {
-    $('.single-slide-menu').resize();
-})
-    
-$('.single-slide-menu a').on('click',function(e){
-  e.preventDefault();
+    $('.modal').on('shown.bs.modal', function (e) {
+        $('.single-slide-menu').resize();
+    });
 
-  var $href = $(this).attr('href');
+    $('.single-slide-menu a').on('click',function(e) {
+        e.preventDefault();
 
-  $('.single-slide-menu a').removeClass('active');
-  $(this).addClass('active');
+        var $href = $(this).attr('href');
 
-  $('.product-details-large .tab-pane').removeClass('active show');
-  $('.product-details-large '+ $href ).addClass('active show');
+        $('.single-slide-menu a').removeClass('active');
+        $(this).addClass('active');
 
-})
-/*------- 
-    Look Book Slider Active 
-----------------------------------*/
- $('.look-book-slider').owlCarousel({
+        $('.product-details-large .tab-pane').removeClass('active show');
+        $('.product-details-large '+ $href ).addClass('active show');
+    });
+    /*----------------------------------
+        Look Book Slider Active 
+    ----------------------------------*/
+     $('.look-book-slider').owlCarousel({
         smartSpeed: 1000,
         nav: false,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -216,11 +211,11 @@ $('.single-slide-menu a').on('click',function(e){
                 items: 2
             }
         }
-    })
-/*------- 
-    Blog Slider Active 
-----------------------------------*/
- $('.blog-slider').owlCarousel({
+    });
+    /*----------------------------------
+        Blog Slider Active 
+    ----------------------------------*/
+     $('.blog-slider').owlCarousel({
         smartSpeed: 1000,
         nav: true,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -241,11 +236,11 @@ $('.single-slide-menu a').on('click',function(e){
                 items: 3
             }
         }
-    })
-/*------- 
-    Blog Gallery Post Active 
-----------------------------------*/
- $('.post-gallery').owlCarousel({
+    });
+    /*----------------------------------
+        Blog Gallery Post Active 
+    ----------------------------------*/
+     $('.post-gallery').owlCarousel({
         nav: true,
         autoplay: true,
         autoplayTimeout: 5000,
@@ -267,11 +262,11 @@ $('.single-slide-menu a').on('click',function(e){
                 items: 1
             }
         }
-    })
-/*------- 
-    Testimonial Active  
-----------------------------------*/
- $('.testimonial-active').owlCarousel({
+    });
+    /*----------------------------------
+        Testimonial Active  
+    ----------------------------------*/
+     $('.testimonial-active').owlCarousel({
         smartSpeed: 1000,
         nav: false,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
@@ -292,11 +287,11 @@ $('.single-slide-menu a').on('click',function(e){
                 items: 1
             }
         }
-    })
-/*--------
-    Brand Active
-----------------------------------*/
- $('.brand-active').owlCarousel({
+    });
+    /*----------------------------------
+        Brand Active
+    ----------------------------------*/
+     $('.brand-active').owlCarousel({
         smartSpeed: 1000,
         nav: true,
         navText: ['<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>'],
@@ -317,85 +312,84 @@ $('.single-slide-menu a').on('click',function(e){
                 items: 6
             }
         }
-}) 
-/*----------------------------------- 
-    Single Product Slide Menu Active 
---------------------------------------*/  
-$('.product-tab-menu').slick({
-		prevArrow: '<i class="fa fa-angle-up"></i>',
-		nextArrow: '<i class="fa fa-angle-down slick-next-btn"></i>',
+    });
+    /*--------------------------------------
+        Single Product Slide Menu Active 
+    --------------------------------------*/  
+    $('.product-tab-menu').slick({
+        prevArrow: '<i class="fa fa-angle-up"></i>',
+        nextArrow: '<i class="fa fa-angle-down slick-next-btn"></i>',
         slidesToShow: 3,
         vertical: true,
         responsive: [
             {
-              breakpoint: 1200,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3
-              }
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
             },
             {
-              breakpoint: 991,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3
-              }
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
             },
             {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          ]
-	});   
-$('.product-tab-menu a').on('click',function(e){
-      e.preventDefault();
-     
-      var $href = $(this).attr('href');
-     
-      $('.product-tab-menu a').removeClass('active');
-      $(this).addClass('active');
-     
-      $('.single-product-img .tab-pane').removeClass('active show');
-      $('.single-product-img '+ $href ).addClass('active show');
-     
-  })
-/*----------------------------
-    Tooltip Active
------------------------------- */
- $('.product-action a').tooltip({
+        ]
+    });
+    $('.product-tab-menu a').on('click',function(e) {
+        e.preventDefault();
+
+        var $href = $(this).attr('href');
+
+        $('.product-tab-menu a').removeClass('active');
+        $(this).addClass('active');
+
+        $('.single-product-img .tab-pane').removeClass('active show');
+        $('.single-product-img '+ $href ).addClass('active show');
+    });
+    /*----------------------------
+        Tooltip Active
+    ------------------------------ */
+     $('.product-action a').tooltip({
         animated: 'fade',
         placement: 'top',
         container: 'body'
-}); 
-/*----------------------------------
-    ScrollUp Active
------------------------------------*/
-$.scrollUp({
-    scrollText: '<i class="fa fa-angle-up"></i>',
-    easingType: 'linear',
-    scrollSpeed: 900,
-    animation: 'fade'
-});
-/*----------------------------------- 
-    Count Down Active 
-----------------------------------*/ 
-$('[data-countdown]').each(function() {
-	var $this = $(this), finalDate = $(this).data('countdown');
-	$this.countdown(finalDate, function(event) {
-		$this.html(event.strftime('<div class="single-count"><span>%D</span>D</div><div class="single-count"><span>%H</span>h</div><div class="single-count"><span>%M</span>m</div><div class="single-count"><span>%S</span>s</div>'));
-	});
-}); 
-/*---------------------------- 
-    Full Screen Menu Active
------------------------------*/
+    }); 
+    /*----------------------------------
+        ScrollUp Active
+    -----------------------------------*/
+    $.scrollUp({
+        scrollText: '<i class="fa fa-angle-up"></i>',
+        easingType: 'linear',
+        scrollSpeed: 900,
+        animation: 'fade'
+    });
+    /*----------------------------------- 
+        Count Down Active 
+    ----------------------------------*/ 
+    $('[data-countdown]').each(function() {
+        var $this = $(this), finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('<div class="single-count"><span>%D</span>D</div><div class="single-count"><span>%H</span>h</div><div class="single-count"><span>%M</span>m</div><div class="single-count"><span>%S</span>s</div>'));
+        });
+    }); 
+    /*---------------------------- 
+        Full Screen Menu Active
+    -----------------------------*/
     function fullScreenmenu() {
         var menuTrigger = $('.menu-icon button'),
             endTriggermenu = $('button.menu-close'),
             container = $('.full-screen-menu-area');
-        
+
         menuTrigger.on('click', function() {
             container.addClass('inside');
         });
@@ -403,112 +397,109 @@ $('[data-countdown]').each(function() {
         endTriggermenu.on('click', function() {
             container.removeClass('inside');
         });
-        
     };
     fullScreenmenu();
-/*--------------------------------
-    Price Slider Active
--------------------------------- */
-var sliderrange = $('#slider-range');
-var amountprice = $('#amount');
-$(function() {
-    sliderrange.slider({
-        range: true,
-        min: 20,
-        max: 100,
-        values: [0, 100],
-        slide: function(event, ui) {
-            amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
-        }
+    /*--------------------------------
+        Price Slider Active
+    -------------------------------- */
+    var sliderrange = $('#slider-range');
+    var amountprice = $('#amount');
+    $(function() {
+        sliderrange.slider({
+            range: true,
+            min: 20,
+            max: 100,
+            values: [0, 100],
+            slide: function(event, ui) {
+                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        amountprice.val("$" + sliderrange.slider("values", 0) +
+            " - $" + sliderrange.slider("values", 1));
     });
-    amountprice.val("$" + sliderrange.slider("values", 0) +
-        " - $" + sliderrange.slider("values", 1));
-});
-/*------------------------------ 
-    Nice Select Active
----------------------------------*/
-// $('select').niceSelect();
-/*------------------------------ 
-    Toggle Function Active
----------------------------------*/   
-/*--- showlogin toggle function ----*/
+    /*------------------------------ 
+        Nice Select Active
+    ---------------------------------*/
+    // $('select').niceSelect();
+    /*------------------------------ 
+        Toggle Function Active
+    ---------------------------------*/   
+    /*--- showlogin toggle function ----*/
     $('#showlogin').on('click', function() {
         $('#checkout-login').slideToggle(900);
     });
-
- /*--- showlogin toggle function ----*/
+    /*--- showlogin toggle function ----*/
     $('#showcoupon').on('click', function() {
         $('#checkout_coupon').slideToggle(900);
     });
-/*--- showlogin toggle function ----*/
+    /*--- showlogin toggle function ----*/
     $('#cbox').on('click', function() {
         $('#cbox-info').slideToggle(900);
     });
 
- /*--- showlogin toggle function ----*/
+    /*--- showlogin toggle function ----*/
     $('#ship-box').on('click', function() {
         $('#ship-box-info').slideToggle(1000);
     });
-/*--------------------------
+    /*--------------------------
     Counter Up
----------------------------- */
+    ---------------------------- */
     $('.counter').counterUp({
         delay: 70,
         time: 5000
     });
-/* --------------------------------------------------------
-    FAQ Accordion 
-* -------------------------------------------------------*/ 
-  $('.card-header a').on('click', function() {
-    $('.card').removeClass('actives');
-    $(this).parents('.card').addClass('actives');
-  });
-/* --------------------------------------------------------
-    Instafeed Active
-* -------------------------------------------------------*/ 
-if($('#instagram-feed').length) {
-    var feed = new Instafeed({
-        get: 'user',
-        userId: 6665768655,
-        accessToken: '6665768655.1677ed0.313e6c96807c45d8900b4f680650dee5',
-        target: 'instagram-feed',
-        resolution: 'thumbnail',
-        limit: 6,
-        template: '<li><a href="{{link}}" target="_new"><img src="{{image}}" /></a></li>',
+    /* --------------------------------------------------------
+        FAQ Accordion 
+    * -------------------------------------------------------*/ 
+    $('.card-header a').on('click', function() {
+        $('.card').removeClass('actives');
+        $(this).parents('.card').addClass('actives');
     });
-    feed.run();
-}
-/*--------------------------
-    Isotope Active
----------------------------- */
-$('.protfolio-active').imagesLoaded( function() {
-// images have loaded
-    // init Isotope
-    var $grid = $('.protfolio-active').isotope({
-      // options
-    });
-    // filter items on button click
-    $('.protfolio-menu-active').on( 'click', 'li', function() {
-      var filterValue = $(this).attr('data-filter');
-      $grid.isotope({ filter: filterValue });
+    /* --------------------------------------------------------
+        Instafeed Active
+    * -------------------------------------------------------*/ 
+    if($('#instagram-feed').length) {
+        var feed = new Instafeed({
+            get: 'user',
+            userId: 6665768655,
+            accessToken: '6665768655.1677ed0.313e6c96807c45d8900b4f680650dee5',
+            target: 'instagram-feed',
+            resolution: 'thumbnail',
+            limit: 6,
+            template: '<li><a href="{{link}}" target="_new"><img src="{{image}}" /></a></li>',
+        });
+        feed.run();
+    }
+    /*--------------------------
+        Isotope Active
+    ---------------------------- */
+    $('.protfolio-active').imagesLoaded( function() {
+        // images have loaded
+        // init Isotope
+        var $grid = $('.protfolio-active').isotope({
+            // options
+        });
+        // filter items on button click
+        $('.protfolio-menu-active').on( 'click', 'li', function() {
+            var filterValue = $(this).attr('data-filter');
+            $grid.isotope({ filter: filterValue });
 
-          $(this).siblings('.active').removeClass('active');
-          $(this).addClass('active');
-          event.preventDefault();
+            $(this).siblings('.active').removeClass('active');
+            $(this).addClass('active');
+            event.preventDefault();
+        });
     });
-});
-/* --------------------------------------------------------
-    Venobox Active
-* -------------------------------------------------------*/  
-  $('.venobox').venobox({
+    /* --------------------------------------------------------
+        Venobox Active
+    * -------------------------------------------------------*/  
+    $('.venobox').venobox({
         border: '10px',
         titleattr: 'data-title',
         numeratio: true,
         infinigall: true
     });
-/*----------------------------------
-    EasyZoom Active       
-------------------------------------*/   
-var $easyzoom = $('.easyzoom').easyZoom();    
-
+    /*----------------------------------
+        EasyZoom Active       
+    ------------------------------------*/   
+    var $easyzoom = $('.easyzoom').easyZoom();
 })(jQuery);

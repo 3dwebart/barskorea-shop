@@ -45,7 +45,8 @@
 		main 페이지 상품 리스트, 
 		상세페이지 관련상품 리스트에서 Quick view 또는 카트 아이콘 클릭시 이벤트
 	*/
-	jQuery(document).on('click', '.btn-list-quick-view', function() {
+	/*
+	jQuery(document).off().on('click', '.btn-list-quick-view', function() {
 		var onThis = jQuery(this);
 		$.ajax({
 			url: g5_shop_url + "/ajax.list.quickview.php",
@@ -94,6 +95,7 @@
 		});
 		return false;
 	});
+	*/
 
 	jQuery(document).on('click', '.mfp-content', function() {
 		jQuery(this).closest('.mfp-fade').magnificPopup('close');
@@ -104,6 +106,7 @@
 		return false;
 	});
 })(jQuery);
+/* BIGIN :: 숫자 3자리마다 , 처리 */
 // 숫자 타입에서 쓸 수 있도록 format() 함수 추가
 Number.prototype.format = function() {
     if(this==0) return 0;
@@ -115,7 +118,7 @@ Number.prototype.format = function() {
  
     return n;
 };
- 
+
 // 문자열 타입에서 쓸 수 있도록 format() 함수 추가
 String.prototype.format = function() {
     var num = parseFloat(this);
@@ -123,3 +126,4 @@ String.prototype.format = function() {
  
     return num.format();
 };
+/* END :: 숫자 3자리마다 , 처리 */
