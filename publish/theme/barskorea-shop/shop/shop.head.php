@@ -13,6 +13,31 @@ include_once(G5_LIB_PATH.'/visit.lib.php');
 include_once(G5_LIB_PATH.'/connect.lib.php');
 include_once(G5_LIB_PATH.'/popular.lib.php');
 include_once(G5_LIB_PATH.'/latest.lib.php');
+$lang = $_COOKIE['language'];
+if(empty($lang)) {
+	$lang = 'eng';
+}
+
+$language = array(
+	/*
+	array(
+		'code' => 'eng',
+		'text' => 'english',
+		'lang2code' => 'en'
+	),
+	*/
+	array(
+		'code' => 'usa',
+		'text' => 'english',
+		'lang2Code' => 'us'
+	),
+	array(
+		'code' => 'kor',
+		'text' => 'korean',
+		'lang2Code' => 'ko'
+	)
+);
+include_once(G5_PATH.'/language/'.$lang.'.php');
 ?>
 <!-- DIGIN :: warpper -->
 <div class="wrapper">
@@ -27,10 +52,28 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 							<div class="header-top-left">
 								<div class="header-top-language">
 									<ul>
-										<li><a href="#"><img src="<?php echo G5_ASSETS_URL; ?>/img/language/en.png" alt=""> <span>English</span></a>
+										<li>
+											<a href="#" data-lang="<?php echo $langStr['langCode']; ?>">
+												<img src="<?php echo G5_ASSETS_URL; ?>/img/language/<?php echo $langStr['lang2Code']; ?>.png" alt=""> 
+												<span><?php echo $langStr['language']; ?></span>
+											</a>
 											<!--Header Top Dropdown-->
 											<ul class="ht-dropdown">
-												<li><a href="#"><img src="<?php echo G5_ASSETS_URL; ?>/img/language/fr.png" alt=""> <span>French</span></a></li>
+												<?php
+												for ($i=0; $i < count($language); $i++) {
+													$code = $language[$i]['code'];
+													if($lang != $code) {
+												?>
+												<li>
+													<a href="#" data-lang="<?php echo $code; ?>">
+														<img src="<?php echo G5_ASSETS_URL; ?>/img/language/<?php echo $language[$i]['lang2Code']; ?>.png" alt=""> 
+														<span><?php echo $langStr[$code]; ?></span>
+													</a>
+												</li>
+												<?php
+													}
+												}
+												?>
 											</ul>
 											<!--Header Top Dropdown-->
 										</li>
@@ -44,26 +87,75 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 							<div class="header-top-right text-right">
 								<div class="menu-my-account">
 									<ul>
-										<li><a href="my-account.html">My account</a>
+										<li><a href="my-account.html"><?php echo $langStr['MyAccount']; ?></a>
 										   <!--Header Top Dropdown-->
 											<ul class="ht-dropdown account-menu">
 												<?php if(G5_COMMUNITY_USE) { ?>
-												<li class="tnb_left tnb_shop"><a href="<?php echo G5_SHOP_URL; ?>/"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 쇼핑몰</a></li>
-												<li class="tnb_left tnb_community"><a href="<?php echo G5_URL; ?>/"><i class="fa fa-home" aria-hidden="true"></i> 커뮤니티</a></li>
+												<li class="tnb_left tnb_shop">
+													<a href="<?php echo G5_SHOP_URL; ?>/">
+														<i class="fa fa-shopping-bag" aria-hidden="true"></i>
+														쇼핑몰
+													</a>
+												</li>
+												<li class="tnb_left tnb_community">
+													<a href="<?php echo G5_URL; ?>/">
+														<i class="fa fa-home" aria-hidden="true"></i>
+														커뮤니티
+													</a>
+												</li>
 												<?php } ?>
-												<li class="tnb_cart"><a href="<?php echo G5_SHOP_URL; ?>/cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 장바구니</a></li>
-												<li class="tnb_left tnb_shop"><a href="<?php echo G5_SHOP_URL; ?>/wishlist.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> 위시리스트</a></li>
-												<li><a href="<?php echo G5_SHOP_URL; ?>/mypage.php">마이페이지</a></li>
+												<li class="tnb_cart">
+													<a href="<?php echo G5_SHOP_URL; ?>/cart.php">
+														<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+														<?php echo $langStr['basket']; ?>
+													</a>
+												</li>
+												<li class="tnb_left tnb_shop">
+													<a href="<?php echo G5_SHOP_URL; ?>/wishlist.php">
+														<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+														<?php echo $langStr['wish']; ?>
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/mypage.php">
+														<i class="fa fa-user-o" aria-hidden="true"></i>
+														<?php echo $langStr['MyPage']; ?>
+													</a>
+												</li>
 												<?php if ($is_member) { ?>
-
-												<li><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php">정보수정</a></li>
-												<li><a href="<?php echo G5_BBS_URL; ?>/logout.php?url=shop">로그아웃</a></li>
+												<li>
+													<a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php">
+														<i class="fa fa-address-card-o" aria-hidden="true"></i>
+														<?php echo $langStr['EditMyInformation']; ?>
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo G5_BBS_URL; ?>/logout.php?url=shop">
+														<i class="fa fa-sign-out" aria-hidden="true"></i>
+														<?php echo $langStr['SignOut']; ?>
+													</a>
+												</li>
 												<?php if ($is_admin) {  ?>
-												<li class="tnb_admin"><a href="<?php echo G5_ADMIN_URL; ?>/shop_admin/"><b>관리자</b></a></li>
+												<li class="tnb_admin">
+													<a href="<?php echo G5_ADMIN_URL; ?>/shop_admin/">
+														<i class="fa fa-cog" aria-hidden="true"></i>
+														<b><?php echo $langStr['Administrator']; ?></b>
+													</a>
+												</li>
 												<?php }  ?>
 												<?php } else { ?>
-												<li><a href="<?php echo G5_BBS_URL; ?>/register.php">회원가입</a></li>
-												<li><a href="<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo $urlencode; ?>"><b>로그인</b></a></li>
+												<li>
+													<a href="<?php echo G5_BBS_URL; ?>/register.php">
+														<i class="fa fa-user-plus" aria-hidden="true"></i>
+														회원가입
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo G5_BBS_URL; ?>/login.php?url=<?php echo $urlencode; ?>">
+														<i class="fa fa-sign-in" aria-hidden="true"></i>
+														<b>로그인</b>
+													</a>
+												</li>
 												<?php } ?>
 												<!--
 												<li><a href="login-register.html">Login Register</a></li>
@@ -76,7 +168,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 											<!--Header Top Dropdown--> 
 										</li>
 										<li>
-											<a href="wishlist.html">
+											<a href="<?php echo G5_SHOP_URL; ?>/wishlist.php">
 												<i class="fa fa-heart-o"></i>
 											</a>
 										</li>
@@ -128,55 +220,103 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 						</div>
 						<div class="col-md-4">
 							<!--Mini Cart Start-->
-							<div class="mini-cart text-lg-right">
-								<ul>
-									<li>
-										<a href="#">
-											<span class="cart-icon"></span>
-											<span class="cart-quantity">2 items</span>
-											<span class="cart-seraparate">-</span>
-											<span class="cart-total">$130.00</span>
-										</a>
-									   <!--Cart Dropdown Start-->
-									   <ul class="cart-dropdown">
-										  <li class="single-cart-item">
-											  <div class="cart-img">
-												  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart1.jpg" alt=""></a>
-											  </div>
-											  <div class="cart-content">
-												  <h5 class="product-name"><a href="single-product.html">Aliquam lobortis est</a></h5>
-												  <span class="quantity">Qty: 1</span>
-												  <span class="cart-price">$70.00</span>
-											  </div>
-											  <div class="cart-remove">
-												  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-											  </div>
-										  </li>
-										  <li class="single-cart-item">
-											  <div class="cart-img">
-												  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart2.jpg" alt=""></a>
-											  </div>
-											  <div class="cart-content">
-												  <h5 class="product-name"><a href="single-product.html">Cras neque metus</a></h5>
-												  <span class="quantity">Qty: 1</span>
-												  <span class="cart-price">$60.00</span>
-											  </div>
-											  <div class="cart-remove">
-												  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-											  </div>
-										  </li>
-										  <li>
-											  <p class="cart-subtotal"><strong>Subtotal:</strong> <span class="float-right">$130.00</span></p> 
-											  <p class="cart-btn">
-												  <a href="cart.html">View cart</a>
-												  <a href="checkout.html">Checkout</a>
-											  </p>
-										  </li>
-									   </ul> 
-									   <!--Cart Dropdown End-->
-									</li>
-								</ul>
-							</div>
+							<form method="" action="" enctype="multipart/form-data">
+								<div class="mini-cart text-lg-right">
+									<ul>
+										<li>
+											<?php
+												// 보관기간이 지난 상품 삭제
+												cart_item_clean();
+												// cart id 설정
+												set_cart_id($sw_direct);
+												$s_cart_id = get_session('ss_cart_id');
+
+												$cart_cnt = 0;
+												$cart_item = array();
+												$total_ct_price = 0;
+												$cart_sql = "SELECT c.ct_id, c.od_id, c.it_id, c.ct_qty, c.ct_price, c.it_name,
+																(SELECT i.it_img1 FROM {$g5['g5_shop_item_table']} i WHERE i.it_id = c.it_id) AS thumb
+															FROM {$g5['g5_shop_cart_table']} AS c
+															WHERE c.ct_direct = 0 
+															AND c.ct_select = 0
+															AND c.ct_status = '쇼핑'
+															AND c.mb_id = '$mb_id'";
+												$cart_res = sql_query($cart_sql);
+												for ($i=0; $i < $cart_row = sql_fetch_array($cart_res); $i++) {
+													$cart_cnt++;
+													$cart_item[$i] = $cart_row;
+													$total_ct_price += $cart_row['ct_price'];
+												}
+												//get_it_thumbnail
+											?>
+											<a href="#">
+												<span class="cart-icon"></span>
+												<span class="cart-quantity"><?php echo $cart_cnt; ?> items</span>
+												<span class="cart-seraparate">-</span>
+												<span class="cart-total"><?php echo number_format($total_ct_price); ?></span>
+											</a>
+											<!--Cart Dropdown Start-->
+											
+											<ul class="cart-dropdown">
+												<?php for ($i=0; $i < count($cart_item); $i++) { ?>
+												<li class="single-cart-item">
+													<div class="cart-img">
+														<a href="single-product.html">
+															<?php echo get_it_thumbnail($cart_item[$i]['thumb'], 90, 113); ?>
+														</a>
+													</div>
+													<div class="cart-content">
+														<h5 class="product-name"><a href="<?php echo G5_SHOP_URL.'/item.php?it_id='.$cart_item[$i]['it_id']; ?>"><?php echo $cart_item[$i]['it_name']; ?></a></h5>
+														<span class="quantity">Qty: <?php echo $cart_item[$i]['ct_qty']; ?></span>
+														<span class="cart-price"><?php echo number_format($cart_item[$i]['ct_price']); ?></span>
+													</div>
+													<div class="cart-remove">
+														<a title="Remove" href="#"><i class="fa fa-times"></i></a>
+													</div>
+												</li>
+												<?php } ?>
+											  <!--
+											  <li class="single-cart-item">
+												  <div class="cart-img">
+													  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart1.jpg" alt=""></a>
+												  </div>
+												  <div class="cart-content">
+													  <h5 class="product-name"><a href="single-product.html">Aliquam lobortis est</a></h5>
+													  <span class="quantity">Qty: 1</span>
+													  <span class="cart-price">$70.00</span>
+												  </div>
+												  <div class="cart-remove">
+													  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
+												  </div>
+											  </li>
+
+											  <li class="single-cart-item">
+												  <div class="cart-img">
+													  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart2.jpg" alt=""></a>
+												  </div>
+												  <div class="cart-content">
+													  <h5 class="product-name"><a href="single-product.html">Cras neque metus</a></h5>
+													  <span class="quantity">Qty: 1</span>
+													  <span class="cart-price">$60.00</span>
+												  </div>
+												  <div class="cart-remove">
+													  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
+												  </div>
+											  </li>
+												-->
+											  <li>
+												  <p class="cart-subtotal"><strong>Subtotal:</strong> <span class="float-right"><?php echo number_format($total_ct_price); ?></span></p> 
+												  <p class="cart-btn">
+													  <a href="<?php echo G5_SHOP_URL ?>/cart.php">View cart</a>
+													  <a href="checkout.html">Checkout</a>
+												  </p>
+											  </li>
+										   </ul> 
+										   <!--Cart Dropdown End-->
+										</li>
+									</ul>
+								</div>
+							</form>
 							<!--Mini Cart End-->
 						</div>
 					</div>
@@ -198,34 +338,58 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 								<nav>
 									<ul class="main-menu">
 										<li>
-											<a href="index.html">Home</a>
-											<!--Dropdown Menu Start-->
-											<ul class="dropdown">
-												<li><a href="index.html">Home Shop 1</a></li>
-												<li><a href="index-2.html">Home Shop 2</a></li>
-												<li><a href="index-3.html">Home Shop 3</a></li>
-												<li><a href="index-4.html">Home Shop 4</a></li>
-											</ul>
-											<!--Dropdown Menu End-->
+											<a href="<?php echo G5_URL ?>">Home</a>
 										</li>
 										<li>
-											<a href="index.html">shopping</a>
+											<a href="<?php echo G5_SHOP_URL.'/mypage.php' ?>">My shopping</a>
 											<!--Dropdown Menu Start-->
 											<ul class="dropdown">
-												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1">히트상품</a></li>
-												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=2">추천상품</a></li>
-												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3">최신상품</a></li>
-												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=4">인기상품</a></li>
-												<li><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5">할인상품</a></li>
-												<li class="hd_menu_right"><a href="<?php echo G5_BBS_URL; ?>/faq.php">FAQ</a></li>
-												<li class="hd_menu_right"><a href="<?php echo G5_BBS_URL; ?>/qalist.php">1:1문의</a></li>
-												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/personalpay.php">개인결제</a></li>
-												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/itemuselist.php">사용후기</a></li>
-												<li class="hd_menu_right"><a href="<?php echo G5_SHOP_URL; ?>/couponzone.php">쿠폰존</a></li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1">
+														<?php echo $langStr['Hit']; ?>
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=2">
+														<?php echo $langStr['Recommended']; ?>
+													</a>
+												</li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3"><?php echo $langStr['new']; ?></a></li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=4"><?php echo $langStr['best']; ?></a></li>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=5"><?php echo $langStr['sale']; ?></a>
+												</li>
+												<li class="hd_menu_right">
+													<a href="<?php echo G5_BBS_URL; ?>/faq.php">
+														<?php echo $langStr['FAQ']; ?>
+													</a>
+												</li>
+												<li class="hd_menu_right">
+													<a href="<?php echo G5_BBS_URL; ?>/qalist.php">
+														<?php echo $langStr['1by1Contact']; ?>
+													</a>
+												</li>
+												<li class="hd_menu_right">
+													<a href="<?php echo G5_SHOP_URL; ?>/personalpay.php">
+														<?php echo $langStr['PersonalPayment']; ?>
+													</a>
+												</li>
+												<li class="hd_menu_right">
+													<a href="<?php echo G5_SHOP_URL; ?>/itemuselist.php">
+														<?php echo $langStr['Reviews']; ?>
+													</a>
+												</li>
+												<li class="hd_menu_right">
+													<a href="<?php echo G5_SHOP_URL; ?>/couponzone.php">
+														<?php echo $langStr['CouponZone']; ?>
+													</a>
+												</li>
 											</ul>
 											<!--Dropdown Menu End-->
 										</li>
-										<li><a href="shop.html">Shop</a></li>
+										<li><a href="<?php echo G5_SHOP_URL.'/search.php' ?>">Shop</a></li>
 										<li><a href="blog.html">Blog</a></li>
 										<li><a href="about.html">About Us</a></li>
 										<li><a href="contact.html">Contact Us</a></li>

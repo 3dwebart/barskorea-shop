@@ -167,7 +167,7 @@ $(function() {
     });
 
     // 수량변경 및 삭제
-    $(document).off().on("click", "#sit_sel_option li button", function() {
+    $(document).on("click", "#sit_sel_option li button", function() {
         var mode = $(this).text();
         var this_qty, max_qty = 9999, min_qty = 1;
         var $el_qty = $(this).closest("li").find("input[name^=ct_qty]");

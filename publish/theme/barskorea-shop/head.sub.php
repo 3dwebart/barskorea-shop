@@ -109,6 +109,7 @@ var g5_assets_url = "<?php echo G5_ASSETS_URL; ?>";
 <!-- BIGIN :: Add js files -->
 <!--Jquery 1.12.4-->
 <script src="<?php echo G5_ASSETS_URL; ?>/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="<?php echo G5_ASSETS_URL; ?>/plugins/jquery.cookie/jquery.cookie.js"></script>
 <script src="<?php echo G5_ASSETS_URL; ?>/js/custom.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> -->
 <?php

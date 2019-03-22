@@ -1,4 +1,24 @@
 (function($) {
+	// 언어팩 셋
+	var date = new Date();
+	date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+	jQuery(document).on('click', '.header-top-language a', function() {
+		var lang = jQuery(this).data('lang');
+		var host = window.location.host;
+		var locationHost = window.location.protocol + '//' + host;
+		$.cookie(
+			"language", 
+			lang, 
+			{
+				path: "/", 
+				domain: host,
+				expires: date//,
+				//secure: true
+			}
+		);
+		location.reload();
+		return false;
+	});
 	// 위시리스트 버튼 클릭시 회원이 아니면 로그인 유도함
 	jQuery(document).on('click', '.btn-list-wishlist', function() {
 		var onThis = jQuery(this);

@@ -7,7 +7,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 error_reporting(E_ALL);
 
 ini_set("display_errors", 1);
-
+$mb_id = $_SESSION['ss_mb_id'];
 ?>
 <!--Shop Product Start-->
 <div class="shop-product">
@@ -24,6 +24,42 @@ ini_set("display_errors", 1);
 					<!-- 상품진열 10 시작 { -->
 					<?php
 						for ($i=1; $row=sql_fetch_array($result); $i++) {
+							$item_id = $row['it_id'];
+							$use_sql = "SELECT 
+											is_score, 
+											(
+												SELECT COUNT(is_id) 
+												FROM {$g5['g5_shop_item_use_table']}
+												WHERE it_id = '{$item_id}' 
+												AND mb_id = '$mb_id'
+											) AS cnt 
+										FROM {$g5['g5_shop_item_use_table']} 
+										WHERE it_id = '{$item_id}' AND mb_id = '$mb_id'";
+							$use_res = sql_query($use_sql);
+							$is_score = array();
+							$cnt = array();
+							$star_score = '';
+							$is_score[$i] = 0;
+							for ($use_cnt = 0; $use_row = sql_fetch_array($use_res); $use_cnt++) {
+								$is_score[$i] += $use_row['is_score'];
+								$cnt[$i] = $use_row['cnt'];
+							}
+							if($is_score[$i] > 0) {
+								$score = ceil($is_score[$i] / $cnt[$i]);
+								$star_score = '';
+								for($z = 1; $z < 6; $z++) {
+									if($score < $z) {
+										$star_score .= "<i class=\"fa fa-star-o\"></i>\n";
+									} else {
+										$star_score .= "<i class=\"fa fa-star\"></i>\n";
+									}
+								}
+							} else {
+								for($z = 1; $z < 6; $z++) {
+									$star_score .= "<i class=\"fa fa-star-o\"></i>\n";
+								}
+							}
+
 							echo "<div class=\"col-lg-4 col-xl-3 col-md-4\">\n";
 							echo "<div class=\"single-product mb-40\">\n";
 							/*
@@ -35,7 +71,6 @@ ini_set("display_errors", 1);
 								$sct_last = 'sct_clear';
 							}
 							*/
-
 							echo "<div class=\"product-img\">\n";
 							// BIGIN :: Image
 							if ($this->href) {
@@ -97,11 +132,14 @@ ini_set("display_errors", 1);
 							}
 							echo "</h4>\n";
 							echo "<div class=\"product-reviews\">\n";
+							echo $star_score;
+							/*
 							echo "<i class=\"fa fa-star\"></i>\n";
 							echo "<i class=\"fa fa-star\"></i>\n";
 							echo "<i class=\"fa fa-star\"></i>\n";
 							echo "<i class=\"fa fa-star\"></i>\n";
 							echo "<i class=\"fa fa-star-o\"></i>\n";
+							*/
 							echo "</div>\n";
 							echo "</div>\n";
 							// END :: product-content

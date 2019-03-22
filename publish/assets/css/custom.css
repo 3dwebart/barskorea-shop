@@ -1,4 +1,54 @@
 /* ------ custom.css --------*/
+/* BIGIN :: Align */
+
+/* END :: Align */
+.ht-dropdown.account-menu {
+    width: 180px;
+}
+/* BIGIN :: Component */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.custom-checkbox input[type='checkbox'] {
+    display: none;
+}
+.custom-checkbox input[type='checkbox'] + .box {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    transition: all .5s ease;
+    border: 1px solid #dedede;
+    margin-right: 5px;
+    position: relative;
+}
+
+.custom-checkbox input[type='checkbox'] + .box:after {
+    content: "\2713";
+    font-size: 36px;
+    font-family: 'Muli', sans-serif;
+    position: absolute;
+    top: -7px;
+    left: 2px;
+    color: transparent;
+    transition: all .5s ease;
+}
+.custom-checkbox input[type='checkbox']:checked + .box {
+    transition: all .5s ease;
+    border: 1px solid #666666;
+}
+.custom-checkbox input[type='checkbox']:checked + .box:after {
+    color: #666666;
+    transition: all .5s ease;
+}
+.btn-warning,
+.btn-warning:hover {
+    color: #ffffff;
+}
+/* END :: Component */
 /* BIGIN :: Main slider */
 .slider-area .single-slider[data-no="1"] { background-image:url(../img/slider/slider1.jpg); }
 .slider-area .single-slider[data-no="2"] { background-image:url(../img/slider/slider2.jpg); }
@@ -145,6 +195,17 @@ a.btn01:hover,a.btn02:hover {
     color: #fff;
 }
 /* } END :: Shop detail page */
+/* BIGIN :: Search page { */
+#ssch_cate ul {
+    display: flex;
+}
+#ssch_cate li {
+    width: 100%;
+    max-width: calc(20% + .8px);
+    flex: 0 0 calc(20% + .8px);
+    float: none;
+}
+/* } END :: Search page */
 #login_fs .btn_submit,
 #faq_sch .btn_submit {
     background: #eeb013;

@@ -73,92 +73,29 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 			<div class="col-md-5">
 				<!--Modal Tab Content Start-->
 				<div class="tab-content product-details-large" id="myTabContent">
-					<div class="tab-pane fade show active" id="single-slide1" role="tabpanel" aria-labelledby="single-slide-tab-1">
+					<?php for($i = 0; $i < count($imgs); $i++) { ?>
+					<div class="tab-pane fade<?php if($i == 0) { echo ' show active'; } ?>" id="single-slide<?php echo $i; ?>" role="tabpanel" aria-labelledby="single-slide-tab-<?php echo $i; ?>">
 						<!--Single Product Image Start-->
 						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product1.jpg" alt="">
+							<img src="<?php echo G5_DATA_URL.'/item/'.$imgs[$i]; ?>" alt="">
 						</div>
 						<!--Single Product Image End-->
 					</div>
-					<div class="tab-pane fade" id="single-slide2" role="tabpanel" aria-labelledby="single-slide-tab-2">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product2.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-					<div class="tab-pane fade" id="single-slide3" role="tabpanel" aria-labelledby="single-slide-tab-3">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product3.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-					<div class="tab-pane fade" id="single-slide4" role="tabpanel" aria-labelledby="single-slide-tab-4">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product4.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-					<div class="tab-pane fade" id="single-slide5" role="tabpanel" aria-labelledby="single-slide-tab-4">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product5.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-					<div class="tab-pane fade" id="single-slide6" role="tabpanel" aria-labelledby="single-slide-tab-4">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product6.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-
-					<div class="tab-pane fade" id="single-slide7" role="tabpanel" aria-labelledby="single-slide-tab-2">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product2.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
-					<div class="tab-pane fade" id="single-slide8" role="tabpanel" aria-labelledby="single-slide-tab-4">
-						<!--Single Product Image Start-->
-						<div class="single-product-img img-full">
-							<img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/single-product5.jpg" alt="">
-						</div>
-						<!--Single Product Image End-->
-					</div>
+					<?php } ?>
 				</div>
 				<!--Modal Content End-->
 				<!--Modal Tab Menu Start-->
 				<div class="single-product-menu">
 					<div class="nav single-slide-menu owl-carousel" role="tablist">
+						<?php for($i = 0; $i < count($imgs); $i++) { ?>
 						<div class="single-tab-menu img-full">
-							<a class="active" data-toggle="tab" id="single-slide-tab-1" href="#single-slide1"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product1.jpg" alt=""></a>
+							<a class="active" data-toggle="tab" id="single-slide-tab-<?php echo $i; ?>" href="#single-slide<?php echo $i; ?>">
+								<?php
+								echo get_it_thumbnail($imgs[$i], 90, 113)."\n";
+								?>
+							</a>
 						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-2" href="#single-slide2"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product2.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-3" href="#single-slide3"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product3.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-4" href="#single-slide4"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product4.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-5" href="#single-slide5"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product5.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-6" href="#single-slide6"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product6.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-7" href="#single-slide7"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product2.jpg" alt=""></a>
-						</div>
-						<div class="single-tab-menu img-full">
-							<a data-toggle="tab" id="single-slide-tab-8" href="#single-slide8"><img src="<?php echo G5_ASSETS_URL; ?>/img/single-product/small/single-product5.jpg" alt=""></a>
-						</div>
+						<?php } ?>
 					</div>
 				</div>
 				<!--Modal Tab Menu End-->
@@ -477,6 +414,7 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 							<?php } ?>
 						</div>
 						<!-- END :: Buttons -->
+						<!--
 						<div class="add-to-cart quantity">
 							<form class="add-quantity" action="#">
 								 <div class="modal-quantity">
@@ -488,19 +426,22 @@ if(!$item['it_use'] || $item['it_tel_inq'] || $is_soldout) {
 							</form>
 						</div>
 						<div class="cart-description">
-						   <p>
-							   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus.
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus.
 							</p>
 					   </div>
+						-->
 						<div class="social-share">
-						   <h3>Share this product</h3>
-						   <ul class="socil-icon2">
-							   <li><a href=""><i class="fa fa-facebook"></i></a></li>
-							   <li><a href=""><i class="fa fa-twitter"></i></a></li>
-							   <li><a href=""><i class="fa fa-pinterest"></i></a></li>
-							   <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-							   <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-						   </ul>
+						<h3>Share this product</h3>
+							<ul class="socil-icon2">
+								<li><a href=""><i class="fa fa-facebook"></i></a></li>
+								<!--
+								<li><a href=""><i class="fa fa-twitter"></i></a></li>
+								<li><a href=""><i class="fa fa-pinterest"></i></a></li>
+								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+								-->
+								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+							</ul>
 						</div>
 					</div>
 				</form>
