@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* BIGIN :: Custom write page */
+#bo_w .bo_w_flie .file_wr {
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #000;
+    vertical-align: middle;
+    border-radius: 3px;
+    padding: 5px;
+    height: auto;
+    margin: 0;
+}
+#bo_w .bo_w_flie .lb_icon {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    border-radius: 3px 0 0 3px;
+    height: 30px;
+    line-height: 30px;
+    width: 40px;
+    margin: 0;
+    background: #eee;
+    text-align: center;
+    color: #888;
+}
+
+#bo_w .frm_file {
+	height: auto;
+}
+#bo_w .btn_submit {
+	width: auto;
+}
+#bo_w .btn_cancel {
+	line-height: 21px;
+}
+.btn_submit {
+	background-color: #eeb013;
+	transition: all .5s ease;
+}
+.btn_submit:hover {
+	background-color: #c08e0e;
+	transition: all .5s ease;
+}
+/* END :: Custom write page */
+/* BIGIN :: Custom view page */
+/* END :: Custom view page */
+/* BIGIN :: Custom list page */
+/* END :: Custom list page */
