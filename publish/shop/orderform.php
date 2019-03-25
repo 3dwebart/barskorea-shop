@@ -14,27 +14,29 @@ set_session("ss_direct", $sw_direct);
 // 장바구니가 비어있는가?
 if ($sw_direct) {
     $tmp_cart_id = get_session('ss_cart_direct');
-}
-else {
+} else {
     $tmp_cart_id = get_session('ss_cart_id');
 }
 
-if (get_cart_count($tmp_cart_id) == 0)
+if (get_cart_count($tmp_cart_id) == 0) {
     alert('장바구니가 비어 있습니다.', G5_SHOP_URL.'/cart.php');
+}
 
 // 새로운 주문번호 생성
 $od_id = get_uniqid();
 set_session('ss_order_id', $od_id);
 $s_cart_id = $tmp_cart_id;
-if($default['de_pg_service'] == 'inicis' || $default['de_inicis_lpay_use'])
+if($default['de_pg_service'] == 'inicis' || $default['de_inicis_lpay_use']) {
     set_session('ss_order_inicis_id', $od_id);
+}
 
 $g5['title'] = '주문서 작성';
 
-if(G5_IS_MOBILE)
+if(G5_IS_MOBILE) {
     include_once(G5_MSHOP_PATH.'/_head.php');
-else
+} else {
     include_once(G5_SHOP_PATH.'/_head.php');
+}
 
 // 희망배송일 지정
 if ($default['de_hope_date_use']) {
@@ -50,8 +52,9 @@ if($is_mobile_order) {
     require_once(G5_SHOP_PATH.'/orderform.sub.php');
 }
 
-if(G5_IS_MOBILE)
+if(G5_IS_MOBILE) {
     include_once(G5_MSHOP_PATH.'/_tail.php');
-else
+} else {
     include_once(G5_SHOP_PATH.'/_tail.php');
+}
 ?>

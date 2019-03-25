@@ -1,6 +1,8 @@
 <?php
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
+include_once('./_common.php');
+
 if(G5_IS_MOBILE) {
 	include_once(G5_THEME_MSHOP_PATH.'/shop.head.php');
 	return;
@@ -38,6 +40,48 @@ $language = array(
 	)
 );
 include_once(G5_PATH.'/language/'.$lang.'.php');
+
+// 보관기간이 지난 상품 삭제
+cart_item_clean();
+// cart id 설정
+set_cart_id($sw_direct);
+$s_cart_id = get_session('ss_cart_id');
+
+$cart_cnt = 0;
+$cart_item = array();
+$total_ct_price = 0;
+$cart_sql = "SELECT c.ct_id, c.od_id, c.it_id, c.ct_qty, c.ct_price, c.it_name,
+				(SELECT i.it_img1 FROM {$g5['g5_shop_item_table']} i WHERE i.it_id = c.it_id) AS thumb
+			FROM {$g5['g5_shop_cart_table']} AS c
+			WHERE c.ct_direct = 0 
+			AND c.ct_select = 0
+			AND c.ct_status = '쇼핑'
+			AND c.mb_id = '$mb_id'";
+$cart_res = sql_query($cart_sql);
+for ($i=0; $i < $cart_row = sql_fetch_array($cart_res); $i++) {
+	$cart_cnt++;
+	$cart_item[$i] = $cart_row;
+	$total_ct_price += $cart_row['ct_price'];
+}
+$main_cate = array();
+$sub1_cate = array();
+$sub2_cate = array();
+$cate_sql = "SELECT * FROM {$g5['g5_shop_category_table']} WHERE ca_use = 1";
+$cate_res = sql_query($cate_sql);
+while ($cate_row = sql_fetch_array($cate_res)) {
+	$strlen = strlen($cate_row['ca_id']);
+	if($strlen == 2) {
+		$main_cate[] = $cate_row;
+	}
+
+	if($strlen == 4) {
+		$sub1_cate[] = $cate_row['ca_id'];
+	}
+
+	if($strlen == 6) {
+		$sub2_cate[] = $cate_row['ca_id'];
+	}
+}
 ?>
 <!-- DIGIN :: warpper -->
 <div class="wrapper">
@@ -173,7 +217,7 @@ include_once(G5_PATH.'/language/'.$lang.'.php');
 											</a>
 										</li>
 										<li>
-											<a href="checkout.html">
+											<a href="#" class="btn-checkout">
 												<i class="fa fa-check-square-o"></i>
 											</a>
 										</li>
@@ -220,35 +264,12 @@ include_once(G5_PATH.'/language/'.$lang.'.php');
 						</div>
 						<div class="col-md-4">
 							<!--Mini Cart Start-->
-							<form method="" action="" enctype="multipart/form-data">
+							<form method="post" action="<?php echo G5_SHOP_URL; ?>/cartupdate.php" id="top_cart" enctype="multipart/form-data">
+								<!-- <input type="hidden" name="sw_direct" value="1" /> -->
+								<input type="hidden" name="act" value="buy" />
 								<div class="mini-cart text-lg-right">
 									<ul>
 										<li>
-											<?php
-												// 보관기간이 지난 상품 삭제
-												cart_item_clean();
-												// cart id 설정
-												set_cart_id($sw_direct);
-												$s_cart_id = get_session('ss_cart_id');
-
-												$cart_cnt = 0;
-												$cart_item = array();
-												$total_ct_price = 0;
-												$cart_sql = "SELECT c.ct_id, c.od_id, c.it_id, c.ct_qty, c.ct_price, c.it_name,
-																(SELECT i.it_img1 FROM {$g5['g5_shop_item_table']} i WHERE i.it_id = c.it_id) AS thumb
-															FROM {$g5['g5_shop_cart_table']} AS c
-															WHERE c.ct_direct = 0 
-															AND c.ct_select = 0
-															AND c.ct_status = '쇼핑'
-															AND c.mb_id = '$mb_id'";
-												$cart_res = sql_query($cart_sql);
-												for ($i=0; $i < $cart_row = sql_fetch_array($cart_res); $i++) {
-													$cart_cnt++;
-													$cart_item[$i] = $cart_row;
-													$total_ct_price += $cart_row['ct_price'];
-												}
-												//get_it_thumbnail
-											?>
 											<a href="#">
 												<span class="cart-icon"></span>
 												<span class="cart-quantity"><?php echo $cart_cnt; ?> items</span>
@@ -260,6 +281,9 @@ include_once(G5_PATH.'/language/'.$lang.'.php');
 											<ul class="cart-dropdown">
 												<?php for ($i=0; $i < count($cart_item); $i++) { ?>
 												<li class="single-cart-item">
+													<input type="hidden" name="it_id[]" value="<?php echo $cart_item[$i]['it_id']; ?>">
+													<input type="hidden" name="it_name[]" value="<?php echo $cart_item[$i]['it_name']; ?>">
+													<input type="hidden" name="ct_chk[]" value="1">
 													<div class="cart-img">
 														<a href="single-product.html">
 															<?php echo get_it_thumbnail($cart_item[$i]['thumb'], 90, 113); ?>
@@ -275,44 +299,22 @@ include_once(G5_PATH.'/language/'.$lang.'.php');
 													</div>
 												</li>
 												<?php } ?>
-											  <!--
-											  <li class="single-cart-item">
-												  <div class="cart-img">
-													  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart1.jpg" alt=""></a>
-												  </div>
-												  <div class="cart-content">
-													  <h5 class="product-name"><a href="single-product.html">Aliquam lobortis est</a></h5>
-													  <span class="quantity">Qty: 1</span>
-													  <span class="cart-price">$70.00</span>
-												  </div>
-												  <div class="cart-remove">
-													  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-												  </div>
-											  </li>
-
-											  <li class="single-cart-item">
-												  <div class="cart-img">
-													  <a href="single-product.html"><img src="<?php echo G5_ASSETS_URL; ?>/img/cart/cart2.jpg" alt=""></a>
-												  </div>
-												  <div class="cart-content">
-													  <h5 class="product-name"><a href="single-product.html">Cras neque metus</a></h5>
-													  <span class="quantity">Qty: 1</span>
-													  <span class="cart-price">$60.00</span>
-												  </div>
-												  <div class="cart-remove">
-													  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-												  </div>
-											  </li>
-												-->
-											  <li>
-												  <p class="cart-subtotal"><strong>Subtotal:</strong> <span class="float-right"><?php echo number_format($total_ct_price); ?></span></p> 
-												  <p class="cart-btn">
-													  <a href="<?php echo G5_SHOP_URL ?>/cart.php">View cart</a>
-													  <a href="checkout.html">Checkout</a>
-												  </p>
-											  </li>
-										   </ul> 
-										   <!--Cart Dropdown End-->
+												<li>
+													<p class="cart-subtotal">
+														<strong>Subtotal: </strong> 
+														<span class="float-right">
+															<?php echo number_format($total_ct_price); ?>
+														</span>
+													</p>
+													<p class="cart-btn">
+														<a href="<?php echo G5_SHOP_URL ?>/cart.php">View cart</a>
+														<a href="#" class="checkout">
+															<span>Checkout</span>
+														</a><!-- <?php echo G5_SHOP_URL ?>/orderform.php?sw_direct=1 -->
+													</p>
+												</li>
+											</ul> 
+											<!--Cart Dropdown End-->
 										</li>
 									</ul>
 								</div>
@@ -389,7 +391,20 @@ include_once(G5_PATH.'/language/'.$lang.'.php');
 											</ul>
 											<!--Dropdown Menu End-->
 										</li>
-										<li><a href="<?php echo G5_SHOP_URL.'/search.php' ?>">Shop</a></li>
+										<li>
+											<a href="<?php echo G5_SHOP_URL.'/search.php' ?>">Shop</a>
+											<!--Dropdown Menu Start-->
+											<ul class="dropdown">
+												<?php for ($i=0; $i < count($main_cate); $i++) { ?>
+												<li>
+													<a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $main_cate[$i]['ca_id']; ?>">
+														<?php echo $main_cate[$i]['ca_name']; ?>
+													</a>
+												</li>
+												<?php } ?>
+											</ul>
+											<!--Dropdown Menu End-->
+										</li>
 										<li><a href="blog.html">Blog</a></li>
 										<li><a href="about.html">About Us</a></li>
 										<li><a href="contact.html">Contact Us</a></li>

@@ -125,6 +125,42 @@
 	jQuery(document).on('click', '.mfp-content > *', function() {
 		return false;
 	});
+
+	jQuery(document).on('click', '#top_cart .checkout', function() {
+		jQuery(this).closest('form').attr('method', 'post');
+		jQuery(this).closest('form').attr('action', g5_shop_url + '/cartupdate.php');
+		jQuery(this).closest('form').submit();
+		return false;
+	});
+	jQuery(document).on('click', '.btn-checkout', function() {
+		jQuery('#top_cart').attr('method', 'post');
+		jQuery('#top_cart').attr('action', g5_shop_url + '/cartupdate.php');
+		jQuery('#top_cart').submit();
+		return false;
+	});
+	/* BIGIN :: When you click the payment cancel button on the order page */
+	jQuery(document).on('click', '#display_pay_button a', function() {
+		$.ajax({
+			url: g5_shop_url + "/ajax.payment.cancel.php",
+			type: "post",
+			data: 
+				{
+					tmp_cart_id: tmp_cart_id,
+					mb_id: mb_id
+				},
+			dataType: "json",
+			cache: false,
+			timeout: 30000,
+			success: function(data) {
+				//debugger;
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				$("div").html("<div>" + textStatus + " (HTTP-" + xhr.status + " / " + errorThrown + ")</div>" );
+			}
+		});
+		return true;
+	});
+	/* END :: When you click the payment cancel button on the order page */
 })(jQuery);
 /* BIGIN :: 숫자 3자리마다 , 처리 */
 // 숫자 타입에서 쓸 수 있도록 format() 함수 추가
