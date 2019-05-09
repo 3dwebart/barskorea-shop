@@ -122,8 +122,8 @@ $download_point = 0;
 //-------------------------------------------------------------------------------------------------
 // config 테이블 설정
 if($g5_install || !$result) {
-    $sql = " insert into `{$table_prefix}config`
-                set cf_title = '".G5_VERSION."',
+    $sql = " INSERT INTO `{$table_prefix}config`
+                SET cf_title = '".G5_VERSION."',
                     cf_theme = 'basic',
                     cf_admin = '$admin_id',
                     cf_admin_email = '$admin_email',
@@ -191,15 +191,15 @@ if($g5_install || !$result) {
     sql_query($sql, true, $dblink);
 
     // 1:1문의 설정
-    $sql = " insert into `{$table_prefix}qa_config`
+    $sql = " INSERT INTO `{$table_prefix}qa_config`
                 ( qa_title, qa_category, qa_skin, qa_mobile_skin, qa_use_email, qa_req_email, qa_use_hp, qa_req_hp, qa_use_editor, qa_subject_len, qa_mobile_subject_len, qa_page_rows, qa_mobile_page_rows, qa_image_width, qa_upload_size, qa_insert_content )
-              values
+              VALUES
                 ( '1:1문의', '회원|포인트', 'basic', 'basic', '1', '0', '1', '0', '1', '60', '30', '15', '15', '600', '1048576', '' ) ";
     sql_query($sql, true, $dblink);
 
     // 관리자 회원가입
-    $sql = " insert into `{$table_prefix}member`
-                set mb_id = '$admin_id',
+    $sql = " INSERT INTO `{$table_prefix}member`
+                SET mb_id = '$admin_id',
                      mb_password = PASSWORD('$admin_pass'),
                      mb_name = '$admin_name',
                      mb_nick = '$admin_name',
@@ -214,18 +214,18 @@ if($g5_install || !$result) {
     sql_query($sql, true, $dblink);
 
     // 내용관리 생성
-    sql_query(" insert into `{$table_prefix}content` set co_id = 'company', co_html = '1', co_subject = '회사소개', co_content= '<p align=center><b>회사소개에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
-    sql_query(" insert into `{$table_prefix}content` set co_id = 'privacy', co_html = '1', co_subject = '개인정보 처리방침', co_content= '<p align=center><b>개인정보 처리방침에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
-    sql_query(" insert into `{$table_prefix}content` set co_id = 'provision', co_html = '1', co_subject = '서비스 이용약관', co_content= '<p align=center><b>서비스 이용약관에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
+    sql_query(" INSERT INTO `{$table_prefix}content` SET co_id = 'company', co_html = '1', co_subject = '회사소개', co_content= '<p align=center><b>회사소개에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
+    sql_query(" INSERT INTO `{$table_prefix}content` SET co_id = 'privacy', co_html = '1', co_subject = '개인정보 처리방침', co_content= '<p align=center><b>개인정보 처리방침에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
+    sql_query(" INSERT INTO `{$table_prefix}content` SET co_id = 'provision', co_html = '1', co_subject = '서비스 이용약관', co_content= '<p align=center><b>서비스 이용약관에 대한 내용을 입력하십시오.</b></p>', co_skin = 'basic', co_mobile_skin = 'basic' ", true, $dblink);
 
     // FAQ Master
-    sql_query(" insert into `{$table_prefix}faq_master` set fm_id = '1', fm_subject = '자주하시는 질문' ", true, $dblink);
+    sql_query(" INSERT INTO `{$table_prefix}faq_master` SET fm_id = '1', fm_subject = '자주하시는 질문' ", true, $dblink);
 
     $tmp_gr_id = defined('G5_YOUNGCART_VER') ? 'shop' : 'community';
     $tmp_gr_subject = defined('G5_YOUNGCART_VER') ? '쇼핑몰' : '커뮤니티';
 
     // 게시판 그룹 생성
-    sql_query(" insert into `{$table_prefix}group` set gr_id = '$tmp_gr_id', gr_subject = '$tmp_gr_subject' ", true, $dblink);
+    sql_query(" INSERT INTO `{$table_prefix}group` SET gr_id = '$tmp_gr_id', gr_subject = '$tmp_gr_subject' ", true, $dblink);
 
     // 게시판 생성
     $tmp_bo_table   = array ("notice", "qa", "free", "gallery");
@@ -235,8 +235,8 @@ if($g5_install || !$result) {
 
         $bo_skin = ($tmp_bo_table[$i] === 'gallery') ? 'gallery' : 'basic';
 
-        $sql = " insert into `{$table_prefix}board`
-                    set bo_table = '$tmp_bo_table[$i]',
+        $sql = " INSERT INTO `{$table_prefix}board`
+                    SET bo_table = '$tmp_bo_table[$i]',
                         gr_id = '$tmp_gr_id',
                         bo_subject = '$tmp_bo_subject[$i]',
                         bo_device           = 'both',
@@ -327,8 +327,8 @@ if($g5_shop_install) {
     $mmimg_height = 200;
 
     // default 설정 (쇼핑몰 설정)
-    $sql = " insert into `{$g5_shop_prefix}default`
-                set de_admin_company_name = '회사명',
+    $sql = " INSERT INTO `{$g5_shop_prefix}default`
+                SET de_admin_company_name = '회사명',
                     de_admin_company_saupja_no = '123-45-67890',
                     de_admin_company_owner = '대표자명',
                     de_admin_company_tel = '02-123-4567',
@@ -391,7 +391,7 @@ if($g5_shop_install) {
                     de_mobile_type3_img_height = '$mmimg_height',
                     de_mobile_type4_list_use = '1',
                     de_mobile_type4_list_skin = 'main.10.skin.php',
-                    de_mobile_type4_list_mod = '22',
+                    de_mobile_type4_list_mod = '2',
                     de_mobile_type4_list_row = '2',
                     de_mobile_type4_img_width = '$simg_width',
                     de_mobile_type4_img_height = '$simg_height',

@@ -131,6 +131,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 				
 			</div>
 
+			<?php include_once(G5_TAG_PATH."/view.tag.write.skin.php");?>
+
 			<div class="write_div">
 				<label for="wr_content" class="sound_only">내용<strong>필수</strong></label>
 				<div class="wr_content <?php echo $is_dhtml_editor ? $config['cf_editor'] : ''; ?>">

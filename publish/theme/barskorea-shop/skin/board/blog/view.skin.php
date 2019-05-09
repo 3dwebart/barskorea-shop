@@ -18,7 +18,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 						<li><a href="<?php echo G5_url; ?>">Home</a></li>
 						<li class="active">
 							<a href="<?php echo G5_BBS_URL.'/board.php?bo_table='.$bo_table.'&wr_id='.$wr_id; ?>">
-								<?php echo $langStr['langCode'] == 'kor' ? $board['bo_subject'] : str_replace('_', ' ', $board['bo_table']); ?>
+								<?php echo $langStr['langCode'] == 'kor' ? $board['bo_subject'] : ucfirst( str_replace('_', ' ', $board['bo_table']) ); ?>
 							</a>
 						</li>
 					</ul>
@@ -27,91 +27,172 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 		</div>
 	</div>
 </div>
+<?php
+if($lang == 'kor') {
+	$wr_date = date("Y-m-d", strtotime($view['wr_datetime']));
+} else {
+	$wr_date = date("F d, Y", strtotime($view['wr_datetime']));
+}
+
+?>
 <!--Breadcrumb End-->
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-md-12 col-lg-9">
+			<div class="blog_area">
+				<article class="blog_single blog-details">
+					<header class="entry-header">
+						<span class="post-category">
+							<a href="#"> Fashion</a>,<a href="#">WordPress</a>
+						</span>
+						<h2 class="entry-title">
+							<a href="single-blog.html"><?php echo $view['wr_subject']; ?></a>
+						</h2>
+						<span class="post-author">
+						<span class="post-by"> Posts by : </span> <?php echo $view['writer']; ?> </span>
+						<span class="post-separator">|</span>
+						<span class="post-date"><i class="fas fa-calendar-alt"></i>On <?php echo $wr_date; ?> </span>
+						<span class="post-separator">|</span>
+						<span class="sound_only">댓글</span><strong><a href="#bo_vc"> <i class="fa fa-commenting-o" aria-hidden="true"></i> <?php echo number_format($view['wr_comment']) ?>건</a></strong>
+						<span class="post-separator">|</span>
+						<span class="sound_only">조회</span><strong><i class="fa fa-eye" aria-hidden="true"></i> <?php echo number_format($view['wr_hit']) ?>회</strong>
+					</header>
+					<div class="post-thumbnail img-full">
+						<a href="single-blog.html">
+							<?php
+							// 파일 출력
+							$v_img_count = count($view['file']);
+							if($v_img_count) {
+								echo "<div id=\"bo_v_img\">\n";
+
+								for ($i=0; $i<=count($view['file']); $i++) {
+									if ($view['file'][$i]['view']) {
+										//echo $view['file'][$i]['view'];
+										echo get_view_thumbnail($view['file'][$i]['view']);
+									}
+								}
+
+								echo "</div>\n";
+							}
+							?>
+						</a>
+					</div>
+					<div class="postinfo-wrapper">
+						<div class="post-info">
+							<div class="entry-summary blog-post-description">
+								<p>
+									<!-- 본문 내용 시작 { -->
+									<div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
+									<?php //echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
+									<!-- } 본문 내용 끝 -->
+									<?php if ($is_signature) { ?><p><?php echo $signature ?></p><?php } ?>
+								</p>
+								<!--  추천 비추천 시작 { -->
+								<?php if ( $good_href || $nogood_href) { ?>
+								<div id="bo_v_act">
+									<?php if ($good_href) { ?>
+									<span class="bo_v_act_gng">
+										<a href="<?php echo $good_href.'&amp;'.$qstr ?>" id="good_button" class="bo_v_good"><span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></a>
+										<b id="bo_v_act_good"></b>
+									</span>
+									<?php } ?>
+									<?php if ($nogood_href) { ?>
+									<span class="bo_v_act_gng">
+										<a href="<?php echo $nogood_href.'&amp;'.$qstr ?>" id="nogood_button" class="bo_v_nogood"><span class="sound_only">비추천</span><strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+										<b id="bo_v_act_nogood"></b>
+									</span>
+									<?php } ?>
+								</div>
+								<?php } else {
+									if($board['bo_use_good'] || $board['bo_use_nogood']) {
+								?>
+								<div id="bo_v_act">
+									<?php if($board['bo_use_good']) { ?><span class="bo_v_good"><span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></span><?php } ?>
+									<?php if($board['bo_use_nogood']) { ?><span class="bo_v_nogood"><span class="sound_only">비추천</span><strong><?php echo number_format($view['wr_nogood']) ?></strong></span><?php } ?>
+								</div>
+								<?php
+									}
+								}
+								?>
+								<!-- }  추천 비추천 끝 -->
+								<!--Blog Post Tag-->
+								<div class="single-post-tag">
+									<a href="#"><?php echo number_format($view['wr_comment']) ?> comments</a>
+									Tags: <?php include_once(G5_TAG_PATH."/view.tag.view.skin.php");?>
+									<!--
+									<a href="">fashion</a>,
+									<a href="">t-shirt</a>,
+									<a href="">white</a>,
+									-->
+								</div>
+								<!--Blog Post Tag-->
+								<!-- <a href="single-blog.html" class="form-button">Read More</a> -->
+								<div class="social-sharing">
+									<div class="widget widget_socialsharing_widget">
+										<h3 class="widget-title">Share this post</h3>
+										<ul class="blog-social-icons">
+											<li>
+												<a target="_blank" title="Facebook" href="#" class="facebook social-icon">
+													<i class="fa fa-facebook"></i>
+												</a>
+											</li>
+											<li>
+												<a target="_blank" title="twitter" href="#" class="twitter social-icon">
+													<i class="fa fa-twitter"></i>
+												</a>
+											</li>
+											<li>
+												<a target="_blank" title="pinterest" href="#" class="pinterest social-icon">
+													<i class="fa fa-pinterest"></i>
+												</a>
+											</li>
+											<li>
+												<a target="_blank" title="linkedin" href="#" class="linkedin social-icon">
+													<i class="fa fa-linkedin"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<div class="relatedposts">
+					<h3>Related posts</h3>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="relatedthumb">
+								<div class="image img-full">
+									<a href="#"><img src="img/blog/blog2.jpg" alt=""></a>
+								</div>
+								<h4><a href="#">Post with Gallery</a></h4>
+								<span class="rl-post-date">December 1, 2018</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="relatedthumb">
+								<div class="image img-full">
+									<a href="#"><img src="img/blog/blog4.jpg" alt=""></a>
+								</div>
+								<h4><a href="#">Post with Gallery</a></h4>
+								<span class="rl-post-date">December 1, 2018</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="relatedthumb">
+								<div class="image img-full">
+									<a href="#"><img src="img/blog/blog7.jpg" alt=""></a>
+								</div>
+								<h4><a href="#">Post with Gallery</a></h4>
+								<span class="rl-post-date">December 1, 2018</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- 게시물 읽기 시작 { -->
 			<article id="bo_v" style="width:<?php echo $width; ?>">
-				<header>
-					<h2 id="bo_v_title">
-						<?php if ($category_name) { ?>
-						<span class="bo_v_cate"><?php echo $view['ca_name']; // 분류 출력 끝 ?></span> 
-						<?php } ?>
-						<span class="bo_v_tit">
-						<?php
-						echo cut_str(get_text($view['wr_subject']), 70); // 글제목 출력
-						?></span>
-					</h2>
-				</header>
-
-				<section id="bo_v_info">
-					<h2>페이지 정보</h2>
-					<span class="sound_only">작성자</span><?php echo $view['name'] ?><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></strong>
-					<span class="sound_only">댓글</span><strong><a href="#bo_vc"> <i class="fa fa-commenting-o" aria-hidden="true"></i> <?php echo number_format($view['wr_comment']) ?>건</a></strong>
-					<span class="sound_only">조회</span><strong><i class="fa fa-eye" aria-hidden="true"></i> <?php echo number_format($view['wr_hit']) ?>회</strong>
-					<strong class="if_date"><span class="sound_only">작성일</span><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo date("y-m-d H:i", strtotime($view['wr_datetime'])) ?></strong>
-
-				</section>
-
-				<section id="bo_v_atc">
-					<h2 id="bo_v_atc_title">본문</h2>
-
-					<?php
-					// 파일 출력
-					$v_img_count = count($view['file']);
-					if($v_img_count) {
-						echo "<div id=\"bo_v_img\">\n";
-
-						for ($i=0; $i<=count($view['file']); $i++) {
-							if ($view['file'][$i]['view']) {
-								//echo $view['file'][$i]['view'];
-								echo get_view_thumbnail($view['file'][$i]['view']);
-							}
-						}
-
-						echo "</div>\n";
-					}
-					 ?>
-
-					<!-- 본문 내용 시작 { -->
-					<div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
-					<?php //echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
-					<!-- } 본문 내용 끝 -->
-
-					<?php if ($is_signature) { ?><p><?php echo $signature ?></p><?php } ?>
-
-
-					<!--  추천 비추천 시작 { -->
-					<?php if ( $good_href || $nogood_href) { ?>
-					<div id="bo_v_act">
-						<?php if ($good_href) { ?>
-						<span class="bo_v_act_gng">
-							<a href="<?php echo $good_href.'&amp;'.$qstr ?>" id="good_button" class="bo_v_good"><span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></a>
-							<b id="bo_v_act_good"></b>
-						</span>
-						<?php } ?>
-						<?php if ($nogood_href) { ?>
-						<span class="bo_v_act_gng">
-							<a href="<?php echo $nogood_href.'&amp;'.$qstr ?>" id="nogood_button" class="bo_v_nogood"><span class="sound_only">비추천</span><strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
-							<b id="bo_v_act_nogood"></b>
-						</span>
-						<?php } ?>
-					</div>
-					<?php } else {
-						if($board['bo_use_good'] || $board['bo_use_nogood']) {
-					?>
-					<div id="bo_v_act">
-						<?php if($board['bo_use_good']) { ?><span class="bo_v_good"><span class="sound_only">추천</span><strong><?php echo number_format($view['wr_good']) ?></strong></span><?php } ?>
-						<?php if($board['bo_use_nogood']) { ?><span class="bo_v_nogood"><span class="sound_only">비추천</span><strong><?php echo number_format($view['wr_nogood']) ?></strong></span><?php } ?>
-					</div>
-					<?php
-						}
-					}
-					?>
-					<!-- }  추천 비추천 끝 -->
-				</section>
-
 				<div id="bo_v_share">
 					<?php if ($scrap_href) { ?><a href="<?php echo $scrap_href;  ?>" target="_blank" class="btn btn_b03" onclick="win_scrap(this.href); return false;"><i class="fa fa-thumb-tack" aria-hidden="true"></i> 스크랩</a><?php } ?>
 
@@ -139,7 +220,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 					// 가변 파일
 					for ($i=0; $i<count($view['file']); $i++) {
 						if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view']) {
-					 ?>
+					?>
 						<li>
 							<i class="fa fa-download" aria-hidden="true"></i>
 							<a href="<?php echo $view['file'][$i]['href'];  ?>" class="view_file_download">

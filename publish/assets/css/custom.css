@@ -59,6 +59,21 @@
 .header-sticky.is-sticky .logo-sticky { margin: 23px 0; }
 /* END :: Navigation custom */
 /* BIGIN :: Bootstrap grid row style { */
+@media(min-width: 576px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media(min-width: 768px) {
+    .container {
+        max-width: 768%;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
 .row-2 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -2px; margin-left: -2px; }
 .row-2 > *[class^="col-"],.row-2 > *[class$="col-"] { padding-left: 2px; padding-right: 2px; transition: all .5s ease; }
 .row-3 { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-right: -3px; margin-left: -3px; }
