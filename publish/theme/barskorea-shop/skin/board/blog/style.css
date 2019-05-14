@@ -93,7 +93,7 @@ box-shadow:inset 0 2px 5px rgb(33, 135, 202);}
 .td_subject img {margin-left:3px}
 
 /* 갤러리 목록 */
-#bo_gall h2 {margin:0;padding:0;width:1px;height:1px;font-size:0;line-height:0;overflow:hidden}
+/*#bo_gall h2 {margin:0;padding:0;width:1px;height:1px;font-size:0;line-height:0;overflow:hidden}*/
 #bo_gall #gall_ul {margin:10px -10px 0;padding:0;list-style:none;zoom:1}
 #bo_gall #gall_ul:after {display:block;visibility:hidden;clear:both;content:""}
 #bo_gall .gall_box {position:relative;margin:0 0 30px 0;border:1px solid #ccc;background:#fff;border-radius:0 0 2px 2px}

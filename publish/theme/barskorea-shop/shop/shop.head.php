@@ -21,13 +21,6 @@ if(empty($lang)) {
 }
 
 $language = array(
-	/*
-	array(
-		'code' => 'eng',
-		'text' => 'english',
-		'lang2code' => 'en'
-	),
-	*/
 	array(
 		'code' => 'usa',
 		'text' => 'english',
@@ -40,7 +33,7 @@ $language = array(
 	)
 );
 include_once(G5_PATH.'/language/'.$lang.'.php');
-
+/*
 // 보관기간이 지난 상품 삭제
 cart_item_clean();
 // cart id 설정
@@ -82,6 +75,7 @@ while ($cate_row = sql_fetch_array($cate_res)) {
 		$sub2_cate[] = $cate_row['ca_id'];
 	}
 }
+*/
 ?>
 <!-- DIGIN :: warpper -->
 <div class="wrapper">

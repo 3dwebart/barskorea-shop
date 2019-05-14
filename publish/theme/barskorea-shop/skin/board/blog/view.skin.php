@@ -8,7 +8,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
-<!--Breadcrumb Start-->
+<!-- BIGIN :: Breadcrumb -->
 <div class="breadcrumb-Area">
 	<div class="container">
 		<div class="row">
@@ -27,6 +27,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/blog-style.css"
 		</div>
 	</div>
 </div>
+<!-- END :: Breadcrumb -->
 <?php
 if($lang == 'kor') {
 	$wr_date = date("Y-m-d", strtotime($view['wr_datetime']));
@@ -35,7 +36,6 @@ if($lang == 'kor') {
 }
 
 ?>
-<!--Breadcrumb End-->
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-md-12 col-lg-9">
@@ -49,7 +49,7 @@ if($lang == 'kor') {
 							<a href="single-blog.html"><?php echo $view['wr_subject']; ?></a>
 						</h2>
 						<span class="post-author">
-						<span class="post-by"> Posts by : </span> <?php echo $view['writer']; ?> </span>
+						<span class="post-by"> Posts by : </span> <?php echo $view['mb_id']; ?> </span>
 						<span class="post-separator">|</span>
 						<span class="post-date"><i class="fas fa-calendar-alt"></i>On <?php echo $wr_date; ?> </span>
 						<span class="post-separator">|</span>

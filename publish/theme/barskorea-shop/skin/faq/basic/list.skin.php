@@ -3,23 +3,25 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$faq_skin_url.'/style.css">', 0);
-
-if ($admin_href)
-    echo '<div class="faq_admin"><a href="'.$admin_href.'" class="btn_admin btn">FAQ 수정</a></div>';
 ?>
+<div class="container mb-5">
+    <?php
+    if ($admin_href)
+        echo '<div class="faq_admin"><a href="'.$admin_href.'" class="btn btn-danger">FAQ 수정</a></div>';
+    ?>
+    
+    <!-- FAQ 시작 { -->
+    <?php
+    if ($himg_src)
+        echo '<div id="faq_himg" class="faq_img"><img src="'.$himg_src.'" alt=""></div>';
+    
+    // 상단 HTML
+    echo '<div id="faq_hhtml">'.conv_content($fm['fm_head_html'], 1).'</div>';
+    ?>
 
-<!-- FAQ 시작 { -->
-<?php
-if ($himg_src)
-    echo '<div id="faq_himg" class="faq_img"><img src="'.$himg_src.'" alt=""></div>';
-
-// 상단 HTML
-echo '<div id="faq_hhtml">'.conv_content($fm['fm_head_html'], 1).'</div>';
-?>
-<div class="container">
     <fieldset id="faq_sch">
         <legend>FAQ 검색</legend>
-
+    
         <form name="faq_search_form" method="get">
         <span class="sch_tit">FAQ 검색</span>
         <input type="hidden" name="fm_id" value="<?php echo $fm_id;?>">
@@ -77,7 +79,7 @@ echo '<div id="faq_hhtml">'.conv_content($fm['fm_head_html'], 1).'</div>';
             </ol>
         </section>
         <?php
-
+    
         } else {
             if($stx){
                 echo '<p class="empty_list">검색된 게시물이 없습니다.</p>';
@@ -90,21 +92,21 @@ echo '<div id="faq_hhtml">'.conv_content($fm['fm_head_html'], 1).'</div>';
         }
         ?>
     </div>
-
     <?php echo get_paging($page_rows, $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
     <?php
     // 하단 HTML
     echo '<div id="faq_thtml">'.conv_content($fm['fm_tail_html'], 1).'</div>';
-
+    
     if ($timg_src)
         echo '<div id="faq_timg" class="faq_img"><img src="'.$timg_src.'" alt=""></div>';
     ?>
-    <!-- } FAQ 끝 -->
-    <?php
-    if ($admin_href)
-        echo '<div class="faq_admin"><a href="'.$admin_href.'" class="btn_admin btn">FAQ 수정</a></div>';
-    ?>
+
+<!-- } FAQ 끝 -->
+<?php
+if ($admin_href)
+    echo '<div class="faq_admin"><a href="'.$admin_href.'" class="btn btn-danger">FAQ 수정</a></div>';
+?>
 </div>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 <script>

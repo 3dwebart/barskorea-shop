@@ -321,13 +321,13 @@ while ($row = sql_fetch_array($res)) {
 						</div>
 						<!--Single List Product End-->
 						<?php
-							if (($i + 1) % 2 == 0) {
+							if ( (($i + 1) % 2 == 0) || count($best_item) == ($i + 1) ) {
 						?>
 					</div>
-					<?php
+						<?php
+								}
 							}
-						}
-					?>
+						?>
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-4 col-12">
@@ -370,7 +370,7 @@ while ($row = sql_fetch_array($res)) {
 						</div>
 						<!--Single List Product End-->
 						<?php
-							if (($i + 1) % 2 == 0) {
+							if ( (($i + 1) % 2 == 0) || (count($trand_item) == ($i + 1)) ) {
 						?>
 					</div>
 					<?php
@@ -419,7 +419,7 @@ while ($row = sql_fetch_array($res)) {
 						</div>
 						<!--Single List Product End-->
 						<?php
-							if (($i + 1) % 2 == 0) {
+							if ( (($i + 1) % 2 == 0) || count($new_item) == ($i + 1) ) {
 						?>
 					</div>
 					<?php

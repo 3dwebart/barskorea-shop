@@ -6,6 +6,9 @@
     width: 180px;
 }
 /* BIGIN :: Component */
+legend {
+    width: auto;
+}
 .custom-checkbox {
     display: flex;
     align-items: center;

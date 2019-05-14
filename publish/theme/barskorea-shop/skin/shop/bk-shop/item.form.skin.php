@@ -425,7 +425,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 						<!-- BIGIN :: Buttons -->
 						<div class="wishlist-compare-btn">
 							<?php if ($is_orderable) { ?>
-							<button type="submit" class="product-btn" data-text="Buy now" onclick="document.pressed=this.value;" value="바로구매">
+							<button type="submit" class="product-btn" data-text="Buy now" onclick="document.pressed=this.value;" id="sit_btn_buy" value="바로구매">
 								<i class="fa fa-credit-card"></i>
 								Buy now
 							</button>

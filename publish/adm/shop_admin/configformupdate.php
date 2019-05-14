@@ -65,6 +65,10 @@ $check_skin_keys = array('de_type1_list_skin', 'de_type2_list_skin', 'de_type3_l
 
 foreach($check_skin_keys as $key){
     $key = $_POST[$key] = isset($_POST[$key]) ? preg_replace('#\.+(\/|\\\)#', '', $_POST[$key]) : '';
+
+    if( $skin_file && ! preg_match('/^.*\.(php|htm|html)$/i', $skin_file) ){
+        alert('스킨 파일 경로의 확장자는 php, htm, html 만 허용합니다.');
+    }
 }
 
 //
@@ -84,8 +88,6 @@ $sql = " UPDATE {$g5['g5_shop_default_table']}
                 main_tabs                     = '{$_POST['main_tabs']}',
                 main_tabs_id                  = '{$_POST['main_tabs_id']}',
                 main_tabs_item_count          = '{$_POST['main_tabs_item_count']}',
-                --de_shop_skin                  = '{$_POST['de_shop_skin']}',
-                --de_shop_mobile_skin           = '{$_POST['de_shop_mobile_skin']}',
                 de_shop_skin                  = '{$de_shop_skin}',
                 de_shop_mobile_skin           = '{$de_shop_mobile_skin}',
                 de_type1_list_use             = '{$_POST['de_type1_list_use']}',
