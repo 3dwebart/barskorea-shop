@@ -33,6 +33,8 @@
 			} else {
 				wish_process = 0;
 			}
+			//alert('wish_process :: ' + wish_process + '\nmb_id :: ' + mb_id + '\nit_id :: ' + jQuery(this).data('id'));
+			//return false;
 			$.ajax({
 				url: g5_shop_url + "/ajax.wish.process.php",
 				type: "post",
@@ -47,6 +49,7 @@
 				timeout: 30000,
 				success: function(data) {
 					//debugger;
+					//console.log(data);
 					if(data.switch == 0) {
 						onThis.removeClass('active');
 					} else if(data.switch == 1) {

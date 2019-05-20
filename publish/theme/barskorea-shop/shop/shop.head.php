@@ -17,21 +17,9 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
 include_once(G5_LIB_PATH.'/latest.lib.php');
 $lang = $_COOKIE['language'];
 if(empty($lang)) {
-	$lang = 'eng';
+	$lang = 'usa';
 }
 
-$language = array(
-	array(
-		'code' => 'usa',
-		'text' => 'english',
-		'lang2Code' => 'us'
-	),
-	array(
-		'code' => 'kor',
-		'text' => 'korean',
-		'lang2Code' => 'ko'
-	)
-);
 include_once(G5_PATH.'/language/'.$lang.'.php');
 /*
 // 보관기간이 지난 상품 삭제
@@ -39,7 +27,7 @@ cart_item_clean();
 // cart id 설정
 set_cart_id($sw_direct);
 $s_cart_id = get_session('ss_cart_id');
-
+*/
 $cart_cnt = 0;
 $cart_item = array();
 $total_ct_price = 0;
@@ -75,7 +63,11 @@ while ($cate_row = sql_fetch_array($cate_res)) {
 		$sub2_cate[] = $cate_row['ca_id'];
 	}
 }
-*/
+$lang_sql = "SELECT `lang_code`, `lang2_code`, `text` FROM `{$g5['g5_language_code_table']}` WHERE `use` = 1 ORDER BY `sort` ASC, `lang_code` ASC";
+$lang_res = sql_query($lang_sql);
+while ($lang_row = sql_fetch_array($lang_res)) {
+	$language[] = $lang_row;
+}
 ?>
 <!-- DIGIN :: warpper -->
 <div class="wrapper">
@@ -98,13 +90,13 @@ while ($cate_row = sql_fetch_array($cate_res)) {
 											<!--Header Top Dropdown-->
 											<ul class="ht-dropdown">
 												<?php
-												for ($i=0; $i < count($language); $i++) {
-													$code = $language[$i]['code'];
+												for ($lang_cnt = 0; $lang_cnt < count($language); $lang_cnt++) {
+													$code = $language[$lang_cnt]['lang_code'];
 													if($lang != $code) {
 												?>
 												<li>
 													<a href="#" data-lang="<?php echo $code; ?>">
-														<img src="<?php echo G5_ASSETS_URL; ?>/img/language/<?php echo $language[$i]['lang2Code']; ?>.png" alt=""> 
+														<img src="<?php echo G5_ASSETS_URL; ?>/img/language/<?php echo $language[$lang_cnt]['lang2Code']; ?>.png" alt=""> 
 														<span><?php echo $langStr[$code]; ?></span>
 													</a>
 												</li>

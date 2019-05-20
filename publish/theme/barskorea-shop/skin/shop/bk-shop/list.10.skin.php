@@ -3,12 +3,15 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 0);
-
-error_reporting(E_ALL);
-
-ini_set("display_errors", 1);
 $mb_id = $_SESSION['ss_mb_id'];
+$wish_id = array();
+$wish_sql = "SELECT it_id FROM {$g5['g5_shop_wish_table']}";
+$wish_res = sql_query($wish_sql);
+while ($wish_row = sql_fetch_array($wish_res)) {
+	$wish_id[] = $wish_row['it_id'];
+}
 ?>
+
 <!--Shop Product Start-->
 <div class="shop-product">
 	<div id="myTabContent-2" class="tab-content">
@@ -71,6 +74,12 @@ $mb_id = $_SESSION['ss_mb_id'];
 								$sct_last = 'sct_clear';
 							}
 							*/
+							$wish_active = '';
+							for($wishCnt = 0; $wishCnt < count($wish_id); $wishCnt++) {
+								if($wish_id[$wishCnt] == $row['it_id']) {
+									$wish_active = ' active';
+								}
+							}
 							echo "<div class=\"product-img\">\n";
 							// BIGIN :: Image
 							if ($this->href) {
@@ -98,7 +107,7 @@ $mb_id = $_SESSION['ss_mb_id'];
 							echo "</a>\n";
 							echo "</li>\n";
 							echo "<li>\n";
-							echo "<a href=\"#\" data-toggle=\"tooltip\" title=\"Add To Wishlist\">\n";
+							echo "<a href=\"#\" class=\"btn-list-wishlist{$wish_active}\" data-toggle=\"tooltip\" data-id=\"{$row['it_id']}\" title=\"Add To Wishlist\">\n";
 							echo "<i class=\"fa fa-heart-o\"></i>";
 							echo "</a>\n";
 							echo "</li>\n";

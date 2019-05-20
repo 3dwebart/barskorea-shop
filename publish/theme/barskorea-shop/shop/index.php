@@ -176,7 +176,7 @@ while ($row = sql_fetch_array($res)) {
 															</a>
 														</li>
 														<li>
-															<a href="#" class="btn-list-wishlist<?php echo $row['wish'] != '' ? ' active' : ''; ?>" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Wishlist">
+															<a href="#" class="btn-list-wishlist<?php echo $row['wish'] == $row['it_id'] ? ' active' : ''; ?>" data-toggle="tooltip" data-id="<?php echo $row['it_id']; ?>" title="Add To Wishlist">
 																<i class="fa fa-heart-o"></i>
 															</a>
 														</li>
