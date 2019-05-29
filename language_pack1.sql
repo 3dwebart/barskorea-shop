@@ -27,4 +27,18 @@ CREATE TABLE IF NOT EXISTS `g5_language_content` (
 
 
 -- 해당 언어가 있는지 검색하는 쿼리문(테스트 : kor)
- SELECT COUNT('variable') FROM Information_schema.columns WHERE table_schema = 'barskorea_shop' AND table_name = 'g5_language_content' AND column_name = 'lang_kor';
+SELECT EXISTS (
+ SELECT 1 FROM Information_schema.columns 
+ WHERE table_schema = 'barskorea_shop' 
+ AND table_name = 'g5_language_content' 
+ AND column_name = 'lang_kor'
+) AS flag;
+
+
+SELECT EXISTS (
+ SELECT 1 FROM Information_schema.columns 
+ WHERE table_schema = 'barskorea_shop' 
+ AND table_name = 'g5_language_content' 
+ AND column_name = 'lang_kr'
+) AS flag;
+

@@ -440,7 +440,7 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
         </tr>
         <tr>
             <th scope="row">상품설명</th>
-            <td colspan="2"> <?php echo editor_html('it_explan', get_text($it['it_explan'], 0)); ?></td>
+            <td colspan="2"> <?php echo editor_html('it_explan', get_text($it['it_explan'], 0, 'it_explan[]')); ?></td>
         </tr>
         <tr>
             <th scope="row">모바일 상품설명</th>

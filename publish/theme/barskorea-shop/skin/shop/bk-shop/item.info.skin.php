@@ -11,18 +11,18 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 						<!-- 상품 정보 시작 { -->
 						<div class="tab-pane fade active show" id="description">
 							<div class="single-product-description">
-								<h2>상품 정보</h2>
+								<h2 class="sound_only">상품 정보</h2>
 								<?php // echo pg_anchor('inf'); ?>
 
 								<?php if ($it['it_basic']) { // 상품 기본설명 ?>
-								<h3>상품 기본설명</h3>
+								<h3 class="sound_only">상품 기본설명</h3>
 								<div id="sit_inf_basic">
 									 <?php echo $it['it_basic']; ?>
 								</div>
 								<?php } ?>
 
 								<?php if ($it['it_explan']) { // 상품 상세설명 ?>
-								<h3>상품 상세설명</h3>
+								<h3 class="sound_only">상품 상세설명</h3>
 								<div id="sit_inf_explan">
 									<?php echo conv_content($it['it_explan'], 1); ?>
 								</div>

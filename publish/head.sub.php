@@ -81,6 +81,10 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <?php } ?>
 </script>
 <script src="<?php echo G5_JS_URL ?>/jquery-1.8.3.min.js"></script>
+<?php if(defined('G5_IS_ADMIN')) { ?>
+<link rel="stylesheet" href="<?php echo G5_ASSETS_URL ?>/css/jquery-ui.css"">
+<script src="<?php echo G5_ASSETS_URL ?>/js/jquery-ui.min.js"></script>
+<?php } ?>
 <?php
 if (defined('_SHOP_')) {
     if(!G5_IS_MOBILE) {

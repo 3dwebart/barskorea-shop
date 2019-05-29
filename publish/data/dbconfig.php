@@ -9,6 +9,7 @@ define('G5_MYSQL_SET_MODE', true);
 define('G5_TABLE_PREFIX', 'g5_');
 
 $g5['g5_language_code_table'] = G5_TABLE_PREFIX.'language_code'; // 언어팩 설정 테이블
+$g5['g5_language_content_table'] = G5_TABLE_PREFIX.'language_content'; // 언어팩 테이블
 
 $g5['write_prefix'] = G5_TABLE_PREFIX.'write_'; // 게시판 테이블명 접두사
 

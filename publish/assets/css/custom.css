@@ -254,3 +254,7 @@ a.btn01:hover,a.btn02:hover {
 }
 .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus { color: #fff !important; }
 input[type="radio"],input[type="checkbox"] { width: auto; height: auto; }
+
+.single-product-description {
+    text-align: center;
+}

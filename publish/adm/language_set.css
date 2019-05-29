@@ -1,0 +1,192 @@
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.label-form {
+	line-height: 32px;
+}
+.col-20 {
+	width: 100%;
+	max-width: 20%;
+	flex: 0 0 20%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.col-30 {
+	width: 100%;
+	max-width: 30%;
+	flex: 0 0 30%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.col-70 {
+	width: 100%;
+	max-width: 70%;
+	flex: 0 0 70%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.col-80 {
+	width: 100%;
+	max-width: 80%;
+	flex: 0 0 80%;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.pb-1 { padding-bottom: 0.5rem; }
+.form-control {
+	width: 100%;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+	transition: all .5s ease;
+}
+.form-control.err {
+	border: 1px solid rgba(200,30,30,1);
+	transition: all .5s ease;
+}
+.err-msg {
+	width: 100%;
+	max-width: 100%;
+	flex: 0 0 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	color: transparent;
+	transition: all .5s ease;
+}
+.err-msg.err {
+	height: auto;
+	line-height: 1rem;
+	font-size: .7rem;
+	height: 1.5rem;
+	color: rgba(200,30,30,1);
+	transition: all .5s ease;
+}
+.d-flex {
+	display: flex;
+}
+.justify-content-flex-end {
+	justify-content: flex-end;
+}
+
+.language-header {
+	background-color: rgba(30,30,30,1);
+	color: rgba(255,255,255,1);
+}
+.language-set {
+	display: flex;
+    flex-wrap: wrap;
+	border: 1px solid rgba(30,30,30,1);
+}
+.language-set input[type="text"] {
+    height: 27px;
+    line-height: 25px;
+    border: 1px solid #d5d5d5;
+    width: 100%;
+}
+
+.language-set > div { padding: 10px 15px; width: 100%; }
+.language-set > div:nth-child(odd) { flex: 0 0 20%; max-width: 20%; }
+.language-set > div:nth-child(even) { flex: 0 0 80%; max-width: 80%; }
+.language-variable { width: 100%; }
+.language-content { width: 100%; }
+.tab-nav { margin-top: 1rem; }
+
+.tab-nav a { display: inline-block; padding: 10px 15px; }
+.tab-nav a.active {
+	background-color: rgba(200,200,200,1);
+	position: relative;
+	border-radius: 5px 5px 0 0;
+}
+.tab-nav a.active:after {
+	content: "";
+	position: absolute;
+	border-top: 5px solid rgba(200,200,200,1);
+	border-bottom: 5px solid transparent;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	bottom: -10px;
+	left: 0;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+}
+.tab-content { margin-bottom: 20px; }
+.tab-content .content { display: none; }
+.tab-content .content.active { display: block; }
+a.add-variable,
+.add-variable { display: inline-block; padding: 15px 25px; background-color: rgba(30,126,191,1); color: rgba(255,255,255,1); font-size: 15px; border: 0; margin-top: -1px; }
+a.btn-back,
+.btn-back {
+	position: relative;
+	display: inline-block;
+	padding: 15px 25px;
+	font-size: 15px;
+	background-color: rgba(30,126,191,1);
+	color: rgba(255,255,255,1);
+	margin-left: 30px;
+}
+a.btn-back:after,
+.btn-back:after {
+	content: "";
+    width: 0;
+    height: 0;
+    font-size: 0;
+    position: absolute;
+	border-top: 24px solid transparent;
+	border-bottom: 24px solid transparent;
+	border-right: 20px solid rgba(30,126,191,1);
+	top: -50%;
+	left: -20px;
+	transform: translateY(50%);
+}
+/* BIGIN :: Create input form */
+.lang-var-div { position: relative; }
+.lang-var-div > .mask { position: absolute; width: calc(100% - 30px); height: calc(100% - 20px); top: 10px; left: 15px; background-color: rgba(0,0,0,.2); z-index: 5; }
+.lang_var, .lang_con { padding: 0 10px; }
+/* END :: Create input form */
+/* BIGIN :: Form add popup window */
+
+#var-add-window,#lang-add-window { display: none; }
+.you-must-read-it {
+	margin: 20px 0;
+}
+.you-must-read-it > strong,
+.you-must-read-it > span {
+	display: block;
+	color: rgba(200, 30,30,1);
+}
+.you-must-read-it > strong {
+	font-size: 1.2rem;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.trans_var.err {
+	border-color: rgba(255,30,30,1);
+}
+.add-form-buttons {
+	display: flex;
+	justify-content: center;
+}
+.add-form-buttons button, .btn-ok {
+	padding: 3px 10px 3px 5px;
+	margin: 0 3px;
+}
+.form-add-ok, .btn-ok {
+	background-color: rgba(30,121,191,1);
+	color: rgba(255,255,255,1);
+}
+
+.form-add-cancel {
+	background-color: rgba(191,30,30,1);
+	color: rgba(255,255,255,1);
+}
+/* END :: Form add popup window */
+.btn-ok .ui-icon, .btn-ok .ui-widget-content .ui-icon {
+    background-image: url(../assets/css/images/ui-icons_ffffff_256x240.png);
+}
